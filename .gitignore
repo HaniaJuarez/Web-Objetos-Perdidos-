@@ -11,3 +11,6 @@
 # Archivos del sistema
 .DS_Store
 Thumbs.db
+
+# Configuración privada del backend
+backend/config.php
