@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión · UV</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <!-- Logo UV -->
+        <div class="logo">
+            <img src="img/logo-uv.png" alt="Logo UV" class="logo-img">
+        </div>
+
+        <h1 class="title">Iniciar sesión</h1>
+
+        <!-- Formulario principal -->
+        <div class="login-box">
+            <form action="../backend/auth.php" method="POST">
+                <input type="hidden" name="accion" value="login">
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico o usuario</label>
+                    <input type="email" id="correo" name="correo" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <div class="form-header">
+                        <label for="password">Contraseña</label>
+                        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+
+            <div class="divider">
+                <span>o</span>
+            </div>
+
+            <!-- Botones Opciones OAuth -->
+            <button class="btn-oauth" type="button">
+                <svg viewBox="0 0 24 24">
+                    <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"/>
+                    <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
+                    <path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12.3 0 15s.7 5.3 1.9 7.7l3.7-2.9c-.3-.7-.5-1.5-.5-2.3z"/>
+                    <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"/>
+                </svg>
+                Continuar con Google
+            </button>
+
+            <button class="btn-oauth" type="button">
+                <svg viewBox="0 0 170 170" fill="currentColor">
+                    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.33.13-9.13-1.9-14.41-6.08-3.81-3.16-7.83-7.98-12.07-14.44-7.01-10.83-12.28-22.75-15.81-35.77-3.53-13.01-5.3-25.04-5.3-36.08 0-14.18 3.29-26.04 9.88-35.58 6.59-9.55 15.03-14.41 25.32-14.58 4.6 0 9.8 1.18 15.61 3.55 5.81 2.37 9.8 3.55 11.98 3.55 1.8 0 5.88-1.22 12.23-3.66 6.36-2.44 11.49-3.58 15.39-3.41 10.66.52 19.38 4.39 26.16 11.62-9.53 5.76-14.16 13.88-13.89 24.36.27 8.35 3.42 15.3 9.45 20.85 6.03 5.56 13.25 8.78 21.66 9.67-2.3 6.94-5.46 13.82-9.48 20.64zM119.22 31.84c0-7.39 2.65-14.34 7.95-20.86 5.3-6.52 11.98-10.45 20.04-11.78.36 1.08.54 2.07.54 2.98 0 7.28-2.73 14.28-8.19 21.01-5.46 6.72-12.18 10.7-20.16 11.93-.09-.89-.18-2.02-.18-3.28z"/>
+                </svg>
+                Continuar con Apple
+            </button>
+        </div>
+
+        <!-- Caja inferior para enlace de registro -->
+        <div class="signup-box">
+            ¿Eres nuevo? <a href="registro.html">Crea una cuenta</a>.
+        </div>
+
+        <a href="#" class="passkey-link">Iniciar sesión con una llave de acceso</a>
+    </div>
+
+</body>
+</html>
