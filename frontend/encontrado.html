@@ -1,0 +1,522 @@
+<!-- Indica que el documento utiliza la versión HTML5 -->
+<!DOCTYPE html>
+
+<!-- Inicia el documento HTML y establece el idioma español -->
+<html lang="es">
+
+<!-- Inicia la sección de configuración de la página -->
+<head>
+
+    <!-- Permite utilizar correctamente caracteres especiales como á, é, í, ó, ú y ñ -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página se adapte al tamaño de la pantalla del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Define el título que aparecerá en la pestaña del navegador -->
+    <title>Reportar objeto encontrado</title>
+
+<!-- Finaliza la sección head -->
+</head>
+
+<!-- Inicia el contenido visible de la página -->
+<body>
+
+    <!-- Inicia el encabezado de la página -->
+    <header>
+
+        <!-- Muestra el título principal de la página -->
+        <h1>Reportar objeto encontrado</h1>
+
+        <!-- Crea un enlace que permite regresar a la página principal -->
+        <a href="index.php">
+
+            <!-- Texto que aparecerá dentro del enlace -->
+            Volver al inicio
+
+        <!-- Finaliza el enlace -->
+        </a>
+
+    <!-- Finaliza el encabezado -->
+    </header>
+
+
+    <!-- Inicia la sección principal de contenido -->
+    <main>
+
+        <!-- Muestra el subtítulo de la sección -->
+        <h2>Registrar objeto encontrado</h2>
+
+        <!-- Muestra una instrucción para el usuario -->
+        <p>
+
+            <!-- Texto que indica al usuario qué información debe proporcionar -->
+            Completa la información del objeto que encontraste.
+
+        <!-- Finaliza el párrafo -->
+        </p>
+
+
+        <!-- Inicia el formulario, enviando los datos a objetos.php mediante POST y permitiendo archivos -->
+        <form action="../backend/objetos.php" method="POST" enctype="multipart/form-data">
+
+            <!-- Crea un campo oculto que no será visible para el usuario -->
+            <input
+
+                <!-- Indica que el campo será de tipo oculto -->
+                type="hidden"
+
+                <!-- Define el nombre con el que se enviará este dato al servidor -->
+                name="accion"
+
+                <!-- Indica que el tipo de reporte corresponde a un objeto encontrado -->
+                value="encontrado"
+
+            <!-- Finaliza el campo oculto -->
+            >
+
+
+            <!-- Etiqueta que identifica el campo para escribir el nombre del objeto -->
+            <label for="nombre">
+
+                <!-- Texto que aparece como descripción del campo -->
+                Nombre del objeto:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo de texto para escribir el nombre del objeto -->
+            <input
+
+                <!-- Define que el campo permitirá introducir texto -->
+                type="text"
+
+                <!-- Asigna el identificador "nombre" al campo -->
+                id="nombre"
+
+                <!-- Define el nombre con el que se enviará el dato al servidor -->
+                name="nombre"
+
+                <!-- Hace obligatorio completar este campo -->
+                required
+
+            <!-- Finaliza el campo de texto -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para seleccionar una categoría -->
+            <label for="categoria">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Categoría:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea una lista desplegable para seleccionar una categoría -->
+            <select
+
+                <!-- Asigna el identificador "categoria" a la lista -->
+                id="categoria"
+
+                <!-- Define el nombre con el que se enviará la categoría al servidor -->
+                name="categoria_id"
+
+                <!-- Hace obligatorio seleccionar una categoría -->
+                required
+
+            <!-- Finaliza la apertura de la lista -->
+            >
+
+                <!-- Crea la primera opción de la lista sin un valor de categoría -->
+                <option value="">
+
+                    <!-- Texto que indica al usuario que debe seleccionar una categoría -->
+                    Selecciona una categoría
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Electrónica -->
+                <option value="1">
+
+                    <!-- Texto visible de la categoría -->
+                    Electrónica
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Documentos -->
+                <option value="2">
+
+                    <!-- Texto visible de la categoría -->
+                    Documentos
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Accesorios -->
+                <option value="3">
+
+                    <!-- Texto visible de la categoría -->
+                    Accesorios
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Ropa -->
+                <option value="4">
+
+                    <!-- Texto visible de la categoría -->
+                    Ropa
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Material escolar -->
+                <option value="5">
+
+                    <!-- Texto visible de la categoría -->
+                    Material escolar
+
+                <!-- Finaliza la opción -->
+                </option>
+
+                <!-- Crea la opción de la categoría Otros -->
+                <option value="6">
+
+                    <!-- Texto visible de la categoría -->
+                    Otros
+
+                <!-- Finaliza la opción -->
+                </option>
+
+            <!-- Finaliza la lista desplegable -->
+            </select>
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo de descripción pública -->
+            <label for="descripcion_publica">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Descripción pública:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un área de texto para escribir la descripción pública -->
+            <textarea
+
+                <!-- Asigna el identificador del área de texto -->
+                id="descripcion_publica"
+
+                <!-- Define el nombre con el que se enviará la información -->
+                name="descripcion_publica"
+
+                <!-- Define que el área de texto tendrá aproximadamente cuatro filas -->
+                rows="4"
+
+                <!-- Define que el área de texto tendrá aproximadamente cuarenta columnas -->
+                cols="40"
+
+                <!-- Muestra un texto de ayuda mientras el campo está vacío -->
+                placeholder="Describe el objeto de manera general"
+
+                <!-- Hace obligatorio completar este campo -->
+                required
+
+            <!-- Finaliza la etiqueta de apertura del área de texto -->
+            ></textarea>
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo de descripción privada -->
+            <label for="descripcion_privada">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Descripción privada:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un área de texto para escribir características privadas del objeto -->
+            <textarea
+
+                <!-- Asigna el identificador del área de texto -->
+                id="descripcion_privada"
+
+                <!-- Define el nombre con el que se enviará la información -->
+                name="descripcion_privada"
+
+                <!-- Define que el área de texto tendrá aproximadamente cuatro filas -->
+                rows="4"
+
+                <!-- Define que el área de texto tendrá aproximadamente cuarenta columnas -->
+                cols="40"
+
+                <!-- Muestra un texto de ayuda mientras el campo está vacío -->
+                placeholder="Características privadas del objeto"
+
+            <!-- Finaliza la etiqueta de apertura del área de texto -->
+            ></textarea>
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para escribir el color -->
+            <label for="color">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Color:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo de texto para introducir el color del objeto -->
+            <input
+
+                <!-- Define que el campo permitirá introducir texto -->
+                type="text"
+
+                <!-- Asigna el identificador "color" al campo -->
+                id="color"
+
+                <!-- Define el nombre con el que se enviará el color al servidor -->
+                name="color"
+
+            <!-- Finaliza el campo de texto -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para seleccionar la fecha -->
+            <label for="fecha">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Fecha en que se encontró:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo para seleccionar una fecha -->
+            <input
+
+                <!-- Define que el campo será de tipo fecha -->
+                type="date"
+
+                <!-- Asigna el identificador "fecha" al campo -->
+                id="fecha"
+
+                <!-- Define el nombre con el que se enviará la fecha al servidor -->
+                name="fecha"
+
+                <!-- Hace obligatorio seleccionar una fecha -->
+                required
+
+            <!-- Finaliza el campo de fecha -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para indicar dónde se encontró el objeto -->
+            <label for="ubicacion">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Lugar donde se encontró:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo de texto para escribir la ubicación -->
+            <input
+
+                <!-- Define que el campo permitirá introducir texto -->
+                type="text"
+
+                <!-- Asigna el identificador "ubicacion" al campo -->
+                id="ubicacion"
+
+                <!-- Define el nombre con el que se enviará la ubicación al servidor -->
+                name="ubicacion"
+
+                <!-- Muestra un ejemplo de cómo escribir la ubicación -->
+                placeholder="Ejemplo: Salón 204"
+
+            <!-- Finaliza el campo de ubicación -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para indicar el docente responsable -->
+            <label for="responsable">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Docente responsable:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo de texto para escribir el nombre del docente -->
+            <input
+
+                <!-- Define que el campo permitirá introducir texto -->
+                type="text"
+
+                <!-- Asigna el identificador "responsable" al campo -->
+                id="responsable"
+
+                <!-- Define el nombre con el que se enviará el responsable al servidor -->
+                name="responsable"
+
+                <!-- Muestra un texto de ayuda para indicar qué debe escribirse -->
+                placeholder="Nombre del docente"
+
+            <!-- Finaliza el campo del responsable -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Etiqueta que identifica el campo para indicar dónde se encuentra actualmente el objeto -->
+            <label for="resguardo">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Lugar actual de resguardo:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo de texto para escribir el lugar de resguardo -->
+            <input
+
+                <!-- Define que el campo permitirá introducir texto -->
+                type="text"
+
+                <!-- Asigna el identificador "resguardo" al campo -->
+                id="resguardo"
+
+                <!-- Define el nombre con el que se enviará el lugar de resguardo -->
+                name="resguardo"
+
+                <!-- Muestra un ejemplo de cómo escribir el lugar de resguardo -->
+                placeholder="Ejemplo: Coordinación"
+
+            <!-- Finaliza el campo de resguardo -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+            <!-- Etiqueta que identifica el campo para seleccionar una fotografía -->
+            <label for="imagen">
+
+                <!-- Texto que aparece como nombre del campo -->
+                Fotografía del objeto:
+
+            <!-- Finaliza la etiqueta -->
+            </label>
+
+            <!-- Inserta un salto de línea -->
+            <br>
+
+            <!-- Crea un campo para seleccionar un archivo -->
+            <input
+
+                <!-- Define que el campo permite seleccionar archivos -->
+                type="file"
+
+                <!-- Asigna el identificador "imagen" al campo -->
+                id="imagen"
+
+                <!-- Define el nombre con el que se enviará la imagen al servidor -->
+                name="imagen"
+
+                <!-- Indica que se aceptan archivos de imagen -->
+                accept="image/*"
+
+            <!-- Finaliza el campo para seleccionar archivos -->
+            >
+
+            <!-- Inserta dos saltos de línea -->
+            <br><br>
+
+
+            <!-- Crea el botón que permite enviar el formulario -->
+            <button type="submit">
+
+                <!-- Texto que aparecerá dentro del botón -->
+                Registrar objeto encontrado
+
+            <!-- Finaliza el botón -->
+            </button>
+
+        <!-- Finaliza el formulario -->
+        </form>
+
+    <!-- Finaliza la sección principal -->
+    </main>
+
+
+    <!-- Inicia el pie de página -->
+    <footer>
+
+        <!-- Inicia un párrafo -->
+        <p>
+
+            <!-- Muestra información de la institución -->
+            Universidad Veracruzana - Facultad
+
+        <!-- Finaliza el párrafo -->
+        </p>
+
+    <!-- Finaliza el pie de página -->
+    </footer>
+
+<!-- Finaliza el contenido visible del documento -->
+</body>
+
+<!-- Finaliza el documento HTML -->
+</html>
