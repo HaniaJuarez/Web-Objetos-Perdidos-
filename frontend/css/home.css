@@ -1,0 +1,806 @@
+/* Selecciona todos los elementos que utilizan la etiqueta header */
+
+header {
+
+
+
+    /* Agrega un espacio interno de 15 píxeles alrededor del contenido */
+
+    padding: 15px;
+
+
+
+    /* Agrega una línea de 1 píxel en la parte inferior del encabezado */
+
+    border-bottom: 1px solid #ccc;
+
+
+
+/* Finaliza las reglas del elemento header */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase header-superior */
+
+.header-superior {
+
+
+
+    /* Activa Flexbox para organizar los elementos de forma flexible */
+
+    display: flex;
+
+
+
+    /* Alinea los elementos verticalmente en el centro */
+
+    align-items: center;
+
+
+
+    /* Coloca los elementos con espacio entre ellos */
+
+    justify-content: space-between;
+
+
+
+/* Finaliza las reglas de header-superior */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase usuario */
+
+.usuario {
+
+
+
+    /* Activa Flexbox para organizar los elementos */
+
+    display: flex;
+
+
+
+    /* Alinea verticalmente los elementos en el centro */
+
+    align-items: center;
+
+
+
+    /* Establece una separación de 20 píxeles entre los elementos */
+
+    gap: 20px;
+
+
+
+/* Finaliza las reglas de usuario */
+
+}
+
+
+
+
+
+/* Selecciona todos los elementos nav */
+
+nav {
+
+
+
+    /* Centra horizontalmente el texto que contiene el elemento nav */
+
+    text-align: center;
+
+
+
+    /* Agrega un margen superior de 15 píxeles */
+
+    margin-top: 15px;
+
+
+
+/* Finaliza las reglas de nav */
+
+}
+
+
+
+
+
+/* Selecciona los enlaces que se encuentran dentro de nav */
+
+nav a {
+
+
+
+    /* Agrega un margen horizontal de 10 píxeles a los enlaces */
+
+    margin: 0 10px;
+
+
+
+/* Finaliza las reglas de los enlaces de nav */
+
+}
+
+
+
+
+
+/* Selecciona el elemento con id objetos-perdidos y el elemento con id objetos-encontrados */
+
+#objetos-perdidos,
+
+#objetos-encontrados {
+
+
+
+    /* Activa Flexbox para organizar las tarjetas */
+
+    display: flex;
+
+
+
+    /* Permite que las tarjetas pasen a otra línea cuando no haya suficiente espacio */
+
+    flex-wrap: wrap;
+
+
+
+    /* Establece una separación de 20 píxeles entre los elementos */
+
+    gap: 20px;
+
+
+
+    /* Agrega un margen inferior de 30 píxeles */
+
+    margin-bottom: 30px;
+
+
+
+/* Finaliza las reglas de los contenedores de objetos */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase tarjeta-objeto */
+
+.tarjeta-objeto {
+
+
+
+    /* Establece el ancho de cada tarjeta en 220 píxeles */
+
+    width: 220px;
+
+
+
+    /* Agrega un borde de 1 píxel de color gris claro */
+
+    border: 1px solid #ccc;
+
+
+
+    /* Redondea las esquinas de la tarjeta con un radio de 8 píxeles */
+
+    border-radius: 8px;
+
+
+
+    /* Agrega un espacio interno de 15 píxeles */
+
+    padding: 15px;
+
+
+
+    /* Establece el fondo de la tarjeta en color blanco */
+
+    background: #fff;
+
+
+
+/* Finaliza las reglas de la tarjeta */
+
+}
+
+
+
+
+
+/* Selecciona las imágenes que se encuentran dentro de una tarjeta de objeto */
+
+.tarjeta-objeto img {
+
+
+
+    /* Hace que la imagen ocupe el 100% del ancho disponible */
+
+    width: 100%;
+
+
+
+    /* Establece la altura de la imagen en 150 píxeles */
+
+    height: 150px;
+
+
+
+    /* Hace que la imagen cubra completamente el espacio disponible */
+
+    object-fit: cover;
+
+
+
+    /* Redondea las esquinas de la imagen con un radio de 6 píxeles */
+
+    border-radius: 6px;
+
+
+
+/* Finaliza las reglas de las imágenes */
+
+}
+
+
+
+
+
+/* Selecciona los encabezados h3 que se encuentran dentro de una tarjeta */
+
+.tarjeta-objeto h3 {
+
+
+
+    /* Agrega un margen superior de 10 píxeles al encabezado */
+
+    margin-top: 10px;
+
+
+
+/* Finaliza las reglas del encabezado */
+
+}
+
+
+
+
+
+/* Selecciona los enlaces que se encuentran dentro de una tarjeta */
+
+.tarjeta-objeto a {
+
+
+
+    /* Hace que el enlace se comporte como un elemento inline-block */
+
+    display: inline-block;
+
+
+
+    /* Agrega un margen superior de 10 píxeles */
+
+    margin-top: 10px;
+
+
+
+/* Finaliza las reglas de los enlaces */
+
+}
+
+
+
+
+
+/perfil/
+
+/* NOTA: Esta línea forma parte del código original y no es un comentario CSS válido */
+
+.usuario-menu {
+
+
+
+    /* Permite posicionar elementos hijos de manera absoluta respecto a este elemento */
+
+    position: relative;
+
+
+
+/* Finaliza las reglas de usuario-menu */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase boton-avatar */
+
+.boton-avatar {
+
+
+
+    /* Establece el ancho del botón en 45 píxeles */
+
+    width: 45px;
+
+
+
+    /* Establece la altura del botón en 45 píxeles */
+
+    height: 45px;
+
+
+
+    /* Convierte el botón en una forma circular */
+
+    border-radius: 50%;
+
+
+
+    /* Agrega un borde de 1 píxel de color gris claro */
+
+    border: 1px solid #ccc;
+
+
+
+    /* Elimina el espacio interno predeterminado del botón */
+
+    padding: 0;
+
+
+
+    /* Cambia el cursor a una mano cuando se coloca sobre el botón */
+
+    cursor: pointer;
+
+
+
+    /* Oculta cualquier contenido que sobresalga de los límites del botón */
+
+    overflow: hidden;
+
+
+
+    /* Establece un fondo gris claro para el botón */
+
+    background: #eee;
+
+
+
+/* Finaliza las reglas del botón de avatar */
+
+}
+
+
+
+
+
+/* Selecciona las imágenes que están dentro del botón de avatar */
+
+.boton-avatar img {
+
+
+
+    /* Hace que la imagen ocupe todo el ancho del botón */
+
+    width: 100%;
+
+
+
+    /* Hace que la imagen ocupe toda la altura del botón */
+
+    height: 100%;
+
+
+
+    /* Hace que la imagen cubra completamente el espacio disponible */
+
+    object-fit: cover;
+
+
+
+/* Finaliza las reglas de la imagen del avatar */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase avatar-letra */
+
+.avatar-letra {
+
+
+
+    /* Activa Flexbox */
+
+    display: flex;
+
+
+
+    /* Centra el contenido verticalmente */
+
+    align-items: center;
+
+
+
+    /* Centra el contenido horizontalmente */
+
+    justify-content: center;
+
+
+
+    /* Hace que el elemento ocupe el 100% del ancho disponible */
+
+    width: 100%;
+
+
+
+    /* Hace que el elemento ocupe el 100% de la altura disponible */
+
+    height: 100%;
+
+
+
+    /* Hace que el texto aparezca en negrita */
+
+    font-weight: bold;
+
+
+
+    /* Establece el tamaño de la letra en 18 píxeles */
+
+    font-size: 18px;
+
+
+
+/* Finaliza las reglas de avatar-letra */
+
+}
+
+
+
+
+
+/* Selecciona los elementos con las clases menu-usuario y menu-configuracion */
+
+.menu-usuario,
+
+.menu-configuracion {
+
+
+
+    /* Permite posicionar estos menús de forma absoluta */
+
+    position: absolute;
+
+
+
+    /* Coloca el menú alineado con el lado derecho */
+
+    right: 0;
+
+
+
+    /* Coloca el menú 55 píxeles desde la parte superior */
+
+    top: 55px;
+
+
+
+    /* Establece el ancho del menú en 250 píxeles */
+
+    width: 250px;
+
+
+
+    /* Establece el fondo del menú en color blanco */
+
+    background: white;
+
+
+
+    /* Agrega un borde de 1 píxel de color gris claro */
+
+    border: 1px solid #ddd;
+
+
+
+    /* Redondea las esquinas del menú */
+
+    border-radius: 10px;
+
+
+
+    /* Agrega una sombra alrededor del menú */
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+
+
+    /* Agrega un espacio interno de 8 píxeles */
+
+    padding: 8px;
+
+
+
+    /* Coloca el menú por encima de otros elementos */
+
+    z-index: 1000;
+
+
+
+    /* Oculta inicialmente el menú */
+
+    display: none;
+
+
+
+/* Finaliza las reglas de los menús */
+
+}
+
+
+
+
+
+/* Selecciona los enlaces dentro de menu-usuario y menu-configuracion, además de los botones de menu-configuracion */
+
+.menu-usuario a,
+
+.menu-configuracion a,
+
+.menu-configuracion button {
+
+
+
+    /* Utiliza Flexbox para organizar el contenido */
+
+    display: flex;
+
+
+
+    /* Hace que el elemento ocupe todo el ancho disponible */
+
+    width: 100%;
+
+
+
+    /* Agrega un espacio interno de 12 píxeles */
+
+    padding: 12px;
+
+
+
+    /* Elimina la decoración predeterminada de los enlaces */
+
+    text-decoration: none;
+
+
+
+    /* Establece el color del texto */
+
+    color: #222;
+
+
+
+    /* Elimina el fondo predeterminado */
+
+    background: none;
+
+
+
+    /* Elimina el borde predeterminado */
+
+    border: none;
+
+
+
+    /* Redondea las esquinas */
+
+    border-radius: 7px;
+
+
+
+    /* Cambia el cursor a una mano */
+
+    cursor: pointer;
+
+
+
+    /* Alinea el texto hacia la izquierda */
+
+    text-align: left;
+
+
+
+    /* Establece el tamaño de la letra en 15 píxeles */
+
+    font-size: 15px;
+
+
+
+/* Finaliza las reglas de enlaces y botones */
+
+}
+
+
+
+
+
+/* Selecciona los enlaces y botones cuando el usuario coloca el cursor sobre ellos */
+
+.menu-usuario a:hover,
+
+.menu-configuracion a:hover,
+
+.menu-configuracion button:hover {
+
+
+
+    /* Cambia el fondo a un gris claro cuando se pasa el cursor */
+
+    background: #f1f1f1;
+
+
+
+/* Finaliza las reglas del efecto hover */
+
+}
+
+
+
+
+
+/* Selecciona los botones que se encuentran dentro de menu-usuario */
+
+.menu-usuario button {
+
+
+
+    /* Coloca el contenido del botón con espacio entre los extremos */
+
+    justify-content: space-between;
+
+
+
+/* Finaliza las reglas del botón */
+
+}
+
+
+
+
+
+/* Selecciona los enlaces que se encuentran dentro de menu-configuracion */
+
+.menu-configuracion a {
+
+
+
+    /* Organiza el contenido del enlace en forma de columna */
+
+    flex-direction: column;
+
+
+
+    /* Establece una separación de 5 píxeles entre los elementos */
+
+    gap: 5px;
+
+
+
+/* Finaliza las reglas de los enlaces de configuración */
+
+}
+
+
+
+
+
+/* Selecciona los elementos span que están dentro de menu-configuracion */
+
+.menu-configuracion a span {
+
+
+
+    /* Establece el color del texto en gris */
+
+    color: #777;
+
+
+
+    /* Establece el tamaño de la letra en 13 píxeles */
+
+    font-size: 13px;
+
+
+
+/* Finaliza las reglas de span */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase separador */
+
+.separador {
+
+
+
+    /* Establece la altura del separador en 1 píxel */
+
+    height: 1px;
+
+
+
+    /* Establece el color de fondo del separador */
+
+    background: #eee;
+
+
+
+    /* Agrega un margen vertical de 6 píxeles y elimina el margen horizontal */
+
+    margin: 6px 0;
+
+
+
+/* Finaliza las reglas del separador */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase cerrar-sesion */
+
+.cerrar-sesion {
+
+
+
+    /* Establece el color del texto en rojo y obliga a utilizar este color */
+
+    color: #c62828 !important;
+
+
+
+/* Finaliza las reglas de cerrar-sesion */
+
+}
+
+
+
+
+
+/* Selecciona los elementos que tienen la clase volver-menu */
+
+.volver-menu {
+
+
+
+    /* Hace que el texto aparezca en negrita */
+
+    font-weight: bold;
+
+
+
+/* Finaliza las reglas de volver-menu */
+
+} 
+
