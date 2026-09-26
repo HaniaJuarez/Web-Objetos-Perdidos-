@@ -1,850 +1,272 @@
-<!-- Indica que este documento utiliza HTML5 -->
-
+<!-- Indica que el documento utiliza HTML5 -->
 <!DOCTYPE html>
 
-
-
-<!-- Inicia el documento HTML y establece que el idioma principal es español -->
-
+<!-- Inicia el documento HTML y establece el idioma español -->
 <html lang="es">
 
-
-
 <!-- Inicia la sección de configuración del documento -->
-
 <head>
 
-
-
     <!-- Permite utilizar correctamente caracteres especiales como á, é, í, ó, ú y ñ -->
-
     <meta charset="UTF-8">
 
-
-
-    <!-- Hace que la página se adapte correctamente al tamaño de la pantalla del dispositivo -->
-
+    <!-- Hace que la página se adapte correctamente al tamaño de la pantalla -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
     <!-- Define el título que aparecerá en la pestaña del navegador -->
-
     <title>Reportar objeto perdido</title>
 
-
-
-<!-- Finaliza la sección head -->
-
+<!-- Finaliza la sección de configuración -->
 </head>
 
-
-
-<!-- Inicia la sección donde se encuentra el contenido visible de la página -->
-
+<!-- Inicia el contenido visible de la página -->
 <body>
 
-
-
     <!-- Inicia el encabezado de la página -->
-
     <header>
 
-
-
         <!-- Muestra el título principal de la página -->
-
         <h1>Reportar objeto perdido</h1>
 
-
-
-        <!-- Crea un enlace para regresar a la página index.php -->
-
+        <!-- Crea un enlace para regresar a la página principal -->
         <a href="index.php">
 
-
-
-            <!-- Texto que aparecerá como enlace para regresar al inicio -->
-
+            <!-- Texto que aparece dentro del enlace -->
             Volver al inicio
 
-
-
         <!-- Finaliza el enlace -->
-
         </a>
 
-
-
     <!-- Finaliza el encabezado -->
-
     </header>
 
 
-
-
-
-    <!-- Inicia la sección principal del contenido de la página -->
-
+    <!-- Inicia la sección principal de la página -->
     <main>
 
-
-
-        <!-- Muestra el subtítulo de la sección para registrar el objeto perdido -->
-
+        <!-- Muestra el subtítulo de la sección -->
         <h2>Registrar objeto perdido</h2>
 
-
-
-        <!-- Muestra una explicación para indicar al usuario qué debe hacer -->
-
+        <!-- Muestra una explicación para el usuario -->
         <p>
-
-
-
-            <!-- Texto que se muestra como instrucción al usuario -->
-
             Completa la información del objeto que perdiste.
-
-
-
-        <!-- Finaliza el párrafo -->
-
         </p>
 
 
-
-
-
-        <!-- Inicia el formulario, envía los datos a objetos.php mediante POST y permite enviar archivos -->
-
+        <!-- Inicia el formulario y establece el archivo PHP que procesará los datos -->
         <form action="../backend/objetos.php" method="POST" enctype="multipart/form-data">
 
-
-
-            <!-- Crea un campo oculto que permite enviar una acción sin mostrarla al usuario -->
-
+            <!-- Campo oculto que indica que el reporte corresponde a un objeto perdido -->
             <input
-
-
-
-                <!-- Indica que este campo será de tipo oculto -->
-
                 type="hidden"
-
-
-
-                <!-- Define el nombre con el que se enviará este dato al servidor -->
-
                 name="accion"
-
-
-
-                <!-- Define que el valor enviado será "perdido" -->
-
                 value="perdido"
-
-
-
-            <!-- Finaliza el campo oculto -->
-
             >
 
-
-
-
-
-            <!-- Etiqueta que identifica el campo donde se escribirá el nombre del objeto -->
-
+            <!-- Etiqueta que identifica el campo del nombre del objeto -->
             <label for="nombre">
-
-
-
-                <!-- Texto que aparece junto al campo -->
-
                 Nombre del objeto:
-
-
-
-            <!-- Finaliza la etiqueta del nombre -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea el campo donde el usuario escribirá el nombre del objeto -->
-
+            <!-- Campo de texto donde se escribe el nombre del objeto -->
             <input
-
-
-
-                <!-- Define que el campo permitirá escribir texto -->
-
                 type="text"
-
-
-
-                <!-- Asigna el identificador "nombre" al campo -->
-
                 id="nombre"
-
-
-
-                <!-- Define el nombre con el que este dato será enviado al servidor -->
-
                 name="nombre"
-
-
-
-                <!-- Hace obligatorio que el usuario complete este campo -->
-
                 required
-
-
-
-            <!-- Finaliza el campo de texto -->
-
             >
 
-
-
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
 
 
-
-
-
-            <!-- Etiqueta que identifica el campo de selección de categoría -->
-
+            <!-- Etiqueta que identifica el campo de categoría -->
             <label for="categoria">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Categoría:
-
-
-
-            <!-- Finaliza la etiqueta de categoría -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea una lista desplegable para seleccionar una categoría -->
-
+            <!-- Crea la lista desplegable para seleccionar una categoría -->
             <select
-
-
-
-                <!-- Asigna el identificador "categoria" a la lista -->
-
                 id="categoria"
-
-
-
-                <!-- Define el nombre con el que se enviará la categoría al servidor -->
-
                 name="categoria_id"
-
-
-
-                <!-- Hace obligatorio seleccionar una categoría -->
-
                 required
-
-
-
-            <!-- Finaliza la apertura de la lista desplegable -->
-
             >
 
-
-
-                <!-- Crea la opción inicial que no representa una categoría -->
-
+                <!-- Opción inicial para indicar que se debe seleccionar una categoría -->
                 <option value="">
-
-
-
-                    <!-- Texto que se muestra para indicar que se debe seleccionar una categoría -->
-
                     Selecciona una categoría
-
-
-
-                <!-- Finaliza la opción inicial -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Electrónica -->
-
+                <!-- Opción correspondiente a Electrónica -->
                 <option value="1">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Electrónica
-
-
-
-                <!-- Finaliza la opción Electrónica -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Documentos -->
-
+                <!-- Opción correspondiente a Documentos -->
                 <option value="2">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Documentos
-
-
-
-                <!-- Finaliza la opción Documentos -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Accesorios -->
-
+                <!-- Opción correspondiente a Accesorios -->
                 <option value="3">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Accesorios
-
-
-
-                <!-- Finaliza la opción Accesorios -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Ropa -->
-
+                <!-- Opción correspondiente a Ropa -->
                 <option value="4">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Ropa
-
-
-
-                <!-- Finaliza la opción Ropa -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Material escolar -->
-
+                <!-- Opción correspondiente a Material escolar -->
                 <option value="5">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Material escolar
-
-
-
-                <!-- Finaliza la opción Material escolar -->
-
                 </option>
 
-
-
-                <!-- Crea la opción correspondiente a la categoría Otros -->
-
+                <!-- Opción correspondiente a Otros -->
                 <option value="6">
-
-
-
-                    <!-- Texto visible de la categoría -->
-
                     Otros
-
-
-
-                <!-- Finaliza la opción Otros -->
-
                 </option>
 
-
-
-            <!-- Finaliza la lista desplegable de categorías -->
-
+            <!-- Finaliza la lista de categorías -->
             </select>
 
-
-
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
-
-
-
 
 
             <!-- Etiqueta que identifica el campo de descripción pública -->
-
             <label for="descripcion_publica">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Descripción pública:
-
-
-
-            <!-- Finaliza la etiqueta de descripción pública -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea un área de texto para escribir la descripción pública -->
-
+            <!-- Área de texto para escribir una descripción general del objeto -->
             <textarea
-
-
-
-                <!-- Asigna el identificador "descripcion_publica" al área de texto -->
-
                 id="descripcion_publica"
-
-
-
-                <!-- Define el nombre con el que se enviará la descripción al servidor -->
-
                 name="descripcion_publica"
-
-
-
-                <!-- Define la cantidad aproximada de filas visibles del área de texto -->
-
                 rows="4"
-
-
-
-                <!-- Define la cantidad aproximada de columnas visibles del área de texto -->
-
                 cols="40"
-
-
-
-                <!-- Muestra un texto de ayuda mientras el campo está vacío -->
-
                 placeholder="Describe el objeto de manera general"
-
-
-
-                <!-- Hace obligatorio completar este campo -->
-
                 required
-
-
-
-            <!-- Cierra la etiqueta de apertura del área de texto -->
-
-            >
-
-
-
-            <!-- Cierra el área de texto -->
-
-            </textarea>
-
-
+            ></textarea>
 
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
-
-
-
 
 
             <!-- Etiqueta que identifica el campo de descripción privada -->
-
             <label for="descripcion_privada">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Descripción privada:
-
-
-
-            <!-- Finaliza la etiqueta de descripción privada -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea un área de texto para escribir información privada del objeto -->
-
+            <!-- Área de texto para escribir características que solo el dueño pueda conocer -->
             <textarea
-
-
-
-                <!-- Asigna el identificador "descripcion_privada" al área de texto -->
-
                 id="descripcion_privada"
-
-
-
-                <!-- Define el nombre con el que se enviará la descripción privada al servidor -->
-
                 name="descripcion_privada"
-
-
-
-                <!-- Define la cantidad aproximada de filas visibles -->
-
                 rows="4"
-
-
-
-                <!-- Define la cantidad aproximada de columnas visibles -->
-
                 cols="40"
-
-
-
-                <!-- Muestra un texto de ayuda mientras el campo está vacío -->
-
                 placeholder="Escribe características que solo el dueño pueda conocer"
-
-
-
-            <!-- Cierra la etiqueta de apertura del área de texto -->
-
-            >
-
-
-
-            <!-- Cierra el área de texto -->
-
-            </textarea>
-
-
+            ></textarea>
 
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
 
 
-
-
-
-            <!-- Etiqueta que identifica el campo donde se escribirá el color -->
-
+            <!-- Etiqueta que identifica el campo del color -->
             <label for="color">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Color:
-
-
-
-            <!-- Finaliza la etiqueta del color -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea un campo de texto para escribir el color del objeto -->
-
+            <!-- Campo de texto para escribir el color del objeto -->
             <input
-
-
-
-                <!-- Define que el campo permitirá escribir texto -->
-
                 type="text"
-
-
-
-                <!-- Asigna el identificador "color" al campo -->
-
                 id="color"
-
-
-
-                <!-- Define el nombre con el que se enviará el color al servidor -->
-
                 name="color"
-
-
-
-            <!-- Finaliza el campo de texto -->
-
             >
 
-
-
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
 
 
-
-
-
-            <!-- Etiqueta que identifica el campo para seleccionar la fecha -->
-
+            <!-- Etiqueta que identifica el campo de fecha -->
             <label for="fecha">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Fecha en que se perdió:
-
-
-
-            <!-- Finaliza la etiqueta de fecha -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea un campo que permite seleccionar una fecha -->
-
+            <!-- Campo para seleccionar la fecha en que se perdió el objeto -->
             <input
-
-
-
-                <!-- Define que el campo será de tipo fecha -->
-
                 type="date"
-
-
-
-                <!-- Asigna el identificador "fecha" al campo -->
-
                 id="fecha"
-
-
-
-                <!-- Define el nombre con el que se enviará la fecha al servidor -->
-
                 name="fecha"
-
-
-
-                <!-- Hace obligatorio seleccionar una fecha -->
-
                 required
-
-
-
-            <!-- Finaliza el campo de fecha -->
-
             >
 
-
-
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
 
-            
 
-            <!-- Etiqueta que identifica el campo para subir una fotografía -->
-
+            <!-- Etiqueta que identifica el campo para seleccionar una fotografía -->
             <label for="imagen">
-
-
-
-                <!-- Texto que aparece como nombre del campo -->
-
                 Fotografía del objeto
-
-
-
-            <!-- Finaliza la etiqueta de fotografía -->
-
             </label>
 
-
-
             <!-- Inserta un salto de línea -->
-
             <br>
 
-
-
-            <!-- Crea un campo que permite seleccionar un archivo -->
-
+            <!-- Campo que permite seleccionar una imagen del objeto -->
             <input
-
-
-
-                <!-- Define que el campo será para seleccionar archivos -->
-
                 type="file"
-
-
-
-                <!-- Asigna el identificador "imagen" al campo -->
-
                 id="imagen"
-
-
-
-                <!-- Define el nombre con el que se enviará la imagen al servidor -->
-
                 name="imagen"
-
-
-
-                <!-- Indica que el campo acepta archivos de imagen -->
-
                 accept="image/*"
-
-
-
-            <!-- Finaliza el campo para seleccionar archivos -->
-
             >
 
-
-
             <!-- Inserta dos saltos de línea -->
-
             <br><br>
 
 
-
-            <!-- Crea el botón que permitirá enviar el formulario -->
-
+            <!-- Botón que permite enviar el formulario -->
             <button type="submit">
-
-
-
-                <!-- Texto que aparecerá dentro del botón -->
-
                 Registrar objeto perdido:
-
-
-
-            <!-- Finaliza el botón -->
-
             </button>
 
-
-
         <!-- Finaliza el formulario -->
-
         </form>
 
-
-
     <!-- Finaliza la sección principal -->
-
     </main>
 
 
-
-
-
     <!-- Inicia el pie de página -->
-
     <footer>
 
-
-
-        <!-- Inicia un párrafo para mostrar información institucional -->
-
+        <!-- Inicia un párrafo -->
         <p>
-
-
-
-            <!-- Texto que aparece en el pie de página -->
-
             Universidad Veracruzana - Facultad
-
-
-
-        <!-- Finaliza el párrafo -->
-
         </p>
 
-
-
-    <!-- Finaliza el pie de página -->
-
+    <!-- Finaliza el párrafo -->
     </footer>
 
-
-
-<!-- Finaliza el contenido visible del documento -->
-
+<!-- Finaliza el contenido visible de la página -->
 </body>
 
-
-
 <!-- Finaliza el documento HTML -->
-
-</html> 
-
+</html>
