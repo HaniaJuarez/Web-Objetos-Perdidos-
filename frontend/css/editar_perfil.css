@@ -1,0 +1,126 @@
+/* Selecciona todos los elementos del documento HTML */
+* {
+    /* Define el modelo de caja para incluir el relleno (padding) y el borde dentro del ancho y alto total del elemento */
+    box-sizing: border-box;
+}
+
+/* Reglas globales para el cuerpo de la página */
+body {
+    /* Elimina el margen externo predeterminado del navegador */
+    margin: 0;
+    /* Establece la tipografía principal a Arial y la tipografía de reserva a sans-serif */
+    font-family: Arial, sans-serif;
+    /* Aplica un color de fondo gris muy claro */
+    background: #f5f6f7;
+}
+
+/* Contenedor principal que envuelve el formulario de edición de perfil */
+.contenedor {
+    /* Establece un ancho relativo del 90% del contenedor padre */
+    width: 90%;
+    /* Limita el ancho máximo del formulario a 650px */
+    max-width: 650px;
+    /* Centra horizontalmente el contenedor y le otorga 40px de margen superior e inferior */
+    margin: 40px auto;
+    /* Fondo blanco para la tarjeta del formulario */
+    background: white;
+    /* Relleno interno de 30px */
+    padding: 30px;
+    /* Redondea las esquinas de la tarjeta a 12px */
+    border-radius: 12px;
+    /* Borde contorno gris de 1px */
+    border: 1px solid #ddd;
+}
+
+/* Enlace directo hijo del contenedor (ej. "← Volver al perfil") */
+.contenedor > a {
+    /* Quita el subrayado predeterminado del enlace */
+    text-decoration: none;
+    /* Aplica un color de texto gris oscuro */
+    color: #333;
+}
+
+/* Título principal dentro del formulario (ej. "Editar perfil") */
+h1 {
+    /* Agrega un margen superior de 25px para separarlo del enlace superior */
+    margin-top: 25px;
+}
+
+/* Subtítulos dentro del formulario (ej. "Cambiar contraseña") */
+h2 {
+    /* Agrega un margen superior de 30px para separarlo de los campos anteriores */
+    margin-top: 30px;
+}
+
+/* Estilos aplicados al formulario */
+form {
+    /* Activa el modelo de caja flexible (Flexbox) */
+    display: flex;
+    /* Orienta las etiquetas e inputs verticalmente, uno debajo de otro */
+    flex-direction: column;
+}
+
+/* Etiquetas de los campos del formulario */
+label {
+    /* Separa la etiqueta 18px del elemento superior */
+    margin-top: 18px;
+    /* Deja un espacio de 6px entre la etiqueta y el input inferior */
+    margin-bottom: 6px;
+    /* Aplica texto en negrita */
+    font-weight: bold;
+}
+
+/* Campos de entrada de datos (inputs de texto, correo, contraseña, archivo, etc.) */
+input {
+    /* Relleno interno de 11px dentro del campo */
+    padding: 11px;
+    /* Borde contorno gris claro de 1px */
+    border: 1px solid #ccc;
+    /* Esquinas ligeramente redondeadas a 7px */
+    border-radius: 7px;
+    /* Establece el tamaño de la fuente a 15px */
+    font-size: 15px;
+}
+
+/* Textos de ayuda pequeños e informativos */
+small,
+.ayuda {
+    /* Aplica un color de texto gris tenue */
+    color: #777;
+    /* Separa el texto de ayuda 5px del campo de entrada superior */
+    margin-top: 5px;
+}
+
+/* Botón de envío del formulario (ej. "Guardar cambios") */
+button {
+    /* Separa el botón 30px de los campos anteriores */
+    margin-top: 30px;
+    /* Relleno interno de 12px */
+    padding: 12px;
+    /* Quita el borde predeterminado del botón */
+    border: none;
+    /* Esquinas redondeadas a 7px */
+    border-radius: 7px;
+    /* Cambia el puntero del mouse a una mano al pasar sobre el botón */
+    cursor: pointer;
+    /* Establece el tamaño de la fuente a 16px */
+    font-size: 16px;
+}
+
+/* Contenedor de la previsualización de la foto de perfil actual */
+.foto-actual {
+    /* Espaciado vertical de 20px arriba y abajo */
+    margin: 20px 0;
+}
+
+/* Imagen dentro del contenedor de la foto actual */
+.foto-actual img {
+    /* Ancho fijo de 120px */
+    width: 120px;
+    /* Altura fija de 120px */
+    height: 120px;
+    /* Convierte la imagen en un círculo perfecto */
+    border-radius: 50%;
+    /* Mantiene la proporción de aspecto recortando la imagen para llenar el círculo */
+    object-fit: cover;
+}
