@@ -1,0 +1,253 @@
+/* Selecciona todos los elementos del documento HTML */
+* {
+    /* Define el modelo de caja para incluir el relleno (padding) y el borde dentro del ancho y alto total del elemento */
+    box-sizing: border-box;
+}
+
+/* Reglas globales para el cuerpo de la página */
+body {
+    /* Elimina el margen externo predeterminado del navegador */
+    margin: 0;
+    /* Establece la tipografía principal a Arial y la tipografía de reserva a sans-serif */
+    font-family: Arial, sans-serif;
+    /* Aplica un color de fondo gris muy claro */
+    background: #f5f6f7;
+    /* Establece el color de texto principal en un tono gris oscuro/casi negro */
+    color: #222;
+}
+
+/* Estilos de la barra de navegación o cabecera del perfil */
+.perfil-header {
+    /* Fondo de color blanco para la cabecera */
+    background: white;
+    /* Espaciado interno: 18px arriba/abajo y 30px a los lados */
+    padding: 18px 30px;
+    /* Define una línea divisoria inferior de 1px en color gris claro */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilos para el enlace de regresar/volver */
+.volver {
+    /* Color de texto gris oscuro */
+    color: #333;
+    /* Quita el subrayado predeterminado del enlace */
+    text-decoration: none;
+    /* Aplica texto en negrita */
+    font-weight: bold;
+}
+
+/* Contenedor principal que envuelve el contenido del perfil */
+.perfil-contenedor {
+    /* Define el ancho máximo permitido para la sección */
+    max-width: 1000px;
+    /* Centra horizontalmente el contenedor y le otorga 30px de margen superior e inferior */
+    margin: 30px auto;
+    /* Relleno lateral interno de 20px para prevenir que el contenido toque las orillas */
+    padding: 0 20px;
+}
+
+/* Tarjeta principal con la información e imagen del usuario */
+.perfil-principal {
+    /* Activa el modelo de caja flexible (Flexbox) */
+    display: flex;
+    /* Alinea verticalmente los elementos secundarios al centro */
+    align-items: center;
+    /* Espacio de separación de 25px entre la foto y los datos del usuario */
+    gap: 25px;
+    /* Fondo blanco para la tarjeta */
+    background: white;
+    /* Relleno interno de 30px */
+    padding: 30px;
+    /* Redondea las esquinas del contenedor a 12px */
+    border-radius: 12px;
+    /* Borde contorno gris de 1px */
+    border: 1px solid #ddd;
+}
+
+/* Estilos aplicados a la imagen de avatar dentro del contenedor de avatar */
+.perfil-avatar img {
+    /* Define el ancho de la imagen */
+    width: 130px;
+    /* Define la altura de la imagen */
+    height: 130px;
+    /* Convierte la imagen rectangular en un círculo perfecto */
+    border-radius: 50%;
+    /* Mantiene la proporción de aspecto recortando la imagen para llenar el círculo */
+    object-fit: cover;
+    /* Agrega un borde gris de 1px alrededor de la imagen */
+    border: 1px solid #ccc;
+}
+
+/* Título principal con el nombre del usuario */
+.perfil-datos h1 {
+    /* Elimina los márgenes superior e inferiores/laterales, manteniendo solo 8px de margen inferior */
+    margin: 0 0 8px;
+}
+
+/* Párrafo con el correo del usuario */
+.perfil-datos p {
+    /* Aplica un color de texto gris intermedio */
+    color: #666;
+}
+
+/* Etiqueta que muestra el rol del usuario */
+.rol {
+    /* Permite aplicar ancho, alto y paddings respetando el flujo de texto */
+    display: inline-block;
+    /* Relleno interno: 6px arriba/abajo y 12px a los lados */
+    padding: 6px 12px;
+    /* Redondea completamente los bordes para crear una píldora */
+    border-radius: 20px;
+    /* Fondo gris claro para destacar el texto */
+    background: #eee;
+    /* Tamaño de fuente de 14px */
+    font-size: 14px;
+}
+
+/* Contenedor secundario que aloja la actividad del usuario */
+.actividad {
+    /* Separa este bloque 25px de la tarjeta principal superior */
+    margin-top: 25px;
+    /* Fondo blanco para el contenedor */
+    background: white;
+    /* Relleno interno de 30px */
+    padding: 30px;
+    /* Esquinas redondeadas a 12px */
+    border-radius: 12px;
+    /* Borde gris claro de 1px */
+    border: 1px solid #ddd;
+}
+
+/* Sección contenedora de las métricas/contadores */
+.estadisticas {
+    /* Activa Flexbox para colocar los contadores en fila */
+    display: flex;
+    /* Espacio de 20px entre cada tarjeta de estadística */
+    gap: 20px;
+    /* Separa las estadísticas 35px del contenido inferior */
+    margin-bottom: 35px;
+}
+
+/* Cajas individuales con cada número estadístico */
+.estadistica {
+    /* Borde contorno gris claro */
+    border: 1px solid #ddd;
+    /* Esquinas redondeadas a 10px */
+    border-radius: 10px;
+    /* Relleno interno de 20px */
+    padding: 20px;
+    /* Ancho mínimo de 180px para cada caja de estadística */
+    min-width: 180px;
+}
+
+/* Texto numérico en negrita dentro de la estadística */
+.estadistica strong {
+    /* Lo convierte en elemento en bloque para que ocupe su propia línea */
+    display: block;
+    /* Incrementa el tamaño del número a 28px */
+    font-size: 28px;
+}
+
+/* Descripción del número estadístico */
+.estadistica span {
+    /* Color de texto gris suave */
+    color: #666;
+}
+
+/* Cuadrícula o Grid para listar las tarjetas de objetos */
+.lista-objetos {
+    /* Activa la maquetación mediante CSS Grid */
+    display: grid;
+    /* Crea columnas adaptables de mínimo 280px que se acomodan automáticamente */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Brecha de 20px entre filas y columnas */
+    gap: 20px;
+}
+
+/* Tarjeta individual de objeto reportado */
+.tarjeta {
+    /* Borde gris claro */
+    border: 1px solid #ddd;
+    /* Esquinas redondeadas a 10px */
+    border-radius: 10px;
+    /* Recorta cualquier contenido (como la imagen) que sobresalga de los bordes redondeados */
+    overflow: hidden;
+    /* Fondo blanco */
+    background: white;
+}
+
+/* Imagen de la tarjeta de objeto */
+.tarjeta img {
+    /* Hace que la imagen ocupe todo el ancho de la tarjeta */
+    width: 100%;
+    /* Define una altura fija de 170px */
+    height: 170px;
+    /* Ajusta la imagen para cubrir el área manteniendo su proporción sin deformarse */
+    object-fit: cover;
+}
+
+/* Contenedor del texto dentro de la tarjeta */
+.tarjeta div {
+    /* Relleno interno de 18px */
+    padding: 18px;
+}
+
+/* Título dentro de la tarjeta de objeto */
+.tarjeta h3 {
+    /* Elimina el margen superior predeterminado del título */
+    margin-top: 0;
+}
+
+/* Enlaces situados dentro de las tarjetas de objeto y reclamaciones */
+.tarjeta a,
+.reclamacion a {
+    /* Color de texto azul primario */
+    color: #2563eb;
+    /* Quita el subrayado predeterminado */
+    text-decoration: none;
+}
+
+/* Lista contenedora de reclamaciones */
+.lista-reclamaciones {
+    /* Activa el diseño Flexbox */
+    display: flex;
+    /* Orienta las reclamaciones una debajo de otra (en columna) */
+    flex-direction: column;
+    /* Espaciado vertical de 15px entre reclamaciones */
+    gap: 15px;
+}
+
+/* Tarjeta individual de reclamación */
+.reclamacion {
+    /* Borde contorno gris de 1px */
+    border: 1px solid #ddd;
+    /* Esquinas redondeadas a 10px */
+    border-radius: 10px;
+    /* Relleno interno de 18px */
+    padding: 18px;
+}
+
+/* Mensajes cuando no hay datos registrados */
+.sin-datos {
+    /* Color de texto gris claro para el texto informativo */
+    color: #777;
+}
+
+/* Regla de diseño adaptativo (Responsive) para pantallas pequeñas (máximo 600px de ancho) */
+@media (max-width: 600px) {
+
+    /* Ajustes para la tarjeta principal del perfil en móviles */
+    .perfil-principal {
+        /* Cambia la orientación de los elementos de fila a columna */
+        flex-direction: column;
+        /* Centra la alineación del texto */
+        text-align: center;
+    }
+
+    /* Ajustes para la sección de estadísticas en móviles */
+    .estadisticas {
+        /* Apila las cajas de estadísticas una sobre otra verticalmente */
+        flex-direction: column;
+    }
+
+}
