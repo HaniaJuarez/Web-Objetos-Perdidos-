@@ -1,0 +1,252 @@
+/* Selecciona todos los elementos del documento HTML */
+* {
+    /* Define el modelo de caja para incluir el relleno (padding) y el borde dentro del ancho y alto total del elemento */
+    box-sizing: border-box;
+}
+
+/* Reglas globales para el cuerpo de la página */
+body {
+    /* Elimina el margen externo predeterminado del navegador */
+    margin: 0;
+    /* Establece la tipografía principal a Arial y la tipografía de reserva a sans-serif */
+    font-family: Arial, sans-serif;
+    /* Aplica un color de fondo gris muy claro */
+    background: #f5f6f7;
+    /* Establece el color de texto principal en un tono gris oscuro/casi negro */
+    color: #222;
+}
+
+
+/* ENCABEZADO */
+
+/* Estilos de la barra de encabezado superior */
+.encabezado {
+    /* Fondo de color blanco para la barra superior */
+    background: white;
+    /* Define una línea divisoria inferior de 1px en color gris claro */
+    border-bottom: 1px solid #ddd;
+    /* Relleno interno: 20px arriba/abajo y 40px a los lados */
+    padding: 20px 40px;
+
+    /* Activa la maquetación mediante Flexbox */
+    display: flex;
+    /* Alinea verticalmente los elementos secundarios al centro */
+    align-items: center;
+    /* Distribuye los elementos dejando el máximo espacio posible entre ellos (título a la izquierda, acciones a la derecha) */
+    justify-content: space-between;
+}
+
+/* Título principal del encabezado */
+.encabezado h1 {
+    /* Elimina los márgenes predeterminados del título */
+    margin: 0;
+}
+
+/* Subtítulo o texto descriptivo del encabezado */
+.encabezado p {
+    /* Elimina únicamente el margen inferior */
+    margin-bottom: 0;
+    /* Aplica un color de texto gris intermedio */
+    color: #666;
+}
+
+
+/* Contenedor de enlaces/acciones situados en el encabezado */
+.acciones-header {
+    /* Activa Flexbox para alinear los enlaces en fila */
+    display: flex;
+    /* Espacio de separación de 20px entre cada enlace */
+    gap: 20px;
+}
+
+/* Estilos para los enlaces dentro de las acciones del encabezado */
+.acciones-header a {
+    /* Quita el subrayado predeterminado del enlace */
+    text-decoration: none;
+    /* Aplica un color de texto gris oscuro */
+    color: #333;
+}
+
+
+/* CONTENEDOR */
+
+/* Grid o cuadrícula contenedora principal de las tarjetas */
+.contenedor {
+    /* Establece un ancho relativo del 90% del contenedor padre */
+    width: 90%;
+    /* Limita el ancho máximo del contenedor a 1100px */
+    max-width: 1100px;
+
+    /* Centra horizontalmente el contenedor y le otorga 40px de margen superior e inferior */
+    margin: 40px auto;
+
+    /* Activa la maquetación mediante CSS Grid */
+    display: grid;
+
+    /* Crea columnas adaptables de mínimo 280px que se expanden (1fr) para llenar el espacio restante */
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px, 1fr)
+        );
+
+    /* Brecha de 25px entre filas y columnas de la cuadrícula */
+    gap: 25px;
+}
+
+
+/* TARJETAS */
+
+/* Tarjeta contenedora de panel/métrica */
+.tarjeta {
+    /* Fondo de color blanco */
+    background: white;
+
+    /* Borde contorno gris claro de 1px */
+    border: 1px solid #ddd;
+
+    /* Redondea las esquinas de la tarjeta a 12px */
+    border-radius: 12px;
+
+    /* Relleno interno de 25px */
+    padding: 25px;
+
+    /* Activa Flexbox para alinear el icono y el contenido lado a lado */
+    display: flex;
+
+    /* Espacio de separación de 20px entre el icono y la columna de contenido */
+    gap: 20px;
+
+    /* Aplica una sombra suave alrededor de la tarjeta para darle elevación */
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.06);
+}
+
+
+/* Icono descriptivo de la tarjeta */
+.icono {
+    /* Tamaño de fuente grande para el icono */
+    font-size: 35px;
+}
+
+
+/* Bloque de contenido principal de la tarjeta */
+.contenido {
+    /* Permite que la columna de contenido crezca para ocupar todo el espacio disponible */
+    flex: 1;
+}
+
+
+/* Título secundario dentro de la tarjeta */
+.contenido h2 {
+    /* Elimina el margen superior predeterminado del título */
+    margin-top: 0;
+}
+
+
+/* Párrafos dentro del contenido de la tarjeta */
+.contenido p {
+    /* Color de texto gris suave */
+    color: #666;
+    /* Incrementa la altura de línea a 1.5 para mejorar la legibilidad del texto */
+    line-height: 1.5;
+}
+
+
+/* Indicador numérico/contador dentro de la tarjeta */
+.numero {
+    /* Tamaño de fuente grande de 35px para destacar la cifra */
+    font-size: 35px;
+
+    /* Aplica texto en negrita */
+    font-weight: bold;
+
+    /* Separa el número 15px del elemento superior */
+    margin-top: 15px;
+}
+
+
+/* Textos descriptivos secundarios dentro del contenido */
+.contenido span {
+    /* Color de texto gris claro */
+    color: #777;
+
+    /* Lo convierte en elemento en bloque para que ocupe su propia línea */
+    display: block;
+
+    /* Agrega un margen inferior de 20px para separarlo del botón */
+    margin-bottom: 20px;
+}
+
+
+/* BOTÓN */
+
+/* Estilos de botones de acción rápida */
+.boton {
+    /* Permite aplicar padding y bordes respetando el flujo de texto inline */
+    display: inline-block;
+
+    /* Relleno interno: 10px arriba/abajo y 16px a los lados */
+    padding: 10px 16px;
+
+    /* Esquinas ligeramente redondeadas a 7px */
+    border-radius: 7px;
+
+    /* Fondo de color casi negro/gris muy oscuro */
+    background: #222;
+
+    /* Color de texto blanco */
+    color: white;
+
+    /* Quita el subrayado predeterminado del enlace */
+    text-decoration: none;
+}
+
+
+/* Efecto hover al pasar el cursor sobre el botón */
+.boton:hover {
+    /* Reduce la opacidad al 85% para proporcionar retroalimentación visual */
+    opacity: 0.85;
+}
+
+
+/* FOOTER */
+
+/* Pie de página de la vista */
+footer {
+    /* Centra el texto del pie de página */
+    text-align: center;
+
+    /* Color de texto gris claro */
+    color: #777;
+
+    /* Relleno interno de 30px */
+    padding: 30px;
+}
+
+
+/* MÓVIL */
+
+/* Regla de diseño adaptativo (Responsive) para pantallas de hasta 650px de ancho */
+@media (max-width: 650px) {
+
+    /* Ajustes para el encabezado en dispositivos móviles */
+    .encabezado {
+        /* Cambia la alineación de los elementos de fila a columna */
+        flex-direction: column;
+
+        /* Alinea los elementos al inicio (izquierda) del contenedor */
+        align-items: flex-start;
+
+        /* Espacio de separación vertical de 15px entre el título y las acciones */
+        gap: 15px;
+    }
+
+    /* Ajustes para la barra de acciones en móviles */
+    .acciones-header {
+        /* Permite que los enlaces pasen a la siguiente línea si no caben horizontalmente */
+        flex-wrap: wrap;
+    }
+
+}
