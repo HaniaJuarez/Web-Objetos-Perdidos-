@@ -33,9 +33,10 @@ $usuario_id =
 
 // Valida que ninguno de los tres campos requeridos esté vacío.
 if (
-    empty($objeto_id) ||
-    empty($objeto_perdido_id) ||
-    empty($descripcion)
+    empty($descripcion) ||
+    empty($objeto_id) && 
+    empty($objeto_perdido_id) 
+    
 ) {
 
     // Notifica al usuario que debe llenar todos los campos obligatorios.
@@ -67,7 +68,7 @@ $datos = [
 
     // Convierte explícitamente el ID del objeto a entero.
     'objeto_id' =>
-        (int)$objeto_id,
+        (int)$objeto_id ? (int)$objeto_id : null,
 
     // Convierte el ID del objeto perdido a entero.
     'objeto_perdido_id' =>
@@ -75,7 +76,7 @@ $datos = [
 
     // Convierte el ID del usuario actual a entero.
     'usuario_id' =>
-        (int)$usuario_id,
+        !empty($objeto_perdido_id) ? (int)$objeto_perdido_id : null,
 
     // Almacena la descripción de verificación introducida por el usuario.
     'descripcion' =>
@@ -243,7 +244,7 @@ if (
     </p>
 
     <!-- Enlace para ver la vista detallada del ticket enviando el código codificado en la URL -->
-    <a href="ticket.php?ticket=<?php echo urlencode($ticket); ?>">
+    <a href="../frontend/ticket.php?ticket=<?php echo urlencode($ticket); ?>">
         Ver ticket
     </a>
 
