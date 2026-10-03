@@ -945,6 +945,89 @@ unset($reclamacion);
 
                     </section>
 
+                    <!-- =================================================
+                        ACCIONES DEL DOCENTE
+                        ================================================= -->
+
+                    <?php if (
+                        ($reclamacion['estado'] ?? '') === 'Pendiente'
+                    ): ?>
+
+                        <section class="seccion">
+
+                            <h3>
+                                Acción del docente
+                            </h3>
+
+                            <div class="acciones-reclamacion">
+
+                                <!-- FORMULARIO PARA APROBAR -->
+
+                                <form
+                                    action="../backend/gestionar_reclamacion.php"
+                                    method="POST"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="reclamacion_id"
+                                        value="<?php echo htmlspecialchars(
+                                            $reclamacion['id']
+                                        ); ?>"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="accion"
+                                        value="aprobar"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="boton-aprobar"
+                                    >
+                                        Aprobar reclamación
+                                    </button>
+
+                                </form>
+
+
+                                <!-- FORMULARIO PARA RECHAZAR -->
+
+                                <form
+                                    action="../backend/gestionar_reclamacion.php"
+                                    method="POST"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="reclamacion_id"
+                                        value="<?php echo htmlspecialchars(
+                                            $reclamacion['id']
+                                        ); ?>"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="accion"
+                                        value="rechazar"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="boton-rechazar"
+                                    >
+                                        Rechazar reclamación
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </section>
+
+                    <?php endif; ?>
+
 
                     <!-- =================================================
                          DOCENTE ASIGNADO
