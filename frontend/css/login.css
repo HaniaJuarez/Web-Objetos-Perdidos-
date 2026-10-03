@@ -1,0 +1,232 @@
+/**
+ * ESTILOS DE AUTENTICACIÓN (LOGIN Y REGISTRO) - ESTILO DARK
+ * ------------------------------------------------------------------
+ * Hoja de estilos encargada de la maquetación y diseño visual de las vistas
+ * de inicio de sesión y registro de usuarios, basada en una interfaz oscura.
+ */
+
+/* Reset básico global y configuración de tipografía del sistema */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Configuración del contenedor principal de la página (Fondo y centrado de pantalla) */
+body {
+    background-color: #0d1117;
+    color: #e6edf3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Contenedor principal centrado que limita el ancho de las cajas de autenticación */
+.login-container {
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+}
+
+/* Sección e imagen del logo superior */
+.logo {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Título principal de la vista */
+.title {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+    color: #f0f6fc;
+    text-align: center;
+}
+
+/* Caja de formulario con fondo oscuro y borde sutil */
+.login-box {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Estructura de cada campo de formulario */
+.form-group {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+/* Encabezado flex para alinear la etiqueta y el enlace de recuperación */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Etiquetas de los campos de entrada */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #f0f6fc;
+    margin-bottom: 8px;
+}
+
+.form-header label {
+    margin-bottom: 0;
+}
+
+/* Enlace para recuperación de contraseña */
+.forgot-link {
+    font-size: 12px;
+    color: #2f81f7;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para los campos de entrada (texto, correo y contraseña) */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100% !important;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #f0f6fc;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Estado de enfoque (focus) con resplandor azul para campos de entrada */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #2f81f7;
+    box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.4);
+}
+
+/* Botón de acción principal (Verde estilo GitHub) */
+.btn-primary {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #238636;
+    border: 1px solid rgba(240, 246, 252, 0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+/* Separador horizontal con texto "o" */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+    color: #8b949e;
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #21262d;
+}
+
+.divider span {
+    padding: 0 8px;
+}
+
+/* Botones de inicio de sesión con proveedores externos (OAuth) */
+.btn-oauth {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #f0f6fc;
+    background-color: #21262d;
+    border: 1px solid #363b42;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-oauth:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+}
+
+.btn-oauth svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Caja inferior secundaria (Enlace hacia la vista de registro) */
+.signup-box {
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #f0f6fc;
+    margin-bottom: 16px;
+}
+
+.signup-box a {
+    color: #2f81f7;
+    text-decoration: none;
+}
+
+.signup-box a:hover {
+    text-decoration: underline;
+}
+
+/* Enlace para autenticación mediante Passkeys */
+.passkey-link {
+    font-size: 14px;
+    color: #2f81f7;
+    text-decoration: none;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.passkey-link:hover {
+    text-decoration: underline;
+}
