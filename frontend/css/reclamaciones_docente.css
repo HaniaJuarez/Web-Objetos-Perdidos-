@@ -322,3 +322,110 @@ footer {
     }
 
 }
+
+/* ============================================================
+   BOTONES DE ACCIÓN DEL DOCENTE
+   ============================================================ */
+
+/**
+ * Contenedor de Botones de Acción (.acciones-reclamacion)
+ * 
+ * Propósito:
+ * Sirve como contenedor flexible (Flexbox) para agrupar las acciones
+ * de interacción del docente (Aprobar / Rechazar solicitudes).
+ * 
+ * Comportamiento:
+ * - display: flex -> Alinea los botones de forma horizontal.
+ * - gap: 12px -> Mantiene una separación constante entre botones.
+ * - flex-wrap: wrap -> Permite que los botones se adapten y bajen de línea en pantallas pequeñas.
+ * - margin-top: 15px -> Separa el contenedor del contenido previo en la tarjeta.
+ */
+.acciones-reclamacion {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 15px;
+}
+
+
+/* Botón aprobar */
+
+/**
+ * Estilo Primario - Acción Positiva (.boton-aprobar)
+ * 
+ * Propósito:
+ * Otorga identidad visual al botón de aprobación/aceptación de una reclamación.
+ * 
+ * Detalle Técnico:
+ * - background: #2e7d32 -> Tono verde institucional que indica una acción positiva o de éxito.
+ * - color: white / border: none -> Garantiza alto contraste y lectura clara.
+ * - cursor: pointer -> Cambia el puntero para indicar interactividad.
+ */
+.boton-aprobar {
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+/* Botón rechazar */
+
+/**
+ * Estilo Primario - Acción Destructiva o Negativa (.boton-rechazar)
+ * 
+ * Propósito:
+ * Otorga identidad visual al botón de rechazo/denegación de una reclamación.
+ * 
+ * Detalle Técnico:
+ * - background: #c62828 -> Tono rojo de advertencia/peligro que alerta sobre una acción definitiva.
+ * - padding / font-size / border-radius -> Mantiene proporciones simétricas idénticas a .boton-aprobar.
+ */
+.boton-rechazar {
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #c62828;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+/* Efecto al pasar el cursor */
+
+/**
+ * Interacción de Estado Hover (.boton-aprobar:hover, .boton-rechazar:hover)
+ * 
+ * Propósito:
+ * Ofrece retroalimentación visual inmediata (Feedback) al usuario cuando pasa el cursor sobre cualquiera de los botones.
+ * 
+ * Detalle Técnico:
+ * - opacity: 0.85 -> Suaviza el tono del color de fondo al 85% para indicar que el elemento es interactivo y listo para clic.
+ */
+.boton-aprobar:hover,
+.boton-rechazar:hover {
+
+    opacity: 0.85;
+}
