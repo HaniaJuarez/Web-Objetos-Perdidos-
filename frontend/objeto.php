@@ -265,20 +265,34 @@ $objeto =$objetos[0];
     <!-- Evalúa si el estado actual del objeto es exactamente igual a "Encontrado" -->
     <?php if ($objeto['estado'] === 'Encontrado'): ?>
 
-        <!-- Salto de línea estructural -->
-        <br>
+        <?php
+        $perdido_id = $_GET['perdido_id'] ?? '';
+        ?>
 
-        <!-- Enlace que redirige a la vista de reclamación enviando el ID del objeto -->
-        <a
-            href="reclamacion.php?id=<?php echo $objeto['id']; ?>"
-        >
+        <?php if (!empty($perdido_id)): ?>
 
-            <!-- Botón interactivo para iniciar la reclamación -->
-            <button type="button">
-                Solicitar reclamación
-            </button>
+            <!-- Salto de línea estructural -->
+            <br>
 
-        </a>
+            <!-- Enlace que redirige a la vista de reclamación enviando el ID del objeto -->
+            <a
+                 href="reclamacion.php?id=<?php echo urlencode($objeto['id']); ?>&perdido_id=<?php echo urlencode($perdido_id); ?>"
+            >
+
+                <!-- Botón interactivo para iniciar la reclamación -->
+                <button type="button">
+                    Solicitar reclamación
+                </button>
+
+            </a>
+        <?php else: ?>
+
+            <p>
+                Para solicitar una reclamación, debes acceder a este objeto
+                desde una coincidencia con un objeto perdido.
+            </p>
+
+        <?php endif; ?>
 
     <!-- Cierre de la condición de estado "Encontrado" -->
     <?php endif; ?>
