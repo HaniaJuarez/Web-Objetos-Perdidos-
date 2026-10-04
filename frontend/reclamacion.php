@@ -18,6 +18,17 @@ if (empty($id)) {
     exit;
 }
 
+// Verifica que exista el objeto perdido.
+if (empty($perdido_id)) {
+    // Imprime un mensaje en pantalla especificando que no se encontro el objeto perdido.
+    echo "No se especificó el objeto perdido relacionado.";
+    echo "<br><br>";
+    // linea que indica la opcion de volver al inicio
+    echo '<a href="index.php">Volver al inicio</a>';
+    // Detiene completamente la ejecución del script.
+    exit;
+}
+
 ?>
 
 <!-- Declaración del tipo de documento que especifica el estándar HTML5 -->
