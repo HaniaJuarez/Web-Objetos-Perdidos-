@@ -15,27 +15,34 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 
 // Recupera el ID del objeto enviado por el formulario vía POST; si no existe, asigna una cadena vacía.
-$objeto_id =
-    $_POST['objeto_id'] ?? '';
+$objeto_id = $_POST['objeto_id'] ?? '';
 
 // Recupera el ID del objeto perdido asociado desde los datos POST; si no existe, asigna una cadena vacía.
-$objeto_perdido_id =
-    $_POST['objeto_perdido_id'] ?? '';
+$objeto_perdido_id = $_POST['objeto_perdido_id'] ?? '';
 
 // Obtiene la descripción o detalle para verificar la propiedad enviado por el usuario.
-$descripcion =
-    $_POST['descripcion'] ?? '';
+$descripcion = trim($_POST['descripcion'] ?? '');
 
 // Obtiene el identificador del usuario autenticado almacenado en la variable global de sesión.
-$usuario_id =
-    $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['usuario_id'] ?? '';
+
+// ============================================================
+// VALIDAR SESIÓN
+// ============================================================
+
+if (empty($usuario_id)) {
+
+    echo "No se pudo identificar al usuario.";
+    exit;
+}
 
 
 // Valida que ninguno de los tres campos requeridos esté vacío.
 if (
-    empty($descripcion) ||
-    empty($objeto_id) && 
-    empty($objeto_perdido_id) 
+    empty($objeto_id) ||
+    empty($objeto_perdido_id) ||
+    empty($descripcion) 
+     
     
 ) {
 
@@ -44,6 +51,198 @@ if (
     // Finaliza la ejecución del script.
     exit;
 
+}
+
+// ============================================================
+// VALIDAR QUE LOS IDs SEAN NUMÉRICOS
+// ============================================================
+
+if (
+    !is_numeric($objeto_id) ||
+    !is_numeric($objeto_perdido_id) ||
+    !is_numeric($usuario_id)
+) {
+
+    echo "Los datos enviados no son válidos.";
+    exit;
+}
+
+
+// Convertimos los valores a enteros.
+
+$objeto_id = (int)$objeto_id;
+
+$objeto_perdido_id = (int)$objeto_perdido_id;
+
+$usuario_id = (int)$usuario_id;
+
+
+// Verificamos que sean mayores que cero.
+
+if (
+    $objeto_id <= 0 ||
+    $objeto_perdido_id <= 0 ||
+    $usuario_id <= 0
+) {
+
+    echo "Los identificadores no son válidos.";
+    exit;
+}
+
+// ============================================================
+// CONFIGURAR CONSULTA A SUPABASE
+// ============================================================
+
+$options = [
+
+    'http' => [
+
+        'method' => 'GET',
+
+        'header' =>
+            "apikey: " .
+            SUPABASE_KEY .
+            "\r\n" .
+
+            "Authorization: Bearer " .
+            SUPABASE_KEY .
+            "\r\n" .
+
+            "Content-Type: application/json\r\n",
+
+        'ignore_errors' => true
+
+    ]
+
+];
+
+
+$context =
+    stream_context_create($options);
+
+
+// ============================================================
+// VERIFICAR OBJETO ENCONTRADO
+// ============================================================
+
+$url_objeto =
+
+    SUPABASE_URL .
+    '/rest/v1/objetos' .
+    '?id=eq.' .
+    urlencode($objeto_id) .
+    '&select=id,nombre,estado';
+
+
+$response_objeto =
+
+    file_get_contents(
+        $url_objeto,
+        false,
+        $context
+    );
+
+
+if ($response_objeto === false) {
+
+    echo "No se pudo verificar el objeto encontrado.";
+    exit;
+}
+
+
+$datos_objeto =
+
+    json_decode(
+        $response_objeto,
+        true
+    );
+
+
+if (
+    !is_array($datos_objeto) ||
+    empty($datos_objeto)
+) {
+
+    echo "El objeto encontrado no existe.";
+    exit;
+}
+
+
+// ============================================================
+// VERIFICAR ESTADO DEL OBJETO
+// ============================================================
+
+if (
+    ($datos_objeto[0]['estado'] ?? '') !== 'Encontrado'
+) {
+
+    echo "El objeto seleccionado ya no está disponible para reclamación.";
+    exit;
+}
+
+
+// ============================================================
+// VERIFICAR OBJETO PERDIDO
+// ============================================================
+
+$url_objeto_perdido =
+
+    SUPABASE_URL .
+    '/rest/v1/objetos' .
+    '?id=eq.' .
+    urlencode($objeto_perdido_id) .
+    '&select=id,nombre,estado,usuario_id';
+
+
+$response_objeto_perdido =
+
+    file_get_contents(
+        $url_objeto_perdido,
+        false,
+        $context
+    );
+
+
+if ($response_objeto_perdido === false) {
+
+    echo "No se pudo verificar el objeto perdido.";
+    exit;
+}
+
+
+$datos_objeto_perdido =
+
+    json_decode(
+        $response_objeto_perdido,
+        true
+    );
+
+
+if (
+    !is_array($datos_objeto_perdido) ||
+    empty($datos_objeto_perdido)
+) {
+
+    echo "El objeto perdido relacionado no existe.";
+    exit;
+}
+
+
+// ============================================================
+// VERIFICAR QUE EL OBJETO PERDIDO PERTENEZCA AL USUARIO
+// ============================================================
+
+$usuario_objeto_perdido =
+
+    $datos_objeto_perdido[0]['usuario_id'] ?? null;
+
+
+if (
+    (int)$usuario_objeto_perdido !== $usuario_id
+) {
+
+    echo "El objeto perdido no pertenece al usuario que realiza la reclamación.";
+    exit;
 }
 
 
@@ -68,15 +267,20 @@ $datos = [
 
     // Convierte explícitamente el ID del objeto a entero.
     'objeto_id' =>
-        (int)$objeto_id ? (int)$objeto_id : null,
+        //(int)$objeto_id ? (int)$objeto_id : null,
+        $objeto_id,
+
 
     // Convierte el ID del objeto perdido a entero.
     'objeto_perdido_id' =>
-        (int)$objeto_perdido_id,
+        //(int)$objeto_perdido_id,
+        $objeto_perdido_id,
 
     // Convierte el ID del usuario actual a entero.
     'usuario_id' =>
-        !empty($objeto_perdido_id) ? (int)$objeto_perdido_id : null,
+        //!empty($objeto_perdido_id) ? (int)$objeto_perdido_id : null,
+        $usuario_id,
+
 
     // Almacena la descripción de verificación introducida por el usuario.
     'descripcion' =>
@@ -100,7 +304,7 @@ $url =
 
 
 // Configura las opciones de la petición HTTP POST enviada a Supabase.
-$options = [
+$options_post = [
 
     // Especifica la sección de configuración del protocolo HTTP.
     'http' => [
@@ -137,8 +341,8 @@ $options = [
 
 
 // Crea el recurso de contexto de transmisión HTTP con las opciones de la petición configuradas.
-$context =
-    stream_context_create($options);
+$context_post =
+    stream_context_create($options_post);
 
 
 // Realiza la petición POST a la API de Supabase para guardar la reclamación.
@@ -208,6 +412,11 @@ if (
 
     <!-- Establece la codificación UTF-8 para garantizar la correcta visualización de caracteres en español -->
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <!-- Define el título de la pestaña en el navegador -->
     <title>Reclamación registrada</title>
