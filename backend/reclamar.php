@@ -376,23 +376,44 @@ $resultado =
 
 // Comprueba si la respuesta de Supabase contiene una clave 'message', lo cual indica una falla o excepción devuelta por la base de datos.
 if (
-    isset($resultado['message'])
+    isset($resultado['message']) ||
+    isset($resultado['error'])
 ) {
 
     // Imprime el mensaje general de error.
-    echo "Error al registrar la reclamación.";
+    echo "<h1>Error al registrar la reclamación</h1>";
 
     // Agrega un salto de línea en HTML.
-    echo "<br>";
+    echo "<p>";
 
     // Imprime de forma segura el mensaje detallado devuelto por la API.
     echo htmlspecialchars(
         $resultado['message']
+        ?? $resultado['error']
+        ?? 'Error desconocido'
     );
+
+    echo "</p>";
+
+    if (isset($resultado['details'])) {
+        echo "<p>";
+        echo htmlspecialchars($resultado['details']);
+        echo "</p>";
+    }
 
     // Detiene la ejecución del código.
     exit;
 
+}
+
+/*
+ * Verificamos que Supabase realmente haya
+ * devuelto una reclamación creada.
+ */
+if (!is_array($resultado) || empty($resultado)) {
+    echo "<h1>Error al registrar la reclamación</h1>";
+    echo "<p>Supabase no devolvió la reclamación creada.</p>";
+    exit;
 }
 
 
