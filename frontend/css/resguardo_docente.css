@@ -318,3 +318,33 @@ footer {
     }
 
 }
+/* ==============================
+   BOTONES DEL OBJETO
+   ============================== */
+
+.botones-objeto {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.botones-objeto a {
+    text-decoration: none;
+}
+
+.boton-entrega {
+    display: inline-block;
+
+    padding: 10px 15px;
+
+    background-color: #2e7d32;
+
+    color: white;
+
+    border-radius: 6px;
+}
+
+.boton-entrega:hover {
+    background-color: #1b5e20;
+}
