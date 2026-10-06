@@ -1,0 +1,320 @@
+
+/* ============================================================
+   REGLAS GENERALES Y RESETEO DE ESTILOS
+   ============================================================ */
+
+/* Aplica el modelo de caja border-box a todos los elementos del DOM
+   para incluir padding y border dentro del ancho/alto total especificado */
+* {
+    box-sizing: border-box;
+}
+
+/* Configuración global del cuerpo del documento */
+body {
+    margin: 0;                            /* Elimina los márgenes por defecto del navegador */
+    font-family: Arial, sans-serif;      /* Define la tipografía principal de la interfaz */
+    background-color: #f5f6f8;            /* Color de fondo gris claro para toda la página */
+    color: #333;                          /* Color de texto principal en tono oscuro */
+}
+
+
+/* ============================================================
+   ENCABEZADO PRINCIPAL DE LA PÁGINA
+   ============================================================ */
+
+/* Estilos del contenedor general del encabezado */
+.encabezado {
+    background-color: #2B2F3A;            /* Fondo oscuro para la barra superior */
+    color: white;                         /* Texto en color blanco para contraste */
+    padding: 20px 30px;                   /* Relleno interno superior/inferior y lateral */
+}
+
+/* Distribución del contenido interno dentro del encabezado */
+.encabezado-contenido {
+    max-width: 1200px;                    /* Ancho máximo permitido para centrar el contenido */
+    margin: auto;                         /* Centrado horizontal automático */
+
+    display: flex;                        /* Habilita maquetación mediante Flexbox */
+    justify-content: space-between;       /* Espacia el título y los botones a los extremos */
+    align-items: center;                  /* Alinea verticalmente los elementos al centro */
+}
+
+/* Título principal dentro del encabezado */
+.encabezado h1 {
+    margin: 0;                            /* Remueve márgenes por defecto del encabezado h1 */
+    font-size: 28px;                      /* Tamaño de fuente del título principal */
+}
+
+
+/* ============================================================
+   BOTÓN DE NAVEGACIÓN Y REGRESO
+   ============================================================ */
+
+/* Botón reutilizable para regresar a páginas o paneles previos */
+.boton-regresar {
+    color: white;                         /* Texto en blanco */
+    text-decoration: none;                /* Quita el subrayado predeterminado de los enlaces */
+
+    background-color: #444a59;            /* Fondo gris azulado para contrastar con el encabezado */
+
+    padding: 10px 16px;                   /* Relleno interno del botón */
+
+    border-radius: 6px;                   /* Bordes ligeramente redondeados */
+}
+
+/* Efecto hover al pasar el cursor sobre el botón regresar */
+.boton-regresar:hover {
+    background-color: #555c6d;            /* Aclarado de fondo para efecto interactivo */
+}
+
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL DE CONTENIDO
+   ============================================================ */
+
+/* Estructura envolvente para el cuerpo principal de la vista */
+.contenedor {
+    max-width: 1200px;                    /* Ancho máximo alineado con el encabezado */
+
+    margin: 30px auto;                    /* Espaciado vertical respecto a otros bloques y centrado horizontal */
+
+    padding: 0 20px;                      /* Relleno lateral de protección en pantallas pequeñas */
+}
+
+
+/* ============================================================
+   SECCIÓN DE INTRODUCCIÓN O DESCRIPCIÓN
+   ============================================================ */
+
+/* Tarjeta informativa o introductoria del panel */
+.introduccion {
+    background-color: white;              /* Fondo blanco tipo tarjeta */
+
+    padding: 20px;                        /* Relleno interno */
+
+    margin-bottom: 25px;                  /* Separación con respecto a la lista de objetos */
+
+    border-radius: 8px;                   /* Esquinas redondeadas */
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* Sombra tenue para dar elevación */
+}
+
+/* Encabezado secundario de la sección introductoria */
+.introduccion h2 {
+    margin-top: 0;                        /* Elimina margen superior excedente */
+}
+
+
+/* ============================================================
+   REJILLA DE OBJETOS (GRID)
+   ============================================================ */
+
+/* Contenedor adaptativo en cuadrícula para tarjetas de objetos */
+.lista-objetos {
+    display: grid;                        /* Activa la maquetación mediante CSS Grid */
+
+    grid-template-columns: 
+        repeat(auto-fill, minmax(300px, 1fr)); /* Columnas autoajustables de mínimo 300px */
+
+    gap: 25px;                            /* Espaciado entre las tarjetas del grid */
+}
+
+
+/* ============================================================
+   TARJETA INDIVIDUAL DE OBJETO
+   ============================================================ */
+
+/* Contenedor tipo tarjeta para cada objeto reportado */
+.tarjeta-objeto {
+    background-color: white;              /* Fondo blanco para destacar el contenido */
+
+    border-radius: 10px;                  /* Bordes redondeados suaves */
+
+    overflow: hidden;                     /* Recorta contenido hijo que sobresalga de las esquinas */
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10); /* Sombra difuminada para efecto flotante */
+
+    transition: transform 0.2s;           /* Transición fluida para la animación al pasar el cursor */
+}
+
+/* Efecto al pasar el cursor sobre la tarjeta del objeto */
+.tarjeta-objeto:hover {
+    transform: translateY(-3px);          /* Eleva ligeramente la tarjeta hacia arriba */
+}
+
+
+/* ============================================================
+   CONTENEDORES E IMÁGENES DE LOS OBJETOS
+   ============================================================ */
+
+/* Marco delimitador para la fotografía del objeto */
+.imagen-contenedor {
+    width: 100%;                          /* Ocupa todo el ancho de la tarjeta */
+    height: 220px;                        /* Altura fija uniforme para las fotos */
+
+    background-color: #eee;               /* Color de fondo previo mientras carga la imagen */
+}
+
+/* Ajuste de la imagen cargada dentro del contenedor */
+.imagen-contenedor img {
+    width: 100%;                          /* Ancho completo del contenedor */
+    height: 100%;                         /* Altura completa del contenedor */
+
+    object-fit: cover;                    /* Escala la imagen recortando para llenar sin deformarse */
+}
+
+/* Bloque alternativo mostrado cuando el objeto no posee fotografía registrada */
+.sin-imagen {
+    width: 100%;                          /* Ocupa el ancho completo */
+    height: 220px;                        /* Misma altura fija de las imágenes reales */
+
+    display: flex;                        /* Activa flexbox para centrar el texto provisional */
+
+    align-items: center;                  /* Centra verticalmente el mensaje */
+    justify-content: center;              /* Centra horizontalmente el mensaje */
+
+    background-color: #e9eaed;            /* Fondo gris neutro de marcador de posición */
+
+    color: #777;                          /* Color de texto deshabilitado para el mensaje */
+}
+
+
+/* ============================================================
+   INFORMACIÓN Y DETALLES DEL OBJETO
+   ============================================================ */
+
+/* Área de datos textuales dentro de la tarjeta */
+.informacion-objeto {
+    padding: 20px;                        /* Espaciado interno para la información */
+}
+
+/* Nombre o título del objeto reportado */
+.informacion-objeto h3 {
+    margin-top: 0;                        /* Remueve espacio superior innecesario */
+
+    font-size: 21px;                      /* Tamaño de letra destacado */
+}
+
+/* Parágrafos descriptivos y metadata del objeto */
+.informacion-objeto p {
+    line-height: 1.5;                     /* Altura de línea para favorecer la lectura */
+
+    margin: 8px 0;                        /* Margen vertical entre líneas de datos */
+}
+
+
+/* ============================================================
+   ETIQUETA DE ESTADO
+   ============================================================ */
+
+/* Insignia o badge visual para mostrar el estado actual del reporte */
+.estado {
+    display: inline-block;                /* Permite aplicar paddings manteniéndose en línea */
+
+    background-color: #e8f5e9;            /* Fondo verde muy claro */
+
+    color: #2e7d32;                       /* Texto en verde oscuro para contraste de estado activo */
+
+    padding: 4px 8px;                     /* Relleno interno de la insignia */
+
+    border-radius: 5px;                   /* Bordes redondeados para la insignia */
+
+    font-size: 14px;                      /* Tamaño de fuente ligeramente reducido */
+}
+
+
+/* ============================================================
+   BOTÓN DE VER DETALLES
+   ============================================================ */
+
+/* Enlace/botón de acción para acceder a la ficha completa del objeto */
+.boton-detalles {
+    display: inline-block;                /* Ocupa espacio según su contenido sin romper el flujo */
+
+    margin-top: 15px;                     /* Separa el botón de los datos superiores */
+
+    padding: 10px 15px;                   /* Relleno interno táctil/clicable */
+
+    background-color: #2B2F3A;            /* Fondo con el color institucional oscuro */
+
+    color: white;                         /* Texto en contraste blanco */
+
+    text-decoration: none;                /* Elimina subrayado predeterminado */
+
+    border-radius: 6px;                   /* Esquinas redondeadas */
+}
+
+/* Efecto hover al pasar el ratón sobre el botón detalles */
+.boton-detalles:hover {
+    background-color: #444a59;            /* Tono más claro al pasar el cursor */
+}
+
+
+/* ============================================================
+   MENSAJES DEL SISTEMA Y NOTIFICACIONES
+   ============================================================ */
+
+/* Contenedor central para avisos informativos o listados vacíos */
+.mensaje {
+    background-color: white;              /* Fondo blanco destacado */
+
+    padding: 30px;                        /* Relleno interno amplio */
+
+    text-align: center;                   /* Texto centrado */
+
+    border-radius: 8px;                   /* Bordes redondeados */
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* Sombra ligera de elevación */
+}
+
+/* Título dentro de un bloque de mensaje */
+.mensaje h3 {
+    margin-top: 0;                        /* Ajuste del margen superior */
+}
+
+/* Modificador para mensajes de error o advertencias */
+.error {
+    color: #b71c1c;                       /* Texto rojo de advertencia/error */
+}
+
+
+/* ============================================================
+   PIE DE PÁGINA (FOOTER)
+   ============================================================ */
+
+/* Pie de página institucional */
+footer {
+    margin-top: 40px;                     /* Separación con el contenido superior de la vista */
+
+    padding: 20px;                        /* Relleno interno */
+
+    text-align: center;                   /* Texto centrado */
+
+    background-color: #2B2F3A;            /* Mismo tono oscuro institucional que el encabezado */
+
+    color: white;                         /* Texto de pie de página en blanco */
+}
+
+
+/* ============================================================
+   ADAPTABILIDAD Y DISEÑO RESPONSIVO (MEDIA QUERIES)
+   ============================================================ */
+
+/* Reglas de maquetación para pantallas de dispositivos móviles (hasta 600px) */
+@media (max-width: 600px) {
+
+    /* Reorganiza el contenido del encabezado de horizontal a vertical */
+    .encabezado-contenido {
+        flex-direction: column;           /* Cambia la orientación a columna */
+
+        gap: 15px;                        /* Genera espacio vertical entre título y botón */
+
+        text-align: center;               /* Centra el texto del encabezado */
+    }
+
+    /* Fuerza a que el grid de objetos sea de una sola columna en móviles */
+    .lista-objetos {
+        grid-template-columns: 1fr;      /* Ocupa el 100% del ancho disponible por fila */
+    }
+
+}
