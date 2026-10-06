@@ -380,7 +380,7 @@ if ($response_reclamacion !== false) {
 <body>
 
     <h1>
-        Entrega registrada correctamente
+        Entrega registrada correctamente!
     </h1>
 
     <p>
