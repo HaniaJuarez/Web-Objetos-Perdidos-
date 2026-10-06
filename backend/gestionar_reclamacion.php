@@ -348,6 +348,101 @@ if ($accion === 'aprobar') {
 
     }
 
+    /*
+|--------------------------------------------------------------------------
+| Registrar cambio en el historial
+|--------------------------------------------------------------------------
+*/
+
+    $datos_historial = [
+
+        'objeto_id' => (int)$objeto_id,
+
+        'estado_anterior' => 'Encontrado',
+
+        'estado_nuevo' => 'En resguardo',
+
+        'usuario_id' => (int)$docente_id,
+
+        'descripcion' => 'Reclamación aprobada por docente'
+
+    ];
+
+
+    $url_historial =
+        SUPABASE_URL .
+        '/rest/v1/historial_objetos';
+
+
+    $options_historial = [
+
+        'http' => [
+
+            'method' => 'POST',
+
+            'header' =>
+                "apikey: " . SUPABASE_KEY . "\r\n" .
+                "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
+                "Content-Type: application/json\r\n" .
+                "Prefer: return=representation\r\n",
+
+            'content' =>
+                json_encode($datos_historial),
+
+            'ignore_errors' => true
+
+        ]
+
+    ];
+
+
+    $context_historial =
+        stream_context_create(
+            $options_historial
+        );
+
+
+    $response_historial =
+        file_get_contents(
+            $url_historial,
+            false,
+            $context_historial
+        );
+
+
+    if ($response_historial === false) {
+
+        echo "El objeto fue enviado a resguardo, pero no se pudo registrar el historial.";
+        exit;
+
+    }
+
+
+    $resultado_historial =
+        json_decode(
+            $response_historial,
+            true
+        );
+
+
+    if (
+        isset($resultado_historial['message']) ||
+        isset($resultado_historial['error'])
+    ) {
+
+        echo "El objeto fue enviado a resguardo, pero ocurrió un error al registrar el historial.";
+
+        echo "<br>";
+
+        echo htmlspecialchars(
+            $resultado_historial['message']
+            ?? $resultado_historial['error']
+        );
+
+        exit;
+
+    }
+
 }
 
 
