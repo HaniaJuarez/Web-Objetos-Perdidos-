@@ -1,197 +1,220 @@
 <?php
 
-/**
- * Script de Procesamiento para la Gestión de Reclamaciones (Docentes)
- * 
- * Este archivo procesa la actualización del estado de una reclamación enviada
- * desde el panel de docente. Permite aprobar o rechazar un ticket de objeto/reclamación
- * interactuando directamente con la API REST de Supabase via PATCH.
- */
-
-// ============================================================
-// VERIFICAR SESIÓN
-// ============================================================
-
-// Comprueba que exista una sesión activa y válida en el sistema.
 require_once 'verificar_sesion.php';
-
-// Carga las variables de entorno global y credenciales (SUPABASE_URL, SUPABASE_KEY).
 require_once 'config.php';
 
 
-// ============================================================
-// VERIFICAR ROL
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Verificar que sea docente
+|--------------------------------------------------------------------------
+*/
 
-// Control de acceso Basado en Roles (RBAC):
-// Solamente un docente puede aprobar o rechazar una reclamación.
-if (
-    !isset($_SESSION['rol']) ||
-    $_SESSION['rol'] !== 'docente'
-) {
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'docente') {
 
     echo "Acceso denegado.";
-
     exit;
+
 }
 
 
-// ============================================================
-// VERIFICAR MÉTODO
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Verificar método POST
+|--------------------------------------------------------------------------
+*/
 
-// Garantiza que el script solo procese solicitudes mediante el protocolo HTTP POST.
-if (
-    $_SERVER['REQUEST_METHOD'] !== 'POST'
-) {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
     echo "Solicitud no válida.";
-
     exit;
+
 }
 
 
-// ============================================================
-// OBTENER DATOS
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Obtener datos
+|--------------------------------------------------------------------------
+*/
 
-// Obtiene el ID único de la reclamación desde los parámetros de la petición POST.
-$reclamacion_id =
-    $_POST['reclamacion_id'] ?? '';
+$reclamacion_id = $_POST['reclamacion_id'] ?? '';
+$accion = $_POST['accion'] ?? '';
 
-
-// Obtiene la acción solicitada por la interfaz ('aprobar' o 'rechazar').
-$accion =
-    $_POST['accion'] ?? '';
+$docente_id = $_SESSION['usuario_id'];
 
 
-// Obtiene el ID único del docente almacenado en la sesión activa.
-$docente_id =
-    $_SESSION['usuario_id'];
+/*
+|--------------------------------------------------------------------------
+| Validar datos
+|--------------------------------------------------------------------------
+*/
 
-
-// ============================================================
-// VALIDAR DATOS
-// ============================================================
-
-// Comprueba que los parámetros mínimos requeridos no se encuentren vacíos.
-if (
-    empty($reclamacion_id) ||
-    empty($accion)
-) {
+if (empty($reclamacion_id) || empty($accion)) {
 
     echo "Datos incompletos.";
-
     exit;
+
 }
 
 
-// ============================================================
-// DETERMINAR EL NUEVO ESTADO
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Determinar acción
+|--------------------------------------------------------------------------
+*/
 
-// Mapea la acción solicitada por el usuario al valor equivalente del estado en la base de datos.
 if ($accion === 'aprobar') {
 
-    $nuevo_estado =
-        'Aprobada';
+    $nuevo_estado = 'Aprobada';
 
 } elseif ($accion === 'rechazar') {
 
-    $nuevo_estado =
-        'Rechazada';
+    $nuevo_estado = 'Rechazada';
 
 } else {
 
     echo "Acción no válida.";
-
     exit;
+
 }
 
 
-// ============================================================
-// DATOS PARA ACTUALIZAR
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Si se aprueba, primero obtenemos la reclamación
+|--------------------------------------------------------------------------
+*/
 
-// Arreglo asociativo con la estructura exacta que la API de Supabase espera recibir en JSON.
+$objeto_id = null;
+
+
+if ($accion === 'aprobar') {
+
+    $url_reclamacion =
+        SUPABASE_URL .
+        '/rest/v1/reclamaciones' .
+        '?id=eq.' .
+        urlencode($reclamacion_id) .
+        '&select=objeto_id';
+
+
+    $options_reclamacion = [
+
+        'http' => [
+
+            'method' => 'GET',
+
+            'header' =>
+                "apikey: " . SUPABASE_KEY . "\r\n" .
+                "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
+                "Content-Type: application/json\r\n",
+
+            'ignore_errors' => true
+
+        ]
+
+    ];
+
+
+    $context_reclamacion =
+        stream_context_create($options_reclamacion);
+
+
+    $response_reclamacion =
+        file_get_contents(
+            $url_reclamacion,
+            false,
+            $context_reclamacion
+        );
+
+
+    if ($response_reclamacion === false) {
+
+        echo "No se pudo consultar la reclamación.";
+        exit;
+
+    }
+
+
+    $datos_reclamacion =
+        json_decode(
+            $response_reclamacion,
+            true
+        );
+
+
+    if (
+        !is_array($datos_reclamacion) ||
+        empty($datos_reclamacion)
+    ) {
+
+        echo "No se encontró la reclamación.";
+        exit;
+
+    }
+
+
+    $objeto_id =
+        $datos_reclamacion[0]['objeto_id'] ?? null;
+
+
+    if (empty($objeto_id)) {
+
+        echo "La reclamación no tiene un objeto asociado.";
+        exit;
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Actualizar reclamación
+|--------------------------------------------------------------------------
+*/
+
 $datos = [
 
-    // Nuevo estado de la reclamación.
-    'estado' =>
-        $nuevo_estado,
+    'estado' => $nuevo_estado,
 
-    // Guarda qué docente realizó la acción de aprobación/rechazo.
-    'docente_id' =>
-        (int)$docente_id
+    'docente_id' => (int)$docente_id
 
 ];
 
 
-// ============================================================
-// URL DE SUPABASE
-// ============================================================
-
-// Construcción del endpoint REST de Supabase con filtrado PostgREST por ID (?id=eq.ID).
 $url =
-
     SUPABASE_URL .
-
-    '/rest/v1/reclamaciones' .
-
-    '?id=eq.' .
-
+    '/rest/v1/reclamaciones?id=eq.' .
     urlencode($reclamacion_id);
 
 
-// ============================================================
-// CONFIGURACIÓN DE LA PETICIÓN
-// ============================================================
-
-// Opciones del contexto HTTP para la llamada REST mediante stream_context.
 $options = [
 
     'http' => [
 
-        // PATCH modifica solamente los campos indicados sin sobrescribir el registro completo.
-        'method' =>
-            'PATCH',
+        'method' => 'PATCH',
 
-        // Encabezados de autenticación y formato exigidos por la API REST de Supabase.
         'header' =>
-
-            "apikey: " .
-            SUPABASE_KEY .
-            "\r\n" .
-
-            "Authorization: Bearer " .
-            SUPABASE_KEY .
-            "\r\n" .
-
+            "apikey: " . SUPABASE_KEY . "\r\n" .
+            "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
             "Content-Type: application/json\r\n" .
-
             "Prefer: return=representation\r\n",
 
-        // Convierte los datos a JSON para ser enviados en el cuerpo de la petición.
-        'content' =>
-            json_encode($datos),
+        'content' => json_encode($datos),
 
-        // Permite obtener la respuesta del servidor incluso si responde con un estado de error HTTP (4xx o 5xx).
-        'ignore_errors' =>
-            true
+        'ignore_errors' => true
+
     ]
+
 ];
 
 
-// ============================================================
-// EJECUTAR PETICIÓN
-// ============================================================
-
-// Crea el recurso de contexto HTTP con las opciones especificadas.
 $context =
     stream_context_create($options);
 
 
-// Envía la actualización a Supabase ejecutando la llamada HTTP.
 $response =
     file_get_contents(
         $url,
@@ -200,20 +223,14 @@ $response =
     );
 
 
-// ============================================================
-// COMPROBAR RESPUESTA
-// ============================================================
-
-// Verifica si la solicitud HTTP falló por completo a nivel de transporte/red.
 if ($response === false) {
 
     echo "Error al actualizar la reclamación.";
-
     exit;
+
 }
 
 
-// Convierte la respuesta JSON devuelta por la API en un arreglo asociativo de PHP.
 $resultado =
     json_decode(
         $response,
@@ -221,28 +238,125 @@ $resultado =
     );
 
 
-// Comprueba si Supabase devolvió un objeto de error (propiedad 'message').
 if (
-    isset($resultado['message'])
+    isset($resultado['message']) ||
+    isset($resultado['error'])
 ) {
 
     echo "Error al actualizar la reclamación.";
-
     echo "<br>";
 
     echo htmlspecialchars(
         $resultado['message']
+        ?? $resultado['error']
     );
 
     exit;
+
 }
 
 
-// ============================================================
-// REGRESAR AL PANEL DE RECLAMACIONES
-// ============================================================
+/*
+|--------------------------------------------------------------------------
+| Si la reclamación fue aprobada
+| cambiar objeto encontrado → En resguardo
+|--------------------------------------------------------------------------
+*/
 
-// Redirige la navegación del navegador de vuelta al panel principal de reclamaciones del docente.
+if ($accion === 'aprobar') {
+
+
+    $datos_objeto = [
+
+        'estado' => 'En resguardo'
+
+    ];
+
+
+    $url_objeto =
+        SUPABASE_URL .
+        '/rest/v1/objetos?id=eq.' .
+        urlencode($objeto_id);
+
+
+    $options_objeto = [
+
+        'http' => [
+
+            'method' => 'PATCH',
+
+            'header' =>
+                "apikey: " . SUPABASE_KEY . "\r\n" .
+                "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
+                "Content-Type: application/json\r\n" .
+                "Prefer: return=representation\r\n",
+
+            'content' =>
+                json_encode($datos_objeto),
+
+            'ignore_errors' => true
+
+        ]
+
+    ];
+
+
+    $context_objeto =
+        stream_context_create(
+            $options_objeto
+        );
+
+
+    $response_objeto =
+        file_get_contents(
+            $url_objeto,
+            false,
+            $context_objeto
+        );
+
+
+    if ($response_objeto === false) {
+
+        echo "La reclamación fue aprobada, pero no se pudo actualizar el objeto.";
+        exit;
+
+    }
+
+
+    $resultado_objeto =
+        json_decode(
+            $response_objeto,
+            true
+        );
+
+
+    if (
+        isset($resultado_objeto['message']) ||
+        isset($resultado_objeto['error'])
+    ) {
+
+        echo "La reclamación fue aprobada, pero ocurrió un error al cambiar el estado del objeto.";
+
+        echo "<br>";
+
+        echo htmlspecialchars(
+            $resultado_objeto['message']
+            ?? $resultado_objeto['error']
+        );
+
+        exit;
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Regresar al panel de reclamaciones
+|--------------------------------------------------------------------------
+*/
+
 header(
     "Location: ../frontend/reclamaciones_docente.php"
 );
