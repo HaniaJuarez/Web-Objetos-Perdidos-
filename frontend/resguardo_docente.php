@@ -307,13 +307,22 @@ if ($response === false) {
 
                             <?php endif; ?>
 
+                            <div class="botones-objeto">
+                                <a
+                                    href="objeto.php?id=<?php echo urlencode($objeto['id']); ?>"
+                                    class="boton-detalles"
+                                >
+                                    Ver detalles
+                                </a>
 
-                            <a
-                                href="objeto.php?id=<?php echo urlencode($objeto['id']); ?>"
-                                class="boton-detalles"
-                            >
-                                Ver detalles
-                            </a>
+                                <a
+                                    href="entrega.php?id=<?php echo urlencode($objeto['id']); ?>"
+                                    class="boton-entegra"
+                                >
+                                    Registrar entrega
+                                </a>
+
+                            </div>
 
                         </div>
 
