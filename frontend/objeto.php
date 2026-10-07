@@ -285,6 +285,8 @@ $objeto =$objetos[0];
                 </button>
 
             </a>
+            
+            
         <?php else: ?>
 
             <p>
@@ -296,6 +298,17 @@ $objeto =$objetos[0];
 
     <!-- Cierre de la condición de estado "Encontrado" -->
     <?php endif; ?>
+
+    <!-- BOTÓN PARA VER EL HISTORIAL -->
+    <br>
+
+    <a
+        href="historial_objeto.php?id=<?php echo urlencode($objeto['id']); ?>"
+    >
+        <button type="button">
+            Ver historial
+        </button>
+    </a>
 
 
     <!-- Evalúa si el estado actual del objeto es igual a "Perdido" -->
