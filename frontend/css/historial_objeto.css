@@ -1,0 +1,354 @@
+/* ============================================================
+   REGLAS GENERALES Y RESETEO DE ESTILOS
+   ============================================================ */
+
+/* Aplica el modelo de caja border-box a todos los elementos del documento.
+   Incluye el padding y el border dentro del ancho y alto total del elemento. */
+* {
+    box-sizing: border-box;
+}
+
+/* Configuración global del cuerpo de la página */
+body {
+    /* Elimina el margen predeterminado del navegador */
+    margin: 0;
+
+    /* Tipografía principal y alternativa sans-serif */
+    font-family: Arial, sans-serif;
+
+    /* Color de fondo suave para el sitio */
+    background-color: #f5f6f8;
+
+    /* Color principal de texto */
+    color: #333;
+}
+
+
+/* ==============================
+   ENCABEZADO
+   ============================== */
+
+/* Bloque del encabezado superior */
+.encabezado {
+    background-color: #2B2F3A;
+
+    color: white;
+
+    padding: 20px 30px;
+}
+
+/* Contenedor interno del encabezado para centrar y alinear el contenido */
+.encabezado-contenido {
+    max-width: 1000px;
+
+    margin: auto;
+
+    /* Distribución flexible en fila con espacio entre elementos y alineación vertical centrada */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+/* Título dentro del encabezado */
+.encabezado h1 {
+    margin: 0;
+
+    font-size: 27px;
+}
+
+
+/* ==============================
+   BOTÓN REGRESAR
+   ============================== */
+
+/* Estilos para el botón o enlace de regreso */
+.boton-regresar {
+    color: white;
+
+    text-decoration: none;
+
+    background-color: #444a59;
+
+    padding: 10px 16px;
+
+    border-radius: 6px;
+}
+
+/* Estado hover al pasar el cursor sobre el botón de regresar */
+.boton-regresar:hover {
+    background-color: #555c6d;
+}
+
+
+/* ==============================
+   CONTENEDOR
+   ============================== */
+
+/* Contenedor principal para delimitar el ancho del contenido de la página */
+.contenedor {
+    max-width: 1000px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* ==============================
+   INFORMACIÓN DEL OBJETO
+   ============================== */
+
+/* Tarjeta resumen de la información general del objeto */
+.objeto {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    /* Sombra ligera para dar elevación a la tarjeta */
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    /* Disposición flexible en fila con alineación central y espacio entre elementos */
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+/* Ajustes de la imagen miniatura del objeto */
+.imagen-objeto {
+    width: 150px;
+
+    height: 120px;
+
+    /* Mantiene la proporción de la imagen cubriendo el área sin distorsionarse */
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+/* Quita el margen superior del título de la información del objeto */
+.informacion-objeto h2 {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   ESTADO
+   ============================== */
+
+/* Etiqueta o badge indicadora del estado del objeto */
+.estado {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    background-color: #e8f5e9;
+
+    color: #2e7d32;
+}
+
+
+/* ==============================
+   HISTORIAL
+   ============================== */
+
+/* Sección contenedora del historial de movimientos */
+.seccion-historial {
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Quita el margen superior del título de la sección del historial */
+.seccion-historial h2 {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   TIMELINE
+   ============================== */
+
+/* Contenedor relativo de la línea de tiempo */
+.timeline {
+    position: relative;
+
+    margin-top: 30px;
+
+    padding-left: 35px;
+}
+
+/* Pseudoelemento para crear la línea vertical contínua del timeline */
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 9px;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 2px;
+
+    background-color: #d0d0d0;
+}
+
+
+/* ==============================
+   MOVIMIENTO
+   ============================== */
+
+/* Elemento individual dentro del historial */
+.movimiento {
+    position: relative;
+
+    margin-bottom: 30px;
+}
+
+/* Círculo o viñeta indicadora sobre la línea de tiempo */
+.punto {
+    position: absolute;
+
+    left: -32px;
+
+    top: 5px;
+
+    width: 18px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background-color: #2B2F3A;
+
+    border: 3px solid white;
+
+    /* Sombra exterior para simular un segundo borde */
+    box-shadow:
+        0 0 0 2px #2B2F3A;
+}
+
+/* Tarjeta contenedora de los detalles del movimiento */
+.contenido-movimiento {
+    background-color: #f8f9fa;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    /* Borde lateral izquierdo para resaltar la tarjeta */
+    border-left: 4px solid #2B2F3A;
+}
+
+/* Estilo para la fecha/hora del movimiento */
+.fecha {
+    color: #777;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+/* Título de la transición de estado */
+.contenido-movimiento h3 {
+    margin: 5px 0 10px;
+}
+
+/* Texto descriptivo del evento registrado */
+.contenido-movimiento p {
+    margin: 5px 0 10px;
+
+    line-height: 1.5;
+}
+
+/* Texto secundario para el usuario responsable */
+.contenido-movimiento small {
+    color: #777;
+}
+
+
+/* ==============================
+   MENSAJE VACÍO
+   ============================== */
+
+/* Contenedor para mostrar cuando no hay movimientos en el historial */
+.mensaje-vacio {
+    padding: 30px;
+
+    text-align: center;
+
+    background-color: #f8f9fa;
+
+    border-radius: 8px;
+}
+
+/* Quita el margen superior del título dentro del mensaje vacío */
+.mensaje-vacio h3 {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   FOOTER
+   ============================== */
+
+/* Pie de página */
+footer {
+    margin-top: 40px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background-color: #2B2F3A;
+
+    color: white;
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+/* Adaptaciones responsivas para pantallas móviles (ancho máximo de 600px) */
+@media (max-width: 600px) {
+
+    /* Alineación vertical del encabezado en pantallas pequeñas */
+    .encabezado-contenido {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    /* Alineación vertical y centrado de la información del objeto */
+    .objeto {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    /* Ajuste del sangrado lateral de la línea de tiempo */
+    .timeline {
+        padding-left: 30px;
+    }
+
+}
