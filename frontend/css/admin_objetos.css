@@ -1,0 +1,502 @@
+
+/* ============================================================
+   CONFIGURACIÓN GENERAL Y RESETEO DE ESTILOS
+   ============================================================ */
+
+/* Aplica el modelo de caja border-box a todos los elementos del documento.
+   Garantiza que el padding y el border se incluyan dentro del ancho y alto total. */
+* {
+    box-sizing: border-box;
+}
+
+/* Configuración global del cuerpo del documento */
+body {
+    /* Elimina los márgenes por defecto del navegador */
+    margin: 0;
+
+    /* Define la tipografía principal y fallback sans-serif */
+    font-family: Arial, sans-serif;
+
+    /* Color de fondo suave para el sitio */
+    background: #f4f6f8;
+
+    /* Color principal de texto */
+    color: #333;
+}
+
+
+/* ============================================================
+   ENCABEZADO PRINCIPAL
+   ============================================================ */
+
+/* Contenedor principal de la barra superior */
+.encabezado {
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 25px 40px;
+
+    /* Distribución flexible en fila con alineación vertical centrada y espacio entre extremos */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+/* Estilo para el título principal dentro del encabezado */
+.encabezado h1 {
+    margin: 0 0 8px 0;
+
+    font-size: 28px;
+}
+
+/* Quita los márgenes por defecto de los párrafos en el encabezado */
+.encabezado p {
+    margin: 0;
+}
+
+
+/* ============================================================
+   BOTONES DEL ENCABEZADO
+   ============================================================ */
+
+/* Botón o enlace interactivo del encabezado */
+.boton {
+    display: inline-block;
+
+    padding: 11px 16px;
+
+    background: white;
+
+    color: #2B2F3A;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+/* Estado hover al pasar el cursor sobre el botón principal */
+.boton:hover {
+    background: #e8ebef;
+}
+
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+   ============================================================ */
+
+/* Delimita el ancho máximo del contenido y lo centra horizontalmente */
+.contenedor {
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* ============================================================
+   RESUMEN / ESTADÍSTICA GENERAL
+   ============================================================ */
+
+/* Tarjeta de resumen o contador global */
+.resumen {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+
+    /* Sombra suave para dar elevación sobre el fondo */
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Quita el margen superior del título de la sección de resumen */
+.resumen h2 {
+    margin-top: 0;
+}
+
+/* Estilo destacado para el valor numérico en el resumen */
+.resumen strong {
+    font-size: 22px;
+}
+
+
+/* ============================================================
+   BARRA DE FILTROS Y BÚSQUEDA
+   ============================================================ */
+
+/* Contenedor de los controles de filtrado y búsqueda */
+.filtros {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    /* Alineación flexible con ajuste al final y empaquetado multinivel */
+    display: flex;
+
+    align-items: end;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+/* Estructura para cada campo individual de entrada (input o select) */
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    /* Permite que el campo se expanda proporcionalmente ocupando el espacio disponible */
+    flex: 1;
+
+    min-width: 220px;
+}
+
+/* Etiquetas del campo de filtro */
+.campo label {
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+/* Cajas de texto y menús desplegables dentro de los filtros */
+.campo input,
+.campo select {
+    padding: 11px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+    background: white;
+}
+
+/* Estado de enfoque en cajas de texto y menús desplegables */
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+
+    border-color: #2B2F3A;
+}
+
+
+/* ============================================================
+   BOTÓN SECUNDARIO / LIMPIAR FILTROS
+   ============================================================ */
+
+/* Estilos para el botón de acción secundaria o limpieza de filtros */
+.boton-secundario {
+    padding: 11px 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #e5e7eb;
+
+    color: #333;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* Estado hover para el botón secundario */
+.boton-secundario:hover {
+    background: #d5d8dd;
+}
+
+
+/* ============================================================
+   REJILLA DE OBJETOS (GRID)
+   ============================================================ */
+
+/* Malla responsiva basada en CSS Grid para organizar las tarjetas de objetos */
+.grid-objetos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ============================================================
+   TARJETA DE OBJETO
+   ============================================================ */
+
+/* Tarjeta contenedora individual de cada objeto */
+.tarjeta-objeto {
+    background: white;
+
+    border-radius: 10px;
+
+    /* Mantiene los bordes redondeados al contener imágenes o elementos internos */
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    /* Transición suave para la elevación e intensidad de la sombra */
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* EFECTO HOVER: Eleva la tarjeta y acentúa su sombra al pasar el cursor */
+.tarjeta-objeto:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   IMAGEN DEL OBJETO
+   ============================================================ */
+
+/* Área contenedora de la fotografía del objeto */
+.imagen {
+    width: 100%;
+
+    height: 210px;
+
+    background: #e9ecef;
+}
+
+/* Ajuste proporcional de la imagen para cubrir el área del contenedor */
+.imagen img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* Contenedor placeholder en caso de que el objeto no tenga fotografía */
+.sin-imagen {
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #777;
+}
+
+
+/* ============================================================
+   INFORMACIÓN DE LA TARJETA
+   ============================================================ */
+
+/* Contenedor de la información textual del objeto */
+.informacion {
+    padding: 20px;
+}
+
+/* Título de la tarjeta o nombre del objeto */
+.informacion h3 {
+    margin-top: 0;
+
+    font-size: 21px;
+}
+
+/* Párrafos con los atributos o metadatos del objeto */
+.informacion p {
+    margin: 8px 0;
+
+    line-height: 1.4;
+}
+
+/* Bloque para la descripción pública del objeto */
+.descripcion {
+    color: #666;
+
+    border-top: 1px solid #eee;
+
+    padding-top: 12px;
+
+    margin-top: 15px !important;
+}
+
+
+/* ============================================================
+   ETIQUETA DE ESTADO
+   ============================================================ */
+
+/* Badge o etiqueta que denota el estado del objeto */
+.estado {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    background: #eef1f4;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+/* ============================================================
+   BOTONES DE ACCIÓN DE LA TARJETA
+   ============================================================ */
+
+/* Contenedor flexible para alinear los botones de acción dentro de la tarjeta */
+.botones-objeto {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    flex-wrap: wrap;
+}
+
+/* Estilos base compartidos para los botones de la tarjeta */
+.boton-ver,
+.boton-historial {
+    padding: 9px 12px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+/* Botón principal para ir al detalle del objeto */
+.boton-ver {
+    background: #2B2F3A;
+
+    color: white;
+}
+
+/* Estado hover para el botón de ver objeto */
+.boton-ver:hover {
+    background: #414756;
+}
+
+/* Botón secundario para consultar el historial del objeto */
+.boton-historial {
+    background: #e9ecef;
+
+    color: #333;
+}
+
+/* Estado hover para el botón de ver historial */
+.boton-historial:hover {
+    background: #dfe3e7;
+}
+
+
+/* ============================================================
+   MENSAJE SIN RESULTADOS
+   ============================================================ */
+
+/* Tarjeta o bloque mostrado cuando no hay coincidencias de objetos */
+.sin-resultados {
+    background: white;
+
+    padding: 40px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Quita el margen superior del título en el contenedor sin resultados */
+.sin-resultados h3 {
+    margin-top: 0;
+}
+
+
+/* ============================================================
+   PIE DE PÁGINA (FOOTER)
+   ============================================================ */
+
+/* Pie de página de la vista de administración */
+footer {
+    margin-top: 40px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    background: #2B2F3A;
+
+    color: white;
+}
+
+
+/* ============================================================
+   RESPONSIVIDAD (MEDIA QUERIES)
+   ============================================================ */
+
+/* Ajustes adaptativos para dispositivos móviles o pantallas de hasta 700px */
+@media (max-width: 700px) {
+
+    /* Alineación vertical centrada del encabezado */
+    .encabezado {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 20px;
+    }
+
+    /* Alineación vertical de la sección de filtros */
+    .filtros {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    /* Expande los campos de filtro al 100% de ancho */
+    .campo {
+        min-width: 100%;
+    }
+
+    /* Expande el botón secundario al 100% de ancho */
+    .boton-secundario {
+        width: 100%;
+    }
+
+}
