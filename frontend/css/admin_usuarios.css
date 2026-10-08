@@ -1,0 +1,465 @@
+
+/* ============================================================
+   GENERAL
+   ============================================================ */
+
+/* Configura el box-sizing para incluir el padding y el border dentro del ancho y alto total de cada elemento. */
+* {
+    box-sizing: border-box;
+}
+
+/* Estilos base para el cuerpo de la página */
+body {
+    /* Quita los márgenes por defecto del navegador */
+    margin: 0;
+
+    /* Define la familia tipográfica principal y fallback */
+    font-family: Arial, sans-serif;
+
+    /* Color de fondo claro para todo el documento */
+    background: #f4f6f8;
+
+    /* Color primario del texto */
+    color: #333;
+}
+
+
+/* ============================================================
+   ENCABEZADO
+   ============================================================ */
+
+/* Estilos para la barra superior/encabezado */
+.encabezado {
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 25px 40px;
+
+    /* Flexbox para distribuir el contenido horizontalmente y centrarlo verticalmente */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+/* Título principal del encabezado */
+.encabezado h1 {
+    margin: 0 0 8px 0;
+
+    font-size: 28px;
+}
+
+/* Quita el margen al párrafo dentro del encabezado */
+.encabezado p {
+    margin: 0;
+}
+
+
+/* ============================================================
+   BOTÓN
+   ============================================================ */
+
+/* Estilos para el botón principal o enlaces con apariencia de botón */
+.boton {
+    display: inline-block;
+
+    padding: 11px 16px;
+
+    background: white;
+
+    color: #2B2F3A;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+/* Estado hover al pasar el cursor sobre el botón principal */
+.boton:hover {
+    background: #e8ebef;
+}
+
+
+/* ============================================================
+   CONTENEDOR
+   ============================================================ */
+
+/* Envoltorio principal para centrar y limitar el ancho del contenido */
+.contenedor {
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* ============================================================
+   RESUMEN
+   ============================================================ */
+
+/* Tarjeta contenedora de la sección de resumen */
+.resumen {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+
+    /* Sombra ligera para destacar sobre el fondo */
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Quita el margen superior del título de resumen */
+.resumen h2 {
+    margin-top: 0;
+}
+
+/* Tamaño de fuente para números o textos destacados en el resumen */
+.resumen strong {
+    font-size: 22px;
+}
+
+
+/* ============================================================
+   RESUMEN DE ROLES
+   ============================================================ */
+
+/* Rejilla para mostrar el desglose de métricas por roles */
+.resumen-roles {
+    display: grid;
+
+    /* Divide la sección en 3 columnas iguales */
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+/* Estilo individual para cada tarjeta de rol */
+.resumen-roles div {
+    background: #f4f6f8;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+/* Estilo de la etiqueta del rol */
+.resumen-roles span {
+    font-weight: bold;
+}
+
+/* Estilo para la cifra o total del rol */
+.resumen-roles strong {
+    font-size: 24px;
+}
+
+
+/* ============================================================
+   FILTROS
+   ============================================================ */
+
+/* Tarjeta contenedora de los controles de filtrado */
+.filtros {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+
+    /* Alinea los controles a la parte inferior para emparejar campos y botones */
+    align-items: end;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+/* Contenedor individual de cada campo de entrada con su etiqueta */
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    flex: 1;
+
+    min-width: 220px;
+}
+
+/* Estilos de la etiqueta del campo */
+.campo label {
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+/* Estilos comunes para inputs y selects dentro del filtro */
+.campo input,
+.campo select {
+    padding: 11px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+
+    background: white;
+}
+
+/* Resaltado de borde al enfocar un campo de entrada */
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+
+    border-color: #2B2F3A;
+}
+
+
+/* ============================================================
+   BOTÓN LIMPIAR
+   ============================================================ */
+
+/* Estilos para el botón secundario (limpiar filtros) */
+.boton-secundario {
+    padding: 11px 16px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #e5e7eb;
+
+    color: #333;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* Estado hover para el botón secundario */
+.boton-secundario:hover {
+    background: #d5d8dd;
+}
+
+
+/* ============================================================
+   TABLA
+   ============================================================ */
+
+/* Tarjeta que envuelve la tabla de datos */
+.tabla-contenedor {
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Habilita desplazamiento horizontal si la tabla excede el ancho de pantalla */
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+/* Estilos base de la tabla HTML */
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+/* Estilos para el encabezado de la tabla */
+thead {
+    background: #2B2F3A;
+
+    color: white;
+}
+
+/* Estilos comunes para celdas de encabezado y datos */
+th,
+td {
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Tamaño de letra para los encabezados de columna */
+th {
+    font-size: 14px;
+}
+
+/* Efecto hover sobre las filas de la tabla */
+tbody tr:hover {
+    background: #f7f8fa;
+}
+
+
+/* ============================================================
+   USUARIO
+   ============================================================ */
+
+/* Contenedor flexible para mostrar la foto/avatar junto al nombre */
+.usuario {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 180px;
+}
+
+/* Estilo para la imagen del usuario y el contenedor avatar */
+.usuario img,
+.avatar {
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+/* Estilo para el avatar cuando el usuario no posee fotografía */
+.avatar {
+    background: #2B2F3A;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+/* ============================================================
+   ROLES
+   ============================================================ */
+
+/* Badge o etiqueta para visualizar el rol del usuario */
+.rol {
+    display: inline-block;
+
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    background: #eef1f4;
+}
+
+
+/* ============================================================
+   SIN RESULTADOS
+   ============================================================ */
+
+/* Contenedor del mensaje cuando no se encuentran datos */
+.sin-resultados {
+    padding: 40px;
+
+    text-align: center;
+}
+
+/* Quita el margen superior del título sin resultados */
+.sin-resultados h3 {
+    margin-top: 0;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+/* Estilos para el pie de página */
+footer {
+    margin-top: 40px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    background: #2B2F3A;
+
+    color: white;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Ajustes para pantallas con ancho máximo de 700px (dispositivos móviles) */
+@media (max-width: 700px) {
+
+    /* Alineación vertical para el encabezado */
+    .encabezado {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 20px;
+    }
+
+    /* Cambia el resumen de roles a una sola columna */
+    .resumen-roles {
+        grid-template-columns: 1fr;
+    }
+
+    /* Alineación vertical para la sección de filtros */
+    .filtros {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    /* Expande los campos de filtro a todo el ancho disponible */
+    .campo {
+        min-width: 100%;
+    }
+
+    /* Expande el botón secundario a todo el ancho disponible */
+    .boton-secundario {
+        width: 100%;
+    }
+
+}
