@@ -1,0 +1,640 @@
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL Y RESETEO
+   ========================================================= */
+
+/* Aplica el modelo de caja border-box a todos los elementos para incluir padding y border en el tamaño total */
+* {
+    box-sizing: border-box;
+}
+
+/* Define la apariencia global del cuerpo del documento */
+body {
+    /* Quita los márgenes por defecto del navegador */
+    margin: 0;
+
+    /* Establece la familia tipográfica principal */
+    font-family: Arial, sans-serif;
+
+    /* Color de fondo neutro claro */
+    background: #f5f6f8;
+
+    /* Color predeterminado para el texto */
+    color: #333;
+}
+
+
+/* =========================================================
+   ENCABEZADO PRINCIPAL
+   ========================================================= */
+
+/* Barra superior que envuelve el encabezado */
+.encabezado {
+    background: #2B2F3A;
+    color: white;
+    padding: 22px 30px;
+}
+
+/* Contenedor flexible del contenido dentro del encabezado */
+.encabezado-contenido {
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Título principal de la vista */
+.encabezado h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+/* Subtítulo o texto descriptivo en el encabezado */
+.encabezado p {
+    margin: 6px 0 0;
+    color: #d5d7dc;
+}
+
+/* Estilos para el botón de navegación/regreso al panel */
+.boton-regresar {
+    color: white;
+    text-decoration: none;
+
+    background: #444a59;
+
+    padding: 10px 16px;
+
+    border-radius: 7px;
+}
+
+/* Efecto hover al pasar el cursor sobre el botón regresar */
+.boton-regresar:hover {
+    background: #555c6d;
+}
+
+
+/* =========================================================
+   CONTENEDOR DE CONTENIDO PRINCIPAL
+   ========================================================= */
+
+/* Delimita el ancho máximo y centra el contenido en la pantalla */
+.contenedor {
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* =========================================================
+   MÉTRICAS Y TARJETAS DE RESUMEN
+   ========================================================= */
+
+/* Rejilla responsiva para distribuir las 5 tarjetas de resumen */
+.resumen {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* Estilo base para cada tarjeta de métrica individual */
+.tarjeta-resumen {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Número o cifra destacada en la tarjeta de resumen */
+.tarjeta-resumen .numero {
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+/* Etiqueta textual descriptiva debajo del número */
+.tarjeta-resumen .texto {
+    color: #777;
+}
+
+/* Borde superior identificador para reclamaciones pendientes (amarillo) */
+.tarjeta-resumen.pendiente {
+    border-top: 4px solid #f0ad4e;
+}
+
+/* Borde superior identificador para reclamaciones aprobadas (verde) */
+.tarjeta-resumen.aprobada {
+    border-top: 4px solid #4caf50;
+}
+
+/* Borde superior identificador para reclamaciones rechazadas (rojo) */
+.tarjeta-resumen.rechazada {
+    border-top: 4px solid #e53935;
+}
+
+/* Borde superior identificador para reclamaciones cerradas (gris) */
+.tarjeta-resumen.cerrada {
+    border-top: 4px solid #607d8b;
+}
+
+
+/* =========================================================
+   SECCIÓN DE FILTROS Y BÚSQUEDA
+   ========================================================= */
+
+/* Tarjeta contenedora de las opciones de búsqueda y filtrado */
+.filtros {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* Envoltorio de cada campo de formulario */
+.campo {
+    flex: 1;
+}
+
+/* Etiqueta del campo de entrada */
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+/* Estilos para inputs de texto y selectores dentro de los filtros */
+.campo input,
+.campo select {
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+/* Botón encargado de restablecer las opciones de filtrado */
+.boton-limpiar {
+    border: none;
+
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+/* Efecto hover sobre el botón de limpiar */
+.boton-limpiar:hover {
+    background: #444a59;
+}
+
+
+/* =========================================================
+   SECCIÓN CONTENEDORA DE LISTADO
+   ========================================================= */
+
+/* Sección transparente para englobar el listado de reclamaciones */
+.seccion-reclamaciones {
+    background: transparent;
+}
+
+/* Encabezado flexbox para el título de sección y el contador */
+.titulo-seccion {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+/* Quita el margen al h2 del título de sección */
+.titulo-seccion h2 {
+    margin: 0;
+}
+
+/* Texto indicador del total de resultados coincidentes */
+#contador-resultados {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   TARJETAS DE RECLAMACIÓN
+   ========================================================= */
+
+/* Contenedor vertical con espacio entre tarjetas de reclamación */
+.lista-reclamaciones {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+/* Tarjeta contenedora individual de cada reclamación */
+.tarjeta-reclamacion {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Animación de elevación sutil en el estado hover */
+.tarjeta-reclamacion:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   CABECERA INTERNA DE LA TARJETA
+   ========================================================= */
+
+/* Encabezado de la tarjeta con alineación horizontal y borde separador */
+.cabecera-reclamacion {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #eee;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 20px;
+}
+
+/* Ajusta el margen superior del número de reclamación */
+.cabecera-reclamacion h3 {
+    margin: 8px 0 0;
+}
+
+/* Badge con el número de folio/ticket */
+.etiqueta-ticket {
+    display: inline-block;
+
+    background: #eef1f5;
+
+    color: #333;
+
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   BADGES DE ESTADOS Y COLORES
+   ========================================================= */
+
+/* Estilo base para las badges de estado */
+.estado {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+/* Estilo para el estado 'Pendiente' */
+.estado-pendiente {
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+/* Estilo para el estado 'Aprobada' */
+.estado-aprobada {
+    background: #d4edda;
+
+    color: #155724;
+}
+
+/* Estilo para el estado 'Rechazada' */
+.estado-rechazada {
+    background: #f8d7da;
+
+    color: #721c24;
+}
+
+/* Estilo para el estado 'Cerrada' */
+.estado-cerrada {
+    background: #d9e1e5;
+
+    color: #455a64;
+}
+
+
+/* =========================================================
+   MÓDULOS DE INFORMACIÓN INTERNA
+   ========================================================= */
+
+/* Rejilla de 4 columnas para distribuir usuario, objeto, objeto perdido y fecha */
+.informacion {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+/* Bloques individuales dentro de la rejilla de información */
+.bloque {
+    background: #f8f9fa;
+
+    padding: 15px;
+
+    border-radius: 8px;
+}
+
+/* Título de cada bloque informativo */
+.bloque h4 {
+    margin-top: 0;
+
+    margin-bottom: 12px;
+}
+
+/* Párrafos con datos dentro de los bloques */
+.bloque p {
+    margin: 7px 0;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   ENLACES INTERNOS
+   ========================================================= */
+
+/* Estilo de enlaces dentro de la tarjeta de reclamación */
+.enlace {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    color: #2867c7;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+/* Subraya el enlace al pasar el cursor sobre él */
+.enlace:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BLOQUE DE DESCRIPCIÓN PROPORCIONADA
+   ========================================================= */
+
+/* Caja contenedora para el texto explicativo enviado por el usuario */
+.descripcion {
+    background: #f8f9fa;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    margin-bottom: 18px;
+}
+
+/* Quita el margen superior del título de descripción */
+.descripcion h4 {
+    margin-top: 0;
+}
+
+/* Párrafo de la descripción con interlineado amplio */
+.descripcion p {
+    margin-bottom: 0;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   INFORMACIÓN DEL DOCENTE RESPONSABLE
+   ========================================================= */
+
+/* Área con los datos del docente asignado a la reclamación */
+.docente-info {
+    padding: 12px 0;
+
+    color: #666;
+
+    border-top: 1px solid #eee;
+}
+
+
+/* =========================================================
+   ACCIONES DE LA TARJETA
+   ========================================================= */
+
+/* Contenedor flexible de botones al final de la tarjeta */
+.acciones {
+    margin-top: 15px;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+/* Estilo del botón para ir a la vista del objeto relacionado */
+.boton-secundario {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+/* Efecto hover para el botón secundario */
+.boton-secundario:hover {
+    background: #444a59;
+}
+
+
+/* =========================================================
+   ESTADO VACÍO (SIN RESULTADOS)
+   ========================================================= */
+
+/* Tarjeta mostrada cuando no existen reclamaciones registradas */
+.mensaje-vacio {
+    background: white;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Ajuste del título del mensaje vacío */
+.mensaje-vacio h3 {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================================= */
+
+/* Estilos generales del pie de página */
+footer {
+    margin-top: 40px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: #2B2F3A;
+
+    color: white;
+}
+
+
+/* =========================================================
+   DISEÑO RESPONSIVO (MEDIA QUERIES)
+   ========================================================= */
+
+/* Adaptación para pantallas medianas (hasta 900px) */
+@media (max-width: 900px) {
+
+    /* Reduce la rejilla de métricas a 2 columnas */
+    .resumen {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    /* Reduce la rejilla de bloques informativos a 2 columnas */
+    .informacion {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* Adaptación para pantallas pequeñas / móviles (hasta 650px) */
+@media (max-width: 650px) {
+
+    /* Reorganiza el contenido del encabezado en orientación vertical */
+    .encabezado-contenido {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    /* Pasa el resumen de métricas a una sola columna */
+    .resumen {
+        grid-template-columns: 1fr;
+    }
+
+    /* Alinea verticalmente los campos de filtro */
+    .filtros {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    /* Cambia la rejilla informativa a una sola columna */
+    .informacion {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reorganiza la cabecera de la tarjeta en vertical */
+    .cabecera-reclamacion {
+        flex-direction: column;
+    }
+
+}
