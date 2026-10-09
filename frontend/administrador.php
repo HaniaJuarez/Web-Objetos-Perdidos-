@@ -1,338 +1,236 @@
 <?php
-
 // ============================================================
-// VERIFICAR SESIÓN
+// 1. VERIFICAR SESIÓN Y CONFIGURACIÓN
 // ============================================================
 
-// Incluye el script encargando de comprobar que la sesión esté iniciada.
+// Incluye el archivo que verifica que el usuario tenga una sesión activa en el sistema.
 require_once '../backend/verificar_sesion.php';
 
-// Carga las variables y constantes de configuración (URLs y llaves de acceso).
+// Incluye la configuración global del proyecto (URLs, claves API de Supabase, etc.).
 require_once '../backend/config.php';
 
-
 // ============================================================
-// VERIFICAR QUE EL USUARIO SEA ADMINISTRADOR
+// 2. VERIFICAR QUE SEA ADMINISTRADOR
 // ============================================================
 
-// Comprueba que el rol almacenado en la sesión corresponda a 'administrador'.
-// Si el rol no está definido o no coincide, restringe el acceso y frena el script.
+// Comprueba si existe la variable de sesión 'rol' o si el rol no es igual a 'administrador'.
 if (
     !isset($_SESSION['rol']) ||
     $_SESSION['rol'] !== 'administrador'
 ) {
-    echo "Acceso no autorizado.";
-    exit;
+    // Establece el código de estado HTTP 403 (Prohibido/Acceso denegado).
+    http_response_code(403);
+    // Finaliza la ejecución del script mostrando un mensaje de error.
+    exit('Acceso no autorizado.');
 }
 
-
 // ============================================================
-// FUNCIÓN PARA CONSULTAR SUPABASE
+// 3. FUNCIÓN PARA CONSULTAR SUPABASE
 // ============================================================
 
 /**
- * Realiza peticiones HTTP de tipo GET a la API REST de Supabase.
+ * Realiza una petición GET a la API REST de Supabase.
  *
- * @param string $url URL del recurso a consultar en Supabase.
- * @return array Arreglo con la respuesta codificada de la consulta o un arreglo vacío en caso de falla.
+ * @param string $url Endpoint completo con parámetros de consulta.
+ * @return array Arreglo asociativo con la respuesta o arreglo vacío en caso de error.
  */
 function consultarSupabase($url)
 {
-    // Define las opciones de la petición HTTP con sus cabeceras correspondientes.
+    // Define la configuración y cabeceras de la petición HTTP.
     $options = [
         'http' => [
-            // Método de la consulta HTTP.
             'method' => 'GET',
-
-            // Cabeceras de autenticación (apikey y Bearer Token).
             'header' =>
-                "apikey: " .
-                SUPABASE_KEY .
-                "\r\n" .
-
-                "Authorization: Bearer " .
-                SUPABASE_KEY .
-                "\r\n" .
-
-                "Content-Type: application/json\r\n",
-
-            // Evita detener la ejecución en caso de respuesta con error HTTP.
-            'ignore_errors' => true
+                "apikey: " . SUPABASE_KEY . "\r\n" .
+                "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
+                "Accept: application/json\r\n",
+            'ignore_errors' => true,
+            'timeout' => 15
         ]
     ];
 
-    // Crea el contexto para la transmisión de datos HTTP.
-    $context =
-        stream_context_create($options);
+    // Crea el contexto de transmisión para la petición con las opciones configuradas.
+    $context = stream_context_create($options);
 
-    // Obtiene el contenido del recurso indicado por la URL.
-    $response =
-        file_get_contents(
-            $url,
-            false,
-            $context
-        );
+    // Obtiene el contenido de la URL suprimiendo advertencias con @.
+    $response = @file_get_contents(
+        $url,
+        false,
+        $context
+    );
 
-    // Devuelve un arreglo vacío si no se recibió respuesta de la URL.
+    // Retorna un arreglo vacío si la conexión o lectura fallaron.
     if ($response === false) {
         return [];
     }
 
-    // Decodifica la respuesta JSON recibida en un arreglo asociativo.
-    $datos =
-        json_decode(
-            $response,
-            true
-        );
+    // Convierte la cadena JSON recibida en un arreglo asociativo de PHP.
+    $datos = json_decode($response, true);
 
-    // Verifica que el contenido parseado sea un arreglo válido.
+    // Si el resultado no es un arreglo válido, devuelve un arreglo vacío.
     if (!is_array($datos)) {
         return [];
     }
 
+    // Retorna los datos procesados.
     return $datos;
 }
 
-
 // ============================================================
-// USUARIOS
+// 4. CONSULTAR USUARIOS
 // ============================================================
 
-// URL para consultar todos los identificadores de la tabla usuarios.
-$url_usuarios =
+// Realiza la consulta a la tabla 'usuarios' obteniendo únicamente los campos 'id' y 'rol'.
+$usuarios = consultarSupabase(
     SUPABASE_URL .
-    '/rest/v1/usuarios?select=id';
+    '/rest/v1/usuarios?select=id,rol'
+);
 
-// Realiza la consulta HTTP a Supabase.
-$usuarios =
-    consultarSupabase(
-        $url_usuarios
+// Obtiene la cantidad total de usuarios registrados.
+$total_usuarios = count($usuarios);
+
+// Inicializa contadores para cada rol de usuario.
+$total_alumnos = 0;
+$total_docentes = 0;
+$total_administradores = 0;
+
+// Recorre cada registro para clasificar los usuarios según su rol.
+foreach ($usuarios as $usuario) {
+
+    // Normaliza el texto del rol convirtiéndolo a minúsculas y limpiando espacios.
+    $rol = strtolower(
+        trim($usuario['rol'] ?? '')
     );
 
-// Cuenta el total de usuarios obtenidos.
-$total_usuarios =
-    count($usuarios);
-
+    // Incrementa el contador correspondiente según la coincidencia de rol.
+    if ($rol === 'alumno') {
+        $total_alumnos++;
+    } elseif ($rol === 'docente') {
+        $total_docentes++;
+    } elseif ($rol === 'administrador') {
+        $total_administradores++;
+    }
+}
 
 // ============================================================
-// OBJETOS
+// 5. CONSULTAR OBJETOS
 // ============================================================
 
-// URL para consultar el total de objetos registrados.
-$url_objetos =
+// Realiza la consulta a la tabla 'objetos' solicitando 'id' y 'estado'.
+$objetos = consultarSupabase(
     SUPABASE_URL .
-    '/rest/v1/objetos?select=id';
+    '/rest/v1/objetos?select=id,estado'
+);
 
-// Ejecuta la consulta de la lista completa de objetos.
-$objetos =
-    consultarSupabase(
-        $url_objetos
+// Obtiene el total de objetos registrados en el sistema.
+$total_objetos = count($objetos);
+
+// Inicializa contadores para cada estado posible de los objetos.
+$total_perdidos = 0;
+$total_encontrados = 0;
+$total_resguardo = 0;
+$total_recuperados = 0;
+
+// Recorre cada objeto para agruparlo según su estado actual.
+foreach ($objetos as $objeto) {
+
+    // Normaliza la cadena de texto del estado.
+    $estado = strtolower(
+        trim($objeto['estado'] ?? '')
     );
 
-// Cuenta el total general de objetos.
-$total_objetos =
-    count($objetos);
-
+    // Acumula el conteo correspondiente para cada estado.
+    if ($estado === 'perdido') {
+        $total_perdidos++;
+    } elseif ($estado === 'encontrado') {
+        $total_encontrados++;
+    } elseif ($estado === 'en resguardo') {
+        $total_resguardo++;
+    } elseif ($estado === 'recuperado') {
+        $total_recuperados++;
+    }
+}
 
 // ============================================================
-// OBJETOS PERDIDOS
+// 6. CONSULTAR RECLAMACIONES
 // ============================================================
 
-// URL para obtener objetos cuyo estado sea 'Perdido'.
-$url_perdidos =
+// Consulta la tabla 'reclamaciones' obteniendo únicamente los identificadores y estados.
+$reclamaciones = consultarSupabase(
     SUPABASE_URL .
-    '/rest/v1/objetos' .
-    '?estado=eq.Perdido' .
-    '&select=id';
+    '/rest/v1/reclamaciones?select=id,estado'
+);
 
-// Ejecuta la consulta de objetos perdidos.
-$perdidos =
-    consultarSupabase(
-        $url_perdidos
+// Cuenta el total de solicitudes de reclamación recibidas.
+$total_reclamaciones = count($reclamaciones);
+
+// Inicializa contadores para la clasificación por estados de reclamación.
+$total_pendientes = 0;
+$total_aprobadas = 0;
+$total_rechazadas = 0;
+$total_cerradas = 0;
+
+// Recorre las reclamaciones contabilizando cada estado.
+foreach ($reclamaciones as $reclamacion) {
+
+    // Normaliza el estado en minúsculas y sin espacios iniciales/finales.
+    $estado = strtolower(
+        trim($reclamacion['estado'] ?? '')
     );
 
-// Cuenta el total de objetos perdidos.
-$total_perdidos =
-    count($perdidos);
-
+    // Incrementa las métricas de estado de las reclamaciones.
+    if ($estado === 'pendiente') {
+        $total_pendientes++;
+    } elseif ($estado === 'aprobada') {
+        $total_aprobadas++;
+    } elseif ($estado === 'rechazada') {
+        $total_rechazadas++;
+    } elseif (
+        $estado === 'cerrada' ||
+        $estado === 'cerrada '
+    ) {
+        $total_cerradas++;
+    }
+}
 
 // ============================================================
-// OBJETOS ENCONTRADOS
+// 7. CONSULTAR HISTORIAL
 // ============================================================
 
-// URL para consultar los objetos clasificados como 'Encontrado'.
-$url_encontrados =
+// Consulta los registros de la tabla 'historial_objetos'.
+$historial = consultarSupabase(
     SUPABASE_URL .
-    '/rest/v1/objetos' .
-    '?estado=eq.Encontrado' .
-    '&select=id';
+    '/rest/v1/historial_objetos?select=id'
+);
 
-// Ejecuta la consulta de objetos encontrados.
-$encontrados =
-    consultarSupabase(
-        $url_encontrados
-    );
-
-// Cuenta el total de objetos encontrados.
-$total_encontrados =
-    count($encontrados);
-
-
-// ============================================================
-// OBJETOS EN RESGUARDO
-// ============================================================
-
-// URL para obtener la cantidad de objetos bajo el estado 'En resguardo'.
-$url_resguardo =
-    SUPABASE_URL .
-    '/rest/v1/objetos' .
-    '?estado=eq.En%20resguardo' .
-    '&select=id';
-
-// Consulta los objetos en resguardo.
-$resguardo =
-    consultarSupabase(
-        $url_resguardo
-    );
-
-// Cuenta el total de objetos bajo resguardo.
-$total_resguardo =
-    count($resguardo);
-
-
-// ============================================================
-// OBJETOS RECUPERADOS
-// ============================================================
-
-// URL para filtrar los objetos entregados o bajo el estado 'Recuperado'.
-$url_recuperados =
-    SUPABASE_URL .
-    '/rest/v1/objetos' .
-    '?estado=eq.Recuperado' .
-    '&select=id';
-
-// Consulta los objetos recuperados.
-$recuperados =
-    consultarSupabase(
-        $url_recuperados
-    );
-
-// Cuenta el total de objetos recuperados.
-$total_recuperados =
-    count($recuperados);
-
-
-// ============================================================
-// RECLAMACIONES TOTALES
-// ============================================================
-
-// URL para pedir todos los registros de la tabla reclamaciones.
-$url_reclamaciones =
-    SUPABASE_URL .
-    '/rest/v1/reclamaciones?select=id';
-
-// Consulta la lista general de reclamaciones.
-$reclamaciones =
-    consultarSupabase(
-        $url_reclamaciones
-    );
-
-// Cuenta el total general de reclamaciones.
-$total_reclamaciones =
-    count($reclamaciones);
-
-
-// ============================================================
-// RECLAMACIONES PENDIENTES
-// ============================================================
-
-// URL para filtrar reclamaciones registradas con estado 'Pendiente'.
-$url_pendientes =
-    SUPABASE_URL .
-    '/rest/v1/reclamaciones' .
-    '?estado=eq.Pendiente' .
-    '&select=id';
-
-// Consulta las reclamaciones pendientes.
-$pendientes =
-    consultarSupabase(
-        $url_pendientes
-    );
-
-// Cuenta las reclamaciones pendientes de atención.
-$total_pendientes =
-    count($pendientes);
-
-
-// ============================================================
-// RECLAMACIONES CERRADAS
-// ============================================================
-
-// URL para filtrar reclamaciones finalizadas bajo el estado 'Cerrada'.
-$url_cerradas =
-    SUPABASE_URL .
-    '/rest/v1/reclamaciones' .
-    '?estado=eq.Cerrada' .
-    '&select=id';
-
-// Consulta las reclamaciones cerradas.
-$cerradas =
-    consultarSupabase(
-        $url_cerradas
-    );
-
-// Cuenta las reclamaciones concluidas.
-$total_cerradas =
-    count($cerradas);
-
-
-// ============================================================
-// HISTORIAL DE OBJETOS
-// ============================================================
-
-// URL para obtener los movimientos registrados en la tabla historial_objetos.
-$url_historial =
-    SUPABASE_URL .
-    '/rest/v1/historial_objetos?select=id';
-
-// Consulta el historial de cambios de los objetos.
-$historial =
-    consultarSupabase(
-        $url_historial
-    );
-
-// Cuenta la cantidad total de movimientos en la bitácora.
-$total_movimientos =
-    count($historial);
+// Cuenta el total de movimientos/eventos registrados en el historial del sistema.
+$total_movimientos = count($historial);
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
 
-    <!-- Codificación de caracteres estándar -->
+    <!-- Codificación de caracteres estándar UTF-8 -->
     <meta charset="UTF-8">
 
-    <!-- Configuración para asegurar que el sitio sea responsivo -->
+    <!-- Configuración para el diseño adaptable en dispositivos móviles -->
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Panel de administrador
-    </title>
+    <title>Panel de administrador</title>
 
-    <!-- Hoja de estilos del panel de administración -->
+    <!-- Enlace a la hoja de estilos del panel de administración -->
     <link
         rel="stylesheet"
         href="css/administrador.css"
     >
 
-    <!-- Script de apoyo del panel cargado de forma diferida -->
+    <!-- Script ejecutable diferido para soporte dinámico del panel -->
     <script
         src="js/administrador.js"
         defer
@@ -340,29 +238,27 @@ $total_movimientos =
 
 </head>
 
-
 <body>
 
-
 <!-- ============================================================
-     ENCABEZADO
+     ENCABEZADO PRINCIPAL DE LA PÁGINA
      ============================================================ -->
 
 <header class="encabezado">
 
     <div>
 
-        <h1>
-            Panel de administrador
-        </h1>
+        <h1>Panel de administrador</h1>
 
+        <!-- Muestra el nombre del usuario administrador desde la variable de sesión -->
         <p>
             Bienvenido,
             <strong>
                 <?php
-                // Escapa caracteres especiales del nombre almacenado en la sesión
                 echo htmlspecialchars(
-                    $_SESSION['nombre']
+                    $_SESSION['nombre'] ?? 'Administrador',
+                    ENT_QUOTES,
+                    'UTF-8'
                 );
                 ?>
             </strong>
@@ -370,18 +266,17 @@ $total_movimientos =
 
     </div>
 
-
+    <!-- Botones de navegación y recarga dentro del encabezado -->
     <div class="acciones-encabezado">
 
-        <!-- Botón para refrescar métricas o recargar elementos dinámicos -->
         <button
             type="button"
             id="boton-actualizar"
+            onclick="window.location.reload()"
         >
             Actualizar estadísticas
         </button>
 
-        <!-- Enlace para retornar a la vista principal -->
         <a
             href="index.php"
             class="boton-inicio"
@@ -394,53 +289,43 @@ $total_movimientos =
 </header>
 
 
-<!-- ============================================================
-     CONTENIDO PRINCIPAL
-     ============================================================ -->
-
+<!-- CONTENEDOR DE CONTENIDO PRINCIPAL -->
 <main class="contenedor">
 
+    <!-- ========================================================
+         SECCIÓN DE BIENVENIDA E INTRODUCCIÓN
+         ======================================================== -->
 
     <section class="bienvenida">
 
-        <h2>
-            Resumen del sistema
-        </h2>
+        <h2>Resumen del sistema</h2>
 
         <p>
-            Consulta las estadísticas actuales de usuarios,
-            objetos, reclamaciones y movimientos registrados.
+            Consulta las estadísticas de usuarios, objetos,
+            reclamaciones y movimientos registrados.
         </p>
 
     </section>
 
 
     <!-- ========================================================
-         ESTADÍSTICAS GENERALES
+         ESTADÍSTICAS GENERALES DE LA PLATAFORMA
          ======================================================== -->
 
     <section class="seccion">
 
-        <h2>
-            Estadísticas generales
-        </h2>
-
+        <h2>Estadísticas generales</h2>
 
         <div class="estadisticas">
 
-
-            <!-- Tarjeta que indica el total de usuarios registrados -->
+            <!-- Tarjeta con el total global de usuarios -->
             <article class="tarjeta estadistica">
 
-                <span class="icono">
-                    👥
-                </span>
+                <span class="icono">👥</span>
 
                 <div>
 
-                    <h3>
-                        Usuarios
-                    </h3>
+                    <h3>Usuarios</h3>
 
                     <strong
                         class="numero"
@@ -454,18 +339,14 @@ $total_movimientos =
             </article>
 
 
-            <!-- Tarjeta con el recuento total de objetos -->
+            <!-- Tarjeta con el total global de objetos -->
             <article class="tarjeta estadistica">
 
-                <span class="icono">
-                    📦
-                </span>
+                <span class="icono">📦</span>
 
                 <div>
 
-                    <h3>
-                        Objetos
-                    </h3>
+                    <h3>Objetos</h3>
 
                     <strong
                         class="numero"
@@ -479,18 +360,14 @@ $total_movimientos =
             </article>
 
 
-            <!-- Tarjeta con la cantidad de solicitudes de reclamación -->
+            <!-- Tarjeta con el total global de reclamaciones -->
             <article class="tarjeta estadistica">
 
-                <span class="icono">
-                    📋
-                </span>
+                <span class="icono">📋</span>
 
                 <div>
 
-                    <h3>
-                        Reclamaciones
-                    </h3>
+                    <h3>Reclamaciones</h3>
 
                     <strong
                         class="numero"
@@ -504,18 +381,14 @@ $total_movimientos =
             </article>
 
 
-            <!-- Tarjeta con el total de movimientos/cambios en la bitácora -->
+            <!-- Tarjeta con el total global de movimientos en el historial -->
             <article class="tarjeta estadistica">
 
-                <span class="icono">
-                    📝
-                </span>
+                <span class="icono">📝</span>
 
                 <div>
 
-                    <h3>
-                        Movimientos
-                    </h3>
+                    <h3>Movimientos</h3>
 
                     <strong
                         class="numero"
@@ -528,6 +401,61 @@ $total_movimientos =
 
             </article>
 
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         DESGLOSE DE USUARIOS POR ROL
+         ======================================================== -->
+
+    <section class="seccion">
+
+        <h2>Usuarios por rol</h2>
+
+        <div class="estadisticas">
+
+            <!-- Conteo de alumnos -->
+            <article class="tarjeta">
+
+                <h3>Alumnos</h3>
+
+                <strong class="numero">
+                    <?php echo $total_alumnos; ?>
+                </strong>
+
+                <p>Usuarios con rol de alumno.</p>
+
+            </article>
+
+
+            <!-- Conteo de docentes -->
+            <article class="tarjeta">
+
+                <h3>Docentes</h3>
+
+                <strong class="numero">
+                    <?php echo $total_docentes; ?>
+                </strong>
+
+                <p>Usuarios con rol de docente.</p>
+
+            </article>
+
+
+            <!-- Conteo de administradores -->
+            <article class="tarjeta">
+
+                <h3>Administradores</h3>
+
+                <strong class="numero">
+                    <?php echo $total_administradores; ?>
+                </strong>
+
+                <p>Usuarios con rol de administrador.</p>
+
+            </article>
 
         </div>
 
@@ -535,102 +463,69 @@ $total_movimientos =
 
 
     <!-- ========================================================
-         ESTADOS DE LOS OBJETOS
+         DESGLOSE DEL ESTADO DE LOS OBJETOS
          ======================================================== -->
 
     <section class="seccion">
 
-        <h2>
-            Estado de los objetos
-        </h2>
-
+        <h2>Estado de los objetos</h2>
 
         <div class="estadisticas">
 
-
-            <!-- Indicador de objetos perdidos -->
+            <!-- Tarjeta de objetos perdidos -->
             <article class="tarjeta estado-perdido">
 
-                <h3>
-                    Objetos perdidos
-                </h3>
+                <h3>Objetos perdidos</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_perdidos; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_perdidos; ?>
                 </strong>
 
-                <p>
-                    Objetos reportados como perdidos.
-                </p>
+                <p>Objetos reportados como perdidos.</p>
 
             </article>
 
 
-            <!-- Indicador de objetos encontrados -->
+            <!-- Tarjeta de objetos encontrados -->
             <article class="tarjeta estado-encontrado">
 
-                <h3>
-                    Objetos encontrados
-                </h3>
+                <h3>Objetos encontrados</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_encontrados; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_encontrados; ?>
                 </strong>
 
-                <p>
-                    Objetos encontrados y disponibles.
-                </p>
+                <p>Objetos encontrados registrados.</p>
 
             </article>
 
 
-            <!-- Indicador de objetos en resguardo -->
+            <!-- Tarjeta de objetos bajo resguardo -->
             <article class="tarjeta estado-resguardo">
 
-                <h3>
-                    En resguardo
-                </h3>
+                <h3>En resguardo</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_resguardo; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_resguardo; ?>
                 </strong>
 
-                <p>
-                    Objetos bajo resguardo docente.
-                </p>
+                <p>Objetos bajo resguardo docente.</p>
 
             </article>
 
 
-            <!-- Indicador de objetos recuperados -->
+            <!-- Tarjeta de objetos recuperados -->
             <article class="tarjeta estado-recuperado">
 
-                <h3>
-                    Recuperados
-                </h3>
+                <h3>Recuperados</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_recuperados; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_recuperados; ?>
                 </strong>
 
-                <p>
-                    Objetos entregados a sus propietarios.
-                </p>
+                <p>Objetos con entrega registrada.</p>
 
             </article>
-
 
         </div>
 
@@ -638,77 +533,83 @@ $total_movimientos =
 
 
     <!-- ========================================================
-         RECLAMACIONES
+         DESGLOSE DEL ESTADO DE LAS RECLAMACIONES
          ======================================================== -->
 
     <section class="seccion">
 
-        <h2>
-            Estado de las reclamaciones
-        </h2>
-
+        <h2>Estado de las reclamaciones</h2>
 
         <div class="estadisticas">
 
-
-            <!-- Recuento global de reclamaciones -->
+            <!-- Total de reclamaciones -->
             <article class="tarjeta">
 
-                <h3>
-                    Total
-                </h3>
+                <h3>Total</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_reclamaciones; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_reclamaciones; ?>
                 </strong>
 
+                <p>Todas las reclamaciones registradas.</p>
+
             </article>
 
 
-            <!-- Muestra de reclamaciones pendientes -->
+            <!-- Reclamaciones pendientes -->
             <article class="tarjeta">
 
-                <h3>
-                    Pendientes
-                </h3>
+                <h3>Pendientes</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_pendientes; ?>"
-                >
+                <strong class="numero">
                     <?php echo $total_pendientes; ?>
                 </strong>
 
-                <p>
-                    Requieren revisión docente.
-                </p>
+                <p>Esperan revisión del docente.</p>
 
             </article>
 
 
-            <!-- Muestra de reclamaciones cerradas -->
+            <!-- Reclamaciones aprobadas -->
             <article class="tarjeta">
 
-                <h3>
-                    Cerradas
-                </h3>
+                <h3>Aprobadas</h3>
 
-                <strong
-                    class="numero"
-                    data-valor="<?php echo $total_cerradas; ?>"
-                >
+                <strong class="numero">
+                    <?php echo $total_aprobadas; ?>
+                </strong>
+
+                <p>Reclamaciones aprobadas.</p>
+
+            </article>
+
+
+            <!-- Reclamaciones rechazadas -->
+            <article class="tarjeta">
+
+                <h3>Rechazadas</h3>
+
+                <strong class="numero">
+                    <?php echo $total_rechazadas; ?>
+                </strong>
+
+                <p>Reclamaciones rechazadas.</p>
+
+            </article>
+
+
+            <!-- Reclamaciones cerradas -->
+            <article class="tarjeta">
+
+                <h3>Cerradas</h3>
+
+                <strong class="numero">
                     <?php echo $total_cerradas; ?>
                 </strong>
 
-                <p>
-                    Reclamaciones finalizadas.
-                </p>
+                <p>Procesos de reclamación finalizados.</p>
 
             </article>
-
 
         </div>
 
@@ -716,37 +617,29 @@ $total_movimientos =
 
 
     <!-- ========================================================
-         ACCIONES DEL ADMINISTRADOR
+         ACCESOS DIRECTOS A LOS MÓDULOS DE ADMINISTRACIÓN
          ======================================================== -->
 
     <section class="seccion">
 
-        <h2>
-            Administración del sistema
-        </h2>
-
+        <h2>Administración del sistema</h2>
 
         <div class="acciones">
 
-
-            <!-- Enlace directo al módulo de gestión de objetos -->
+            <!-- Enlace al módulo de gestión de objetos -->
             <a
                 href="admin_objetos.php"
                 class="accion"
             >
 
-                <span>
-                    📦
-                </span>
+                <span>📦</span>
 
                 <div>
 
-                    <strong>
-                        Gestionar objetos
-                    </strong>
+                    <strong>Gestionar objetos</strong>
 
                     <p>
-                        Consultar y administrar objetos.
+                        Consultar objetos y sus estados.
                     </p>
 
                 </div>
@@ -754,24 +647,20 @@ $total_movimientos =
             </a>
 
 
-            <!-- Enlace directo al módulo de administración de usuarios -->
+            <!-- Enlace al módulo de gestión de usuarios -->
             <a
                 href="admin_usuarios.php"
                 class="accion"
             >
 
-                <span>
-                    👥
-                </span>
+                <span>👥</span>
 
                 <div>
 
-                    <strong>
-                        Gestionar usuarios
-                    </strong>
+                    <strong>Gestionar usuarios</strong>
 
                     <p>
-                        Consultar usuarios registrados.
+                        Consultar usuarios y roles.
                     </p>
 
                 </div>
@@ -779,24 +668,20 @@ $total_movimientos =
             </a>
 
 
-            <!-- Enlace directo al módulo de atención a reclamaciones -->
+            <!-- Enlace al módulo de gestión de reclamaciones -->
             <a
                 href="admin_reclamaciones.php"
                 class="accion"
             >
 
-                <span>
-                    📋
-                </span>
+                <span>📋</span>
 
                 <div>
 
-                    <strong>
-                        Gestionar reclamaciones
-                    </strong>
+                    <strong>Gestionar reclamaciones</strong>
 
                     <p>
-                        Consultar las reclamaciones del sistema.
+                        Consultar reclamaciones y tickets.
                     </p>
 
                 </div>
@@ -804,49 +689,39 @@ $total_movimientos =
             </a>
 
 
-            <!-- Enlace directo al módulo de historial global -->
+            <!-- Enlace al historial de movimientos -->
             <a
                 href="admin_historial.php"
                 class="accion"
             >
 
-                <span>
-                    📜
-                </span>
+                <span>📜</span>
 
                 <div>
 
-                    <strong>
-                        Historial del sistema
-                    </strong>
+                    <strong>Historial del sistema</strong>
 
                     <p>
-                        Consultar movimientos de objetos.
+                        Consultar los movimientos de los objetos.
                     </p>
 
                 </div>
 
             </a>
 
-
         </div>
 
     </section>
 
-
 </main>
 
 
-<!-- Pie de página informativo -->
+<!-- PIE DE PÁGINA -->
 <footer>
 
-    <p>
-        Universidad Veracruzana - Facultad
-    </p>
+    <p>Universidad Veracruzana - Facultad</p>
 
 </footer>
 
-
 </body>
-
 </html>
