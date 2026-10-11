@@ -18,7 +18,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Objetos Perdidos - Facultad</title>
+    <title>Finders</title>
 
     <link rel="stylesheet" href="css/home.css">
     <script src="js/home.js" defer></script>
@@ -34,8 +34,40 @@ if (!isset($_SESSION['usuario_id'])) {
         <div class="header-superior">
 
             <div>
-                <h1>Objetos Perdidos - Facultad</h1>
+                <h1>Finders</h1>
             </div>
+
+            
+            <form id="form-busqueda" class="buscador-superior">
+
+                <input
+                    type="search"
+                    id="busqueda"
+                    name="q"
+                    placeholder="Buscar objetos..."
+                    aria-label="Buscar objetos"
+                >
+
+                <button type="submit" aria-label="Buscar">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="m20 20-4-4"></path>
+                    </svg>
+                </button>
+
+            </form>
+
 
             <div class="usuario-menu">
 
@@ -195,24 +227,7 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
 
         </div>
-
-
-        <nav>
-
-            <a href="index.php">
-                HOME
-            </a>
-
-            <a href="perdido.html">
-                ¿Perdiste algo?
-            </a>
-
-            <a href="encontrado.html">
-                ¿Encontraste algo?
-            </a>
-
-        </nav>
-
+        
     </header>
 
 
@@ -228,26 +243,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
         </section>
 
-        <section>
-
-            <h3>Buscar un objeto</h3>
-
-            <form id="form-busqueda">
-
-                <input
-                    type="text"
-                    id="busqueda"
-                    placeholder="¿Qué estás buscando?"
-                    required
-                >
-
-                <button type="submit">
-                    Buscar
-                </button>
-            </form>
-
-        </section>
-
+        
         <section id="seccion-resultados" style="display: none;">
             
             <h2>Resultados de búsqueda</h2>
@@ -257,37 +253,45 @@ if (!isset($_SESSION['usuario_id'])) {
         </section>
 
 
-        <section id="seccion-acciones">
+        
+        <section id="seccion-acciones" class="panel-acciones">
 
-            <h3>¿Qué deseas hacer?</h3>
+            <h2>¿Qué deseas hacer?</h2>
 
-                <a href="perdido.html">
-                    <button type="button">
-                        Reportar objeto perdido
-                    </button>
+            <div class="botones-acciones">
+
+                <a href="perdido.html" class="boton-reporte">
+                    ¿Reportar objeto perdido?
                 </a>
 
-                <a href="encontrado.html">
-                    <button type="button">
-                        Reportar objeto encontrado
-                    </button>
+                <a href="encontrado.html" class="boton-reporte">
+                    ¿Reportar objeto encontrado?
                 </a>
 
-        </section>
-
-        <section id="seccion-perdidos">
-
-            <h2>Objetos perdidos</h2>
-            <div id="objetos-perdidos"></div>
+            </div>
 
         </section>
 
-        <section id="seccion-encontrados">
 
-            <h2>Objetos encontrados</h2>
-            <div id="objetos-encontrados"></div>
+        
+        <div id="seccion-catalogo" class="panel-catalogo">
 
-        </section>
+            <section id="seccion-perdidos">
+
+                <h2>Objetos perdidos</h2>
+                <div id="objetos-perdidos"></div>
+
+            </section>
+
+            <section id="seccion-encontrados">
+
+                <h2>Objetos encontrados</h2>
+                <div id="objetos-encontrados"></div>
+
+            </section>
+
+        </div>
+
 
     </main>
 
