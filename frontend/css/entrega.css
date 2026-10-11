@@ -1,0 +1,288 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f5f6f8;
+
+    color: #333;
+}
+
+
+/* ==============================
+   ENCABEZADO
+   ============================== */
+
+.encabezado {
+    background-color: #2B2F3A;
+
+    color: white;
+
+    padding: 20px 30px;
+}
+
+.encabezado-contenido {
+    max-width: 900px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.encabezado h1 {
+    margin: 0;
+
+    font-size: 26px;
+}
+
+
+/* ==============================
+   BOTÓN REGRESAR
+   ============================== */
+
+.boton-regresar {
+    color: white;
+
+    text-decoration: none;
+
+    background-color: #444a59;
+
+    padding: 10px 16px;
+
+    border-radius: 6px;
+}
+
+.boton-regresar:hover {
+    background-color: #555c6d;
+}
+
+
+/* ==============================
+   CONTENEDOR
+   ============================== */
+
+.contenedor {
+    max-width: 900px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* ==============================
+   TARJETA
+   ============================== */
+
+.tarjeta {
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==============================
+   IMAGEN
+   ============================== */
+
+.imagen-objeto {
+    display: block;
+
+    width: 280px;
+
+    max-width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    margin: 20px auto;
+
+    border-radius: 8px;
+}
+
+
+/* ==============================
+   INFORMACIÓN
+   ============================== */
+
+.informacion {
+    margin-top: 20px;
+}
+
+.informacion p {
+    line-height: 1.5;
+
+    margin: 10px 0;
+}
+
+
+/* ==============================
+   ESTADO
+   ============================== */
+
+.estado {
+    display: inline-block;
+
+    background-color: #e8f5e9;
+
+    color: #2e7d32;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+}
+
+
+/* ==============================
+   ADVERTENCIA
+   ============================== */
+
+.advertencia {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    background-color: #fff8e1;
+
+    border-radius: 7px;
+
+    border-left: 5px solid #f9a825;
+}
+
+.advertencia h3 {
+    margin-top: 0;
+}
+
+
+/* ==============================
+   FORMULARIO
+   ============================== */
+
+form {
+    margin-top: 25px;
+}
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-family: Arial, sans-serif;
+
+    resize: vertical;
+}
+
+
+/* ==============================
+   ACCIONES
+   ============================== */
+
+.acciones {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.boton-cancelar,
+.boton-confirmar {
+    border: none;
+
+    padding: 11px 17px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.boton-cancelar {
+    background-color: #e0e0e0;
+
+    color: #333;
+}
+
+.boton-confirmar {
+    background-color: #2e7d32;
+
+    color: white;
+}
+
+.boton-confirmar:hover {
+    background-color: #1b5e20;
+}
+
+
+/* ==============================
+   FOOTER
+   ============================== */
+
+footer {
+    margin-top: 40px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background-color: #2B2F3A;
+
+    color: white;
+}
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 600px) {
+
+    .encabezado-contenido {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .acciones {
+        flex-direction: column;
+    }
+
+    .boton-cancelar,
+    .boton-confirmar {
+        text-align: center;
+    }
+
+}

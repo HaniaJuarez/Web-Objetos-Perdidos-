@@ -1,0 +1,356 @@
+
+/* ============================================================
+   CONFIGURACIÓN GENERAL
+   ============================================================ */
+
+/* Aplica el modelo de caja border-box a todos los elementos para incluir padding y border dentro del ancho y alto total. */
+* {
+    box-sizing: border-box;
+}
+
+/* Define los estilos globales para el cuerpo del documento (márgenes, tipografía y colores base). */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
+
+
+/* ============================================================
+   ENCABEZADO
+   ============================================================ */
+
+/* Contenedor principal de la barra superior con fondo oscuro y alineación flexible. */
+.encabezado {
+    background: #2B2F3A;
+    color: white;
+
+    padding: 25px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+}
+
+/* Estilo del título principal dentro del encabezado. */
+.encabezado h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+
+/* Remueve los márgenes por defecto de los párrafos dentro del encabezado. */
+.encabezado p {
+    margin: 0;
+}
+
+/* Contenedor flexible para alinear los botones o enlaces de acción del encabezado. */
+.acciones-encabezado {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+/* ============================================================
+   BOTONES DEL ENCABEZADO
+   ============================================================ */
+
+/* Estilos compartidos para el botón de actualizar y el enlace a la página de inicio. */
+#boton-actualizar,
+.boton-inicio {
+    border: none;
+
+    padding: 11px 16px;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #2B2F3A;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+/* Estado visual interactivo al pasar el cursor sobre los botones del encabezado. */
+#boton-actualizar:hover,
+.boton-inicio:hover {
+    background: #e9edf2;
+}
+
+
+/* ============================================================
+   CONTENEDOR
+   ============================================================ */
+
+/* Delimita el ancho máximo del contenido y lo centra horizontalmente en la pantalla. */
+.contenedor {
+    max-width: 1150px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* ============================================================
+   BIENVENIDA
+   ============================================================ */
+
+/* Tarjeta contenedora del mensaje de bienvenida con sombra suave y bordes redondeados. */
+.bienvenida {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    margin-bottom: 30px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Remueve el espacio superior del título en el bloque de bienvenida. */
+.bienvenida h2 {
+    margin-top: 0;
+}
+
+
+/* ============================================================
+   SECCIONES
+   ============================================================ */
+
+/* Define la separación vertical entre los bloques principales del panel. */
+.seccion {
+    margin-bottom: 35px;
+}
+
+/* Define el espacio inferior para los subtítulos de cada sección. */
+.seccion h2 {
+    margin-bottom: 18px;
+}
+
+
+/* ============================================================
+   ESTADÍSTICAS
+   ============================================================ */
+
+/* Malla adaptativa mediante CSS Grid que ajusta las columnas automáticamente según el ancho disponible. */
+.estadisticas {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* ============================================================
+   TARJETAS
+   ============================================================ */
+
+/* Estilo base de tarjeta blanca con bordes redondeados, sombra y efecto de elevación al interactuar. */
+.tarjeta {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Animación de elevación al pasar el cursor sobre una tarjeta. */
+.tarjeta:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   TARJETAS ESTADÍSTICAS GENERALES
+   ============================================================ */
+
+/* Alineación horizontal del ícono y la información textual de la métrica. */
+.estadistica {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+/* Tamaño del ícono o emoticono representante de la estadística. */
+.icono {
+    font-size: 38px;
+}
+
+/* Ajusta el margen del título dentro de la tarjeta de estadística. */
+.estadistica h3 {
+    margin: 0 0 5px 0;
+}
+
+/* Muestra el valor numérico destacado en negrita y color principal. */
+.numero {
+    display: block;
+
+    font-size: 32px;
+
+    color: #2B2F3A;
+}
+
+
+/* ============================================================
+   TARJETAS DE ESTADO
+   ============================================================ */
+
+/* Quita el margen superior del título en las tarjetas de estado de los objetos/reclamaciones. */
+.tarjeta h3 {
+    margin-top: 0;
+}
+
+/* Estilo para los textos secundarios o descripciones cortas dentro de las tarjetas. */
+.tarjeta p {
+    color: #666;
+
+    line-height: 1.4;
+}
+
+
+/* ============================================================
+   ACCIONES DEL ADMINISTRADOR
+   ============================================================ */
+
+/* Malla responsiva para estructurar los accesos directos a los módulos de administración. */
+.acciones {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 18px;
+}
+
+/* Estilos de los botones/tarjetas clicables para acceder a cada subsección de gestión. */
+.accion {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: #333;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Efecto de elevación interactivo al pasar el cursor sobre las tarjetas de acción. */
+.accion:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Tamaño del ícono dentro de la tarjeta de acción. */
+.accion > span {
+    font-size: 35px;
+}
+
+/* Tamaño de la etiqueta o nombre del módulo. */
+.accion strong {
+    font-size: 17px;
+}
+
+/* Estilo del texto descriptivo debajo del título de la acción. */
+.accion p {
+    margin: 6px 0 0 0;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   PIE DE PÁGINA
+   ============================================================ */
+
+/* Bloque inferior del pie de página con texto centrado y color institucional. */
+footer {
+    margin-top: 40px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    background: #2B2F3A;
+
+    color: white;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Ajustes adaptativos para pantallas móviles o de ancho menor a 700px. */
+@media (max-width: 700px) {
+
+    /* Cambia la distribución del encabezado a orientación vertical centrado. */
+    .encabezado {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 20px;
+    }
+
+    /* Expande el contenedor de acciones del encabezado al 100% de ancho. */
+    .acciones-encabezado {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    /* Ajusta los botones del encabezado para ocupar todo el ancho disponible. */
+    #boton-actualizar,
+    .boton-inicio {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    /* Reduce el espaciado lateral del contenedor principal. */
+    .contenedor {
+        padding: 0 15px;
+    }
+
+}

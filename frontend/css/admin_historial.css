@@ -1,0 +1,624 @@
+/* =========================================================
+   CONFIGURACIÓN GENERAL Y RESETEO
+   ========================================================= */
+
+/* Aplica la propiedad box-sizing en todos los elementos para mantener el control del tamaño con paddings y bordes */
+* {
+    box-sizing: border-box;
+}
+
+/* Define los estilos base globales para el cuerpo del documento */
+body {
+    /* Elimina el margen predeterminado del navegador */
+    margin: 0;
+
+    /* Define la familia tipográfica principal */
+    font-family: Arial, sans-serif;
+
+    /* Fondo gris claro neutro */
+    background: #f5f6f8;
+
+    /* Color predeterminado para el texto */
+    color: #333;
+}
+
+
+/* =========================================================
+   ENCABEZADO PRINCIPAL
+   ========================================================= */
+
+/* Barra superior contenedora del encabezado */
+.encabezado {
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 22px 30px;
+}
+
+/* Contenedor con ancho máximo centrado para el contenido del encabezado */
+.encabezado-contenido {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+/* Título de la vista */
+.encabezado h1 {
+    margin: 0;
+
+    font-size: 28px;
+}
+
+/* Subtítulo o texto descriptivo secundario */
+.encabezado p {
+    margin: 6px 0 0;
+
+    color: #d5d7dc;
+}
+
+/* Botón con estilo de enlace para regresar al panel principal */
+.boton-regresar {
+    color: white;
+
+    text-decoration: none;
+
+    background: #444a59;
+
+    padding: 10px 16px;
+
+    border-radius: 7px;
+}
+
+/* Cambio de color de fondo al pasar el cursor sobre el botón de regresar */
+.boton-regresar:hover {
+    background: #555c6d;
+}
+
+
+/* =========================================================
+   CONTENEDOR DE CONTENIDO PRINCIPAL
+   ========================================================= */
+
+/* Area principal centrada de la página */
+.contenedor {
+    max-width: 1200px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* =========================================================
+   MÉTRICAS Y TARJETAS DE RESUMEN
+   ========================================================= */
+
+/* Disposición en cuadrícula de 3 columnas para el resumen de métricas */
+.resumen {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* Estilo base de cada tarjeta de métrica de resumen */
+.tarjeta-resumen {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Valor numérico destacado en la tarjeta */
+.tarjeta-resumen .numero {
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+/* Etiqueta textual del indicador */
+.tarjeta-resumen .texto {
+    color: #777;
+}
+
+/* Borde indicador superior para tarjetas en estado de resguardo (amarillo) */
+.tarjeta-resumen.resguardo {
+    border-top: 4px solid #f0ad4e;
+}
+
+/* Borde indicador superior para tarjetas en estado recuperado (verde) */
+.tarjeta-resumen.recuperado {
+    border-top: 4px solid #4caf50;
+}
+
+
+/* =========================================================
+   SECCIÓN DE FILTROS Y BÚSQUEDA
+   ========================================================= */
+
+/* Contenedor flexible de los campos de filtrado y búsqueda */
+.filtros {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* Envoltorio individual para cada input o select de filtro */
+.campo {
+    flex: 1;
+}
+
+/* Etiqueta descriptiva del campo */
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+/* Estilos comunes para controles de entrada y selección */
+.campo input,
+.campo select {
+    width: 100%;
+
+    padding: 11px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+/* Estilo del botón para restablecer los filtros */
+#limpiar-filtros {
+    border: none;
+
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+/* Cambio de color al pasar el cursor sobre el botón de limpiar */
+#limpiar-filtros:hover {
+    background: #444a59;
+}
+
+
+/* =========================================================
+   CABECERA Y TÍTULO DE SECCIÓN
+   ========================================================= */
+
+/* Contenedor flexbox con el título de la lista y el contador */
+.titulo-seccion {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+/* Resetea el margen predeterminado del h2 */
+.titulo-seccion h2 {
+    margin: 0;
+}
+
+/* Texto indicador de la cantidad de resultados encontrados */
+#contador-resultados {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   LISTA CONTENEDORA
+   ========================================================= */
+
+/* Contenedor vertical para apilar las tarjetas del historial */
+.lista-historial {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   TARJETAS DE MOVIMIENTO
+   ========================================================= */
+
+/* Estilo base para cada tarjeta individual de movimiento registrado */
+.tarjeta-movimiento {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Efecto de elevación suave al pasar el cursor */
+.tarjeta-movimiento:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   CABECERA DE LA TARJETA
+   ========================================================= */
+
+/* Sección superior interna de la tarjeta de movimiento */
+.cabecera-movimiento {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #eee;
+
+    padding-bottom: 18px;
+
+    margin-bottom: 20px;
+}
+
+/* Nombre del objeto dentro del encabezado */
+.cabecera-movimiento h3 {
+    margin: 8px 0 0;
+
+    font-size: 21px;
+}
+
+/* Etiqueta identificadora del número de movimiento */
+.id-movimiento {
+    display: inline-block;
+
+    background: #eef1f5;
+
+    padding: 6px 10px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+
+/* =========================================================
+   BADGES DE ESTADO
+   ========================================================= */
+
+/* Estilo base de la badge de estado */
+.estado {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+/* Colores para el estado 'En resguardo' */
+.estado-en-resguardo {
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+/* Colores para el estado 'Recuperado' */
+.estado-recuperado {
+    background: #d4edda;
+
+    color: #155724;
+}
+
+
+/* =========================================================
+   TRANSICIÓN Y CAMBIO DE ESTADO
+   ========================================================= */
+
+/* Representación horizontal de la transición entre estado anterior y nuevo */
+.cambio-estado {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+/* Píldoras con los nombres de los estados */
+.cambio-estado span {
+    background: #f1f3f5;
+
+    padding: 8px 12px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+/* Flecha de dirección del cambio de estado */
+.cambio-estado strong {
+    font-size: 20px;
+
+    color: #777;
+}
+
+
+/* =========================================================
+   MÓDULOS Y DATOS DEL MOVIMIENTO
+   ========================================================= */
+
+/* Rejilla de 4 columnas para visualizar objeto, ID, fecha y usuario */
+.datos-movimiento {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+/* Cajas contenedoras de cada dato indivual */
+.datos-movimiento > div {
+    background: #f8f9fa;
+
+    padding: 14px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+}
+
+/* Encabezados o etiquetas de cada dato */
+.datos-movimiento strong {
+    display: block;
+
+    margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   DESCRIPCIÓN DEL MOVIMIENTO
+   ========================================================= */
+
+/* Bloque gris para el texto detallado del movimiento */
+.descripcion {
+    background: #f8f9fa;
+
+    padding: 18px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+}
+
+/* Ajusta el interlineado del párrafo descriptivo */
+.descripcion p {
+    margin-bottom: 0;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTONES DE ACCIÓN DE LA TARJETA
+   ========================================================= */
+
+/* Área inferior flexbox con enlaces a detalles del objeto */
+.acciones {
+    display: flex;
+
+    gap: 10px;
+
+    border-top: 1px solid #eee;
+
+    padding-top: 18px;
+}
+
+/* Estilo base del botón primario */
+.boton {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #2B2F3A;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+/* Hover para el botón primario */
+.boton:hover {
+    background: #444a59;
+}
+
+/* Estilo para el botón secundario */
+.boton.secundario {
+    background: #687080;
+}
+
+/* Hover para el botón secundario */
+.boton.secundario:hover {
+    background: #555d6c;
+}
+
+
+/* =========================================================
+   ESTADO VACÍO (SIN MOVIMIENTOS)
+   ========================================================= */
+
+/* Tarjeta contenedora de la alerta cuando no existen registros */
+.mensaje-vacio {
+    background: white;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Elimina el margen superior del encabezado del mensaje vacío */
+.mensaje-vacio h3 {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================================= */
+
+/* Estilos del footer al final del documento */
+footer {
+    margin-top: 40px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: #2B2F3A;
+
+    color: white;
+}
+
+
+/* =========================================================
+   DISEÑO ADAPTABLE Y RESPONSIVO (MEDIA QUERIES)
+   ========================================================= */
+
+/* Reglas CSS para pantallas medianas o tablets (hasta 900px) */
+@media (max-width: 900px) {
+
+    /* Convierte la lista de tarjetas de resumen a 1 sola columna */
+    .resumen {
+        grid-template-columns:
+            1fr;
+    }
+
+    /* Reduce los bloques de datos a 2 columnas */
+    .datos-movimiento {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* Reglas CSS para pantallas pequeñas o móviles (hasta 650px) */
+@media (max-width: 650px) {
+
+    /* Alinea el contenido del encabezado en una columna centralizada */
+    .encabezado-contenido {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    /* Apila los controles de filtrado verticalmente */
+    .filtros {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    /* Pasa el bloque de datos a 1 sola columna */
+    .datos-movimiento {
+        grid-template-columns:
+            1fr;
+    }
+
+    /* Apila los elementos de la cabecera de la tarjeta */
+    .cabecera-movimiento {
+        flex-direction: column;
+    }
+
+    /* Alinea las acciones verticalmente */
+    .acciones {
+        flex-direction: column;
+    }
+
+    /* Centra el texto en los botones dentro de dispositivos móviles */
+    .boton {
+        text-align: center;
+    }
+
+}
