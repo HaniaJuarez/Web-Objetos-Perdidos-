@@ -379,6 +379,88 @@ if (isset($resultado['message'])) {
 
 }
 
+/* =========================
+   REGISTRAR EN EL HISTORIAL
+   ========================= */
+
+// Verifica que la respuesta previa de Supabase sea un arreglo válido y contenga el ID del objeto creado.
+// Supabase devuelve los registros creados en un arreglo.
+if (
+    !is_array($resultado) ||
+    !isset($resultado[0]['id'])
+) {
+    // Cancela la ejecución si no es posible recuperar el ID para vincularlo al historial.
+    echo "El objeto pudo haberse guardado, pero no se pudo obtener su identificador.";
+    exit;
+}
+
+// Obtiene el ID del objeto que acaba de registrarse mediante un casteo explícito a entero.
+$objeto_id = (int) $resultado[0]['id'];
+
+// Prepara la estructura de datos que define el primer movimiento en el historial.
+// Prepara la información del movimiento inicial.
+$datos_historial = [
+    'objeto_id' => $objeto_id,
+    'estado_anterior' => 'No registrado',
+    'estado_nuevo' => $estado,
+    'usuario_id' => (int) $usuario_id,
+    'descripcion' => 'Registro inicial del objeto'
+];
+
+// Define la URL del endpoint REST de Supabase para la tabla de historial.
+// Dirección de la tabla historial_objetos.
+$historial_url =
+    SUPABASE_URL . '/rest/v1/historial_objetos';
+
+// Configura las cabeceras HTTP, método y cuerpo JSON para realizar la inserción por POST.
+// Configura la petición para guardar el movimiento.
+$historial_options = [
+    'http' => [
+        'method' => 'POST',
+        'header' =>
+            "apikey: " . SUPABASE_KEY . "\r\n" .
+            "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
+            "Content-Type: application/json\r\n" .
+            "Prefer: return=representation\r\n",
+        'content' => json_encode($datos_historial),
+        'ignore_errors' => true,
+        'timeout' => 15
+    ]
+];
+
+// Crea el flujo de contexto para ejecutar la solicitud HTTP con las opciones especificadas.
+// Crea un contexto independiente para el historial.
+$historial_context =
+    stream_context_create($historial_options);
+
+// Ejecuta la petición POST a Supabase para insertar el registro del historial.
+// Envía el movimiento a Supabase.
+$historial_response = file_get_contents(
+    $historial_url,
+    false,
+    $historial_context
+);
+
+// Convierte la respuesta recibida en formato JSON a un arreglo asociativo de PHP.
+// Comprueba si Supabase devolvió un error.
+$historial_resultado = json_decode(
+    $historial_response ?: '',
+    true
+);
+
+// Comprueba si hubo una falla de red, error de respuesta o si no se generó un ID de historial.
+if (
+    $historial_response === false ||
+    !is_array($historial_resultado) ||
+    !isset($historial_resultado[0]['id'])
+) {
+    // Muestra una notificación al usuario informando que el objeto se creó pero falló el rastreo de historial.
+    echo "<h1>Objeto registrado, pero hubo un problema con el historial.</h1>";
+    echo "<p>El objeto se guardó, pero no se pudo confirmar el registro de su movimiento inicial.</p>";
+    echo '<a href="../frontend/index.php">Volver al inicio</a>';
+    exit;
+}
+
 // Muestra un encabezado indicando que el objeto fue registrado correctamente
 echo "<h1>Objeto registrado correctamente</h1>";
 
