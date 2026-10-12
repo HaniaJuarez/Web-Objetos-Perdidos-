@@ -942,29 +942,29 @@ header {
 
 /* ===== CONTENEDOR GENERAL DEL CATALOGO ===== */
 
+
+/* Contenedor general del catálogo */
 .panel-catalogo {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-    width: min(1400px, calc(100% - 32px));
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
     margin: 30px auto;
-    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
     box-sizing: border-box;
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
 }
 
-/* ===== SECCIONES DE PERDIDOS Y ENCONTRADOS ===== */
-
+/* Cada sección ocupa todo el ancho */
 .panel-catalogo > section {
-    min-width: 0;
-    padding: 20px;
+    width: 100%;
     box-sizing: border-box;
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    min-width: 0;
 }
+
 
 .panel-catalogo h2 {
     margin-top: 0;
@@ -1110,5 +1110,199 @@ button,
     #objetos-perdidos,
     #objetos-encontrados {
         grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+
+/* =====================================
+   FINDERS - ESTILO LIQUID GLASS
+   ===================================== */
+
+/* Fondo general */
+body {
+    background:
+        radial-gradient(ellipse at 10% 10%, #263d66 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, #243b55 0%, transparent 40%),
+        linear-gradient(135deg, #0b1220, #172337 55%, #101827);
+
+    background-attachment: fixed;
+    color: #f8fafc;
+}
+
+/* Barra superior */
+header {
+    background: rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 18px 18px;
+}
+
+/* Nombre Finders */
+.marca-finders h1 {
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Buscador de la barra superior */
+.buscador-superior input {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 12px 16px;
+    outline: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.buscador-superior input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.buscador-superior input:focus {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+/* Panel para reportar objetos */
+#seccion-acciones {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+#seccion-acciones h2 {
+    color: #ffffff;
+}
+
+/* Botones de reporte */
+.boton-reporte {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 15px;
+    padding: 13px 20px;
+    text-decoration: none;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.25s, transform 0.25s;
+}
+
+.boton-reporte:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Contenedor del catálogo */
+.panel-catalogo {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Secciones de objetos perdidos y encontrados */
+.panel-catalogo > section {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.panel-catalogo h2 {
+    color: #ffffff;
+}
+
+/* Tarjetas individuales de objetos */
+.tarjeta-objeto {
+    background: rgba(255, 255, 255, 0.10);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 17px;
+    padding: 15px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.25s, background 0.25s;
+}
+
+.tarjeta-objeto:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-3px);
+}
+
+/* Texto dentro de las tarjetas */
+.tarjeta-objeto h3,
+.tarjeta-objeto h4,
+.tarjeta-objeto p,
+.tarjeta-objeto span {
+    color: #f8fafc;
+}
+
+/* Botones generales */
+button {
+    transition: background 0.25s, transform 0.25s;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid #a5d8ff;
+    outline-offset: 3px;
+}
+
+/* Pie de página */
+footer {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.75);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    margin-top: 30px;
+    padding: 18px;
+}
+
+/* Ajustes para teléfonos */
+@media (max-width: 600px) {
+    #seccion-acciones {
+        padding: 20px 15px;
+        border-radius: 20px;
+    }
+
+    .panel-catalogo {
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .panel-catalogo > section {
+        padding: 15px;
+    }
+
+    .boton-reporte {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Compatibilidad con dispositivos sin desenfoque */
+@supports not (backdrop-filter: blur(10px)) {
+    header,
+    #seccion-acciones,
+    .panel-catalogo,
+    .panel-catalogo > section,
+    .tarjeta-objeto {
+        background-color: #202d40;
     }
 }
