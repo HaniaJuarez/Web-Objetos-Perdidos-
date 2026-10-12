@@ -16,243 +16,123 @@
     <!-- Define el título que aparecerá en la pestaña del navegador -->
     <title>Reportar objeto perdido</title>
 
+    <!-- Acceso al archivo de que va dar el estilo de liquid glass -->
+    <link rel="stylesheet" href="css/reportes.css">
+
 <!-- Finaliza la sección de configuración -->
 </head>
 
 <!-- Inicia el contenido visible de la página -->
-<body>
+<body class="pagina-reporte pagina-perdido">
 
-    <!-- Inicia el encabezado de la página -->
-    <header>
+    <main class="contenedor-reporte">
 
-        <!-- Muestra el título principal de la página -->
-        <h1>Reportar objeto perdido</h1>
+        <!-- Contenedor superior -->
+        <header class="encabezado-reporte">
+            <h1>Reportar objeto perdido</h1>
 
-        <!-- Crea un enlace para regresar a la página principal -->
-        <a href="index.php">
+            <h2>Registrar objeto perdido</h2>
 
-            <!-- Texto que aparece dentro del enlace -->
-            Volver al inicio
+            <p>
+                Completa la información del objeto que perdiste.
+            </p>
+        </header>
 
-        <!-- Finaliza el enlace -->
-        </a>
+        <!-- Contenedor del formulario -->
+        <section class="panel-formulario">
 
-    <!-- Finaliza el encabezado -->
-    </header>
-
-
-    <!-- Inicia la sección principal de la página -->
-    <main>
-
-        <!-- Muestra el subtítulo de la sección -->
-        <h2>Registrar objeto perdido</h2>
-
-        <!-- Muestra una explicación para el usuario -->
-        <p>
-            Completa la información del objeto que perdiste.
-        </p>
-
-
-        <!-- Inicia el formulario y establece el archivo PHP que procesará los datos -->
-        <form action="../backend/objetos.php" method="POST" enctype="multipart/form-data">
-
-            <!-- Campo oculto que indica que el reporte corresponde a un objeto perdido -->
-            <input
-                type="hidden"
-                name="accion"
-                value="perdido"
+            <form
+                action="../backend/objetos.php"
+                method="POST"
+                enctype="multipart/form-data"
+                class="formulario-reporte"
             >
 
-            <!-- Etiqueta que identifica el campo del nombre del objeto -->
-            <label for="nombre">
-                Nombre del objeto:
-            </label>
+                <input type="hidden" name="accion" value="perdido">
 
-            <!-- Inserta un salto de línea -->
-            <br>
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre del objeto:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
 
-            <!-- Campo de texto donde se escribe el nombre del objeto -->
-            <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                required
-            >
+                <div class="campo-formulario">
+                    <label for="categoria">Categoría:</label>
 
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
+                    <select id="categoria" name="categoria_id" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="1">Electrónica</option>
+                        <option value="2">Documentos</option>
+                        <option value="3">Accesorios</option>
+                        <option value="4">Ropa</option>
+                        <option value="5">Material escolar</option>
+                        <option value="6">Otros</option>
+                    </select>
+                </div>
 
+                <div class="campo-formulario">
+                    <label for="descripcion_publica">
+                        Descripción pública:
+                    </label>
 
-            <!-- Etiqueta que identifica el campo de categoría -->
-            <label for="categoria">
-                Categoría:
-            </label>
+                    <textarea
+                        id="descripcion_publica"
+                        name="descripcion_publica"
+                        rows="4"
+                        placeholder="Describe el objeto de manera general"
+                        required
+                    ></textarea>
+                </div>
 
-            <!-- Inserta un salto de línea -->
-            <br>
+                <div class="campo-formulario">
+                    <label for="descripcion_privada">
+                        Descripción privada:
+                    </label>
 
-            <!-- Crea la lista desplegable para seleccionar una categoría -->
-            <select
-                id="categoria"
-                name="categoria_id"
-                required
-            >
+                    <textarea
+                        id="descripcion_privada"
+                        name="descripcion_privada"
+                        rows="3"
+                        placeholder="Escribe características que solo el dueño pueda conocer"
+                    ></textarea>
+                </div>
 
-                <!-- Opción inicial para indicar que se debe seleccionar una categoría -->
-                <option value="">
-                    Selecciona una categoría
-                </option>
+                <div class="campo-formulario">
+                    <label for="color">Color:</label>
+                    <input type="text" id="color" name="color">
+                </div>
 
-                <!-- Opción correspondiente a Electrónica -->
-                <option value="1">
-                    Electrónica
-                </option>
+                <div class="campo-formulario">
+                    <label for="fecha">Fecha en que se perdió:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
 
-                <!-- Opción correspondiente a Documentos -->
-                <option value="2">
-                    Documentos
-                </option>
+                <div class="campo-formulario">
+                    <label for="imagen">Fotografía del objeto:</label>
+                    <input
+                        type="file"
+                        id="imagen"
+                        name="imagen"
+                        accept="image/*"
+                    >
+                </div>
 
-                <!-- Opción correspondiente a Accesorios -->
-                <option value="3">
-                    Accesorios
-                </option>
+                <!-- Botones debajo de los campos -->
+                <div class="acciones-formulario">
+                    <a href="index.php" class="boton-formulario boton-cancelar">
+                        Cancelar
+                    </a>
 
-                <!-- Opción correspondiente a Ropa -->
-                <option value="4">
-                    Ropa
-                </option>
+                    <button
+                        type="submit"
+                        class="boton-formulario boton-registrar"
+                    >
+                        Registrar
+                    </button>
+                </div>
 
-                <!-- Opción correspondiente a Material escolar -->
-                <option value="5">
-                    Material escolar
-                </option>
+            </form>
 
-                <!-- Opción correspondiente a Otros -->
-                <option value="6">
-                    Otros
-                </option>
-
-            <!-- Finaliza la lista de categorías -->
-            </select>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de descripción pública -->
-            <label for="descripcion_publica">
-                Descripción pública:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Área de texto para escribir una descripción general del objeto -->
-            <textarea
-                id="descripcion_publica"
-                name="descripcion_publica"
-                rows="4"
-                cols="40"
-                placeholder="Describe el objeto de manera general"
-                required
-            ></textarea>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de descripción privada -->
-            <label for="descripcion_privada">
-                Descripción privada:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Área de texto para escribir características que solo el dueño pueda conocer -->
-            <textarea
-                id="descripcion_privada"
-                name="descripcion_privada"
-                rows="4"
-                cols="40"
-                placeholder="Escribe características que solo el dueño pueda conocer"
-            ></textarea>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo del color -->
-            <label for="color">
-                Color:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo de texto para escribir el color del objeto -->
-            <input
-                type="text"
-                id="color"
-                name="color"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de fecha -->
-            <label for="fecha">
-                Fecha en que se perdió:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo para seleccionar la fecha en que se perdió el objeto -->
-            <input
-                type="date"
-                id="fecha"
-                name="fecha"
-                required
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo para seleccionar una fotografía -->
-            <label for="imagen">
-                Fotografía del objeto
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo que permite seleccionar una imagen del objeto -->
-            <input
-                type="file"
-                id="imagen"
-                name="imagen"
-                accept="image/*"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Botón que permite enviar el formulario -->
-            <button type="submit">
-                Registrar objeto perdido:
-            </button>
-
-        <!-- Finaliza el formulario -->
-        </form>
-
-    <!-- Finaliza la sección principal -->
-    </main>
-
+        </section>
 
     <!-- Inicia el pie de página -->
     <footer>
