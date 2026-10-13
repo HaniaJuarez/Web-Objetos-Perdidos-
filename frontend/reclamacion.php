@@ -49,74 +49,80 @@ if (empty($perdido_id)) {
     <!-- Define el título que aparecerá en la pestaña del navegador -->
     <title>Solicitar reclamación</title>
 
+    <!-- Enlace para entrar al archivo de detalle.css y agregar el estilo de liquid glass -->
+    <link rel="stylesheet" href="css/cuenta.css">
+
 </head>
 
 <!-- Inicio del contenido visible de la página web -->
 <body>
 
-    <!-- Encabezado principal de la página de solicitud de reclamación -->
-    <h1>Solicitar reclamación</h1>
+    <main class="contenedor-reclamacion">
 
-    <!-- Párrafo de instrucción para orientar al usuario sobre el contenido que debe ingresar -->
-    <p>
-        Describe una característica privada que permita
-        comprobar que el objeto te pertenece.
-    </p>
+        <header class="encabezado-cuenta">
 
+            <!-- Encabezado principal de la página de solicitud de reclamación -->
+            <h1>Solicitar reclamación</h1>
 
-    <!-- Formulario que envía la información mediante el método POST hacia el script backend encargado de la reclamación -->
-    <form action="../backend/reclamar.php" method="POST">
+            <!-- Párrafo de instrucción para orientar al usuario sobre el contenido que debe ingresar -->
+            <p>
+                Describe una característica privada que permita
+                comprobar que el objeto te pertenece.
+            </p>
+        </header>
 
-        <!-- Campo oculto que envía el ID del objeto a reclamar escapando caracteres especiales de forma segura -->
-        <input
-            type="hidden"
-            name="objeto_id"
-            value="<?php echo htmlspecialchars($id); ?>"
-        >
-
-        <!-- Campo oculto que envía el ID del objeto perdido de referencia escapando caracteres especiales -->
-        <input
-            type="hidden"
-            name="objeto_perdido_id"
-            value="<?php echo htmlspecialchars($perdido_id); ?>"
-        >
-
-        <!-- Etiqueta descriptiva vinculada al campo del área de texto para la descripción privada -->
-        <label for="descripcion">
-            Información para verificar la propiedad:
-        </label>
-
-        <!-- Salto de línea estructural -->
-        <br>
-
-        <!-- Campo de entrada multilínea obligatorio donde el usuario escribe los detalles de comprobación -->
-        <textarea
-            id="descripcion"
-            name="descripcion"
-            rows="6"
-            cols="50"
-            required
-        ></textarea>
-
-        <!-- Doble salto de línea para separar el área de texto del botón de envío -->
-        <br><br>
+        <section class="panel-cuenta">
 
 
-        <!-- Botón para enviar el formulario y procesar la solicitud de reclamación -->
-        <button type="submit">
-            Enviar reclamación
-        </button>
+            <!-- Formulario que envía la información mediante el método POST hacia el script backend encargado de la reclamación -->
+            <form action="../backend/reclamar.php" method="POST">
 
-    </form>
+                <!-- Campo oculto que envía el ID del objeto a reclamar escapando caracteres especiales de forma segura -->
+                <input
+                    type="hidden"
+                    name="objeto_id"
+                    value="<?php echo htmlspecialchars($id); ?>"
+                >
 
+                <!-- Campo oculto que envía el ID del objeto perdido de referencia escapando caracteres especiales -->
+                <input
+                    type="hidden"
+                    name="objeto_perdido_id"
+                    value="<?php echo htmlspecialchars($perdido_id); ?>"
+                >
 
-    <!-- Salto de línea previo al enlace de cancelación -->
-    <br>
+                <!-- Etiqueta descriptiva vinculada al campo del área de texto para la descripción privada -->
+                <label for="descripcion">
+                    Información para verificar la propiedad:
+                </label>
 
-    <!-- Enlace de navegación para cancelar la operación y volver a la página principal "index.php" -->
-    <a href="index.php">
-        Cancelar
-    </a>
+                
+                <!-- Campo de entrada multilínea obligatorio donde el usuario escribe los detalles de comprobación -->
+                <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    rows="6"
+                    required
+                ></textarea>
+
+                <div class="acciones-cuenta">
+
+                    <a href="index.php" class="boton-cuenta">
+                        Cancelar
+                    </a>
+
+                    <!-- Botón para enviar el formulario y procesar la solicitud de reclamación -->
+                    <button type="submit">
+                        Enviar reclamación
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+        
+    </main>
 
 <!-- Cierre del cuerpo del documento HTML -->
 </body>

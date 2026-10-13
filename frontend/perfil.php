@@ -190,6 +190,9 @@ if (empty($foto)) {
         href="css/perfil.css"
     >
 
+    <!-- Enlace para entrar al archivo de detalle.css y agregar el estilo de liquid glass -->
+    <link rel="stylesheet" href="css/cuenta.css">
+
 </head>
 
 <!-- Inicio del cuerpo visual de la página -->
