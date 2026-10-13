@@ -1,0 +1,297 @@
+
+/* ======================================
+   FINDERS - DETALLES LIQUID GLASS
+   ====================================== */
+
+body {
+    --texto: #f8fafc;
+    --texto-secundario: #cbd5e1;
+    --borde-vidrio: rgba(255, 255, 255, 0.22);
+
+    margin: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 30px 18px 45px;
+
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: var(--texto);
+
+    background:
+        radial-gradient(ellipse at 10% 10%, #263d66 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, #243b55 0%, transparent 40%),
+        linear-gradient(135deg, #0b1220, #172337 55%, #101827);
+
+    background-attachment: fixed;
+}
+
+/* Contenido centrado */
+body > h1,
+body > img,
+body > p,
+body > hr,
+body > h2,
+body > #coincidencias {
+    width: 100%;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* Enlace para regresar */
+body > a:first-of-type {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    box-sizing: border-box;
+    margin: 0 auto 22px;
+
+    color: #a5f3fc;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: color 0.2s;
+}
+
+body > a:first-of-type:hover {
+    color: #ffffff;
+}
+
+/* Nombre del objeto */
+body > h1 {
+    padding: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    font-size: 27px;
+    line-height: 1.4;
+    text-align: center;
+    overflow-wrap: anywhere;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 22px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+/* Fotografía del objeto */
+body > img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 12px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 20px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Tarjetas con información */
+body > p {
+    padding: 16px 19px;
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+body > p strong {
+    color: #a5f3fc;
+    font-weight: 600;
+}
+
+/* Separador */
+body > hr {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+/* Título de coincidencias */
+body > h2 {
+    padding: 20px;
+    margin-top: 0;
+    margin-bottom: 16px;
+
+    font-size: 20px;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 18px;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Panel de coincidencias */
+body > #coincidencias {
+    padding: 18px;
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 20px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Cada posible coincidencia creada por JavaScript */
+#coincidencias > div {
+    padding: 18px;
+    margin-bottom: 14px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+
+    overflow-wrap: anywhere;
+    transition: background 0.25s, transform 0.25s;
+}
+
+#coincidencias > div:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-2px);
+}
+
+#coincidencias h3 {
+    margin-top: 0;
+    color: #ffffff;
+    font-size: 17px;
+}
+
+#coincidencias p {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#coincidencias a {
+    display: inline-block;
+    margin: 8px 0;
+    padding: 10px 16px;
+
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+
+    border: 1px solid rgba(165, 243, 252, 0.65);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+
+    transition: background 0.25s;
+}
+
+#coincidencias a:hover {
+    background: rgba(165, 243, 252, 0.17);
+}
+
+#coincidencias hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Botones de acciones: reclamación e historial */
+body > a:not(:first-of-type) {
+    text-decoration: none;
+}
+
+body > a button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 8px 8px 8px 0;
+    padding: 12px 20px;
+
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(52, 211, 153, 0.75);
+    border-radius: 999px;
+
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition: background 0.25s, transform 0.25s;
+}
+
+body > a button:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Adaptación para teléfonos */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px 30px;
+    }
+
+    body > h1 {
+        padding: 20px 15px;
+        font-size: 22px;
+    }
+
+    body > p {
+        padding: 14px;
+        font-size: 13px;
+    }
+
+    body > h2 {
+        padding: 16px;
+        font-size: 18px;
+    }
+
+    body > #coincidencias {
+        padding: 12px;
+    }
+
+    body > a button {
+        max-width: 100%;
+        white-space: normal;
+    }
+}
+
+/* Alternativa para navegadores sin desenfoque */
+@supports not (backdrop-filter: blur(10px)) {
+    body > h1,
+    body > p,
+    body > h2,
+    body > #coincidencias,
+    #coincidencias > div {
+        background: #202d40;
+    }
+}
