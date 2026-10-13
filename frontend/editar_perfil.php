@@ -89,6 +89,9 @@ $foto = $usuario['foto'] ?? '';
         href="css/editar_perfil.css"
     >
 
+    <!-- Enlace para entrar al archivo de detalle.css y agregar el estilo de liquid glass -->
+    <link rel="stylesheet" href="css/cuenta.css">
+
 </head>
 
 <body>
