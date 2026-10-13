@@ -94,6 +94,9 @@ $objeto =$objetos[0];
         <?php echo htmlspecialchars($objeto['nombre']); ?>
     </title>
 
+    <!-- Enlace para entrar al archivo de detalle.css y agregar el estilo de liquid glass -->
+    <link rel="stylesheet" href="css/detalle.css">
+
 </head>
 
 <!-- Inicio del cuerpo visible del documento HTML -->
