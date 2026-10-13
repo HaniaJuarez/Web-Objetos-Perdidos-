@@ -15,315 +15,278 @@
 
     <!-- Define el título que aparecerá en la pestaña del navegador -->
     <title>Reportar objeto encontrado</title>
+    
+    <!-- Entrada al archivo reporte.css para agregar el nuevo estilo liquid glass -->
+    <link rel="stylesheet" href="css/reportes.css">
 
 <!-- Finaliza la sección de configuración -->
 </head>
 
 <!-- Inicia el contenido visible de la página -->
-<body>
+<body class="pagina-reporte pagina-encontrado">
+
+    <main class="contenedor-reporte">
+
+        <!-- Inicia el encabezado de la página -->
+        <header class="encabezado-reporte">
+
+            <!-- Muestra el título principal de la página -->
+            <h1>Reportar objeto encontrado</h1>
+
+            <!-- Muestra el subtítulo de la página -->
+            <h2>Registrar objeto encontrado</h2>
+
+            <!-- Muestra una explicación para el usuario -->
+            <p>
+                Completa la información del objeto que encontraste.
+            </p>
+
+        <!-- Finaliza el encabezado -->
+        </header>
+
+
+        <!-- Contenedor del formulario -->
+        <section class="panel-formulario">
+
+            <!-- Inicia el formulario y establece el archivo PHP que procesará los datos -->
+            <form action="../backend/objetos.php" method="POST" enctype="multipart/form-data">
+
+                <!-- Campo oculto que indica que el reporte corresponde a un objeto encontrado -->
+                <input
+                    type="hidden"
+                    name="accion"
+                    value="encontrado"
+                >
+
+                <!-- Etiqueta que identifica el campo del nombre del objeto -->
+                <!-- Nombre -->
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre del objeto:</label>
+
+                    <!-- Campo de texto donde se escribe el nombre del objeto -->
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                    >
+                </div>
+
+                
+                <!-- Etiqueta que identifica el campo de categoría -->
+                <div class="campo-formulario">
+                    <label for="categoria">Categoría:</label>
+
+                    <!-- Crea la lista desplegable para seleccionar una categoría -->
+                    <select
+                        id="categoria"
+                        name="categoria_id"
+                        required
+                    >
+
+                        <!-- Opción inicial para indicar que se debe seleccionar una categoría -->
+                        <option value="">
+                            Selecciona una categoría
+                        </option>
+
+                        <!-- Opción correspondiente a Electrónica -->
+                        <option value="1">
+                            Electrónica
+                        </option>
+
+                        <!-- Opción correspondiente a Documentos -->
+                        <option value="2">
+                            Documentos
+                        </option>
+
+                        <!-- Opción correspondiente a Accesorios -->
+                        <option value="3">
+                            Accesorios
+                        </option>
+
+                        <!-- Opción correspondiente a Ropa -->
+                        <option value="4">
+                            Ropa
+                        </option>
+
+                        <!-- Opción correspondiente a Material escolar -->
+                        <option value="5">
+                            Material escolar
+                        </option>
+
+                        <!-- Opción correspondiente a Otros -->
+                        <option value="6">
+                            Otros
+                        </option>
+
+                    <!-- Finaliza la lista de categorías -->
+                    </select>
+
+                </div>
+
 
-    <!-- Inicia el encabezado de la página -->
-    <header>
+                <!-- Etiqueta que identifica el campo de descripción pública -->
+                <!-- Descripción pública -->
+                <div class="campo-formulario">
+                    <label for="descripcion_publica">
+                        Descripción pública:
+                    </label>
+
+                    <!-- Área de texto para escribir una descripción general del objeto -->
+                    <textarea
+                        id="descripcion_publica"
+                        name="descripcion_publica"
+                        rows="4"
+                        placeholder="Describe el objeto de manera general"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Etiqueta que identifica el campo de descripción privada -->
+                <!-- Descripción privada -->
+                <div class="campo-formulario">
+                    <label for="descripcion_privada">
+                        Descripción privada:
+                    </label>
+
+                    <!-- Área de texto para escribir características privadas del objeto -->
+                    <textarea
+                        id="descripcion_privada"
+                        name="descripcion_privada"
+                        rows="3"
+                        placeholder="Características privadas del objeto"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Etiqueta que identifica el campo del color -->
+                <div class="campo-formulario">
+                    <label for="color">Color:</label>
+
+                    <!-- Campo de texto para escribir el color del objeto -->
+                    <input
+                        type="text"
+                        id="color"
+                        name="color"
+                    >
+                </div>
+
+                <!-- Etiqueta que identifica el campo de fecha -->
+                <div class="campo-formulario">
+                    <label for="fecha">Fecha en que se encontró:</label>
 
-        <!-- Muestra el título principal de la página -->
-        <h1>Reportar objeto encontrado</h1>
+                    <!-- Campo para seleccionar la fecha en que se encontró el objeto -->
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required
+                    >
 
-        <!-- Crea un enlace para regresar a la página principal -->
-        <a href="index.php">
+                </div>
 
-            <!-- Texto que aparece dentro del enlace -->
-            Volver al inicio
 
-        <!-- Finaliza el enlace -->
-        </a>
+                <!-- Etiqueta que identifica el campo de ubicación -->
+                 <div class="campo-formulario">
+                    <label for="ubicacion">Lugar donde se encontró:</label>
 
-    <!-- Finaliza el encabezado -->
-    </header>
+                    <!-- Campo para escribir el lugar donde fue encontrado el objeto -->
+                    <input
+                        type="text"
+                        id="ubicacion"
+                        name="ubicacion"
+                        placeholder="Ejemplo: Salón 204"
+                    >
 
+                </div>
 
-    <!-- Inicia la sección principal de la página -->
-    <main>
 
-        <!-- Muestra el subtítulo de la sección -->
-        <h2>Registrar objeto encontrado</h2>
+                <!-- Etiqueta que identifica el campo del docente responsable -->
+                <div class="campo-formulario">
+                    <label for="responsable">Docente responsable:</label>
 
-        <!-- Muestra una explicación para el usuario -->
-        <p>
-            Completa la información del objeto que encontraste.
-        </p>
+                <!-- Campo para escribir el nombre del docente responsable -->
+                    <input
+                        type="text"
+                        id="responsable"
+                        name="responsable"
+                        placeholder="Nombre del docente"
+                    >
 
+                </div>
 
-        <!-- Inicia el formulario y establece el archivo PHP que procesará los datos -->
-        <form action="../backend/objetos.php" method="POST" enctype="multipart/form-data">
 
-            <!-- Campo oculto que indica que el reporte corresponde a un objeto encontrado -->
-            <input
-                type="hidden"
-                name="accion"
-                value="encontrado"
-            >
+                <!-- Etiqueta que identifica el campo del lugar de resguardo -->
+                <!-- Lugar de resguardo -->
+                <div class="campo-formulario">
+                    <label for="resguardo">Lugar actual de resguardo:</label>
 
-            <!-- Etiqueta que identifica el campo del nombre del objeto -->
-            <label for="nombre">
-                Nombre del objeto:
-            </label>
+                    <!-- Campo para escribir dónde se encuentra actualmente el objeto -->
+                    <input
+                        type="text"
+                        id="resguardo"
+                        name="resguardo"
+                        placeholder="Ejemplo: Coordinación"
+                    >
 
-            <!-- Inserta un salto de línea -->
-            <br>
+                </div>
 
-            <!-- Campo de texto donde se escribe el nombre del objeto -->
-            <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                required
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
 
-            <!-- Etiqueta que identifica el campo de categoría -->
-            <label for="categoria">
-                Categoría:
-            </label>
+                <!-- Etiqueta que identifica el campo para seleccionar una fotografía -->
+                <!-- Fotografía -->
+                <div class="campo-formulario">
+                    <label for="imagen">Fotografía del objeto:</label>
 
-            <!-- Inserta un salto de línea -->
-            <br>
+                    <!-- Campo que permite seleccionar una imagen del objeto -->
+                    <input
+                        type="file"
+                        id="imagen"
+                        name="imagen"
+                        accept="image/*"
+                    >
 
-            <!-- Crea la lista desplegable para seleccionar una categoría -->
-            <select
-                id="categoria"
-                name="categoria_id"
-                required
-            >
-
-                <!-- Opción inicial para indicar que se debe seleccionar una categoría -->
-                <option value="">
-                    Selecciona una categoría
-                </option>
+                </div>
 
-                <!-- Opción correspondiente a Electrónica -->
-                <option value="1">
-                    Electrónica
-                </option>
 
-                <!-- Opción correspondiente a Documentos -->
-                <option value="2">
-                    Documentos
-                </option>
+                <!-- Botones -->
+                <div class="acciones-formulario">
 
-                <!-- Opción correspondiente a Accesorios -->
-                <option value="3">
-                    Accesorios
-                </option>
-
-                <!-- Opción correspondiente a Ropa -->
-                <option value="4">
-                    Ropa
-                </option>
+                    <a
+                        href="index.php"
+                        class="boton-formulario boton-cancelar"
+                    >
+                        Cancelar
+                    </a>
 
-                <!-- Opción correspondiente a Material escolar -->
-                <option value="5">
-                    Material escolar
-                </option>
+                    <button
+                        type="submit"
+                        class="boton-formulario boton-registrar"
+                    >
+                        Registrar
+                    </button>
 
-                <!-- Opción correspondiente a Otros -->
-                <option value="6">
-                    Otros
-                </option>
+                </div>
 
-            <!-- Finaliza la lista de categorías -->
-            </select>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de descripción pública -->
-            <label for="descripcion_publica">
-                Descripción pública:
-            </label>
+            </form>
 
-            <!-- Inserta un salto de línea -->
-            <br>
+        </section>
 
-            <!-- Área de texto para escribir una descripción general del objeto -->
-            <textarea
-                id="descripcion_publica"
-                name="descripcion_publica"
-                rows="4"
-                cols="40"
-                placeholder="Describe el objeto de manera general"
-                required
-            ></textarea>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de descripción privada -->
-            <label for="descripcion_privada">
-                Descripción privada:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Área de texto para escribir características privadas del objeto -->
-            <textarea
-                id="descripcion_privada"
-                name="descripcion_privada"
-                rows="4"
-                cols="40"
-                placeholder="Características privadas del objeto"
-            ></textarea>
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
 
-            <!-- Etiqueta que identifica el campo del color -->
-            <label for="color">
-                Color:
-            </label>
+        <!-- Inicia el pie de página -->
+        <footer>
 
-            <!-- Inserta un salto de línea -->
-            <br>
+            <!-- Inicia un párrafo -->
+            <p>
+                Universidad Veracruzana - Facultad
+            </p>
 
-            <!-- Campo de texto para escribir el color del objeto -->
-            <input
-                type="text"
-                id="color"
-                name="color"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de fecha -->
-            <label for="fecha">
-                Fecha en que se encontró:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo para seleccionar la fecha en que se encontró el objeto -->
-            <input
-                type="date"
-                id="fecha"
-                name="fecha"
-                required
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo de ubicación -->
-            <label for="ubicacion">
-                Lugar donde se encontró:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo para escribir el lugar donde fue encontrado el objeto -->
-            <input
-                type="text"
-                id="ubicacion"
-                name="ubicacion"
-                placeholder="Ejemplo: Salón 204"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo del docente responsable -->
-            <label for="responsable">
-                Docente responsable:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo para escribir el nombre del docente responsable -->
-            <input
-                type="text"
-                id="responsable"
-                name="responsable"
-                placeholder="Nombre del docente"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo del lugar de resguardo -->
-            <label for="resguardo">
-                Lugar actual de resguardo:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo para escribir dónde se encuentra actualmente el objeto -->
-            <input
-                type="text"
-                id="resguardo"
-                name="resguardo"
-                placeholder="Ejemplo: Coordinación"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Etiqueta que identifica el campo para seleccionar una fotografía -->
-            <label for="imagen">
-                Ftografía del objeto:
-            </label>
-
-            <!-- Inserta un salto de línea -->
-            <br>
-
-            <!-- Campo que permite seleccionar una imagen del objeto -->
-            <input
-                type="file"
-                id="imagen"
-                name="imagen"
-                accept="image/*"
-            >
-
-            <!-- Inserta dos saltos de línea -->
-            <br><br>
-
-
-            <!-- Botón que permite enviar el formulario -->
-            <button type="submit">
-                Registrar objeto encontrado
-            </button>
-
-        <!-- Finaliza el formulario -->
-        </form>
-
-    <!-- Finaliza la sección principal -->
+        <!-- Finaliza el párrafo -->
+        </footer>
+        
     </main>
-
-
-    <!-- Inicia el pie de página -->
-    <footer>
-
-        <!-- Inicia un párrafo -->
-        <p>
-            Universidad Veracruzana - Facultad
-        </p>
-
-    <!-- Finaliza el párrafo -->
-    </footer>
 
 <!-- Finaliza el contenido visible de la página -->
 </body>
