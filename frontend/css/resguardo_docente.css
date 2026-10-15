@@ -348,3 +348,342 @@ footer {
 .boton-entrega:hover {
     background-color: #1b5e20;
 }
+
+
+/* ==========================================================
+   FINDERS - OBJETOS EN RESGUARDO
+   LIQUID GLASS
+   ========================================================== */
+
+/* Fondo general */
+
+body {
+    min-height: 100vh;
+    font-family: "Century Gothic", CenturyGothic, sans-serif;
+    color: #f5f7ff;
+    background:
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(83, 103, 177, 0.32),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(91, 71, 147, 0.22),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #10131d, #202638 55%, #10131d);
+}
+
+/* Encabezado y contenido interno */
+
+.encabezado {
+    margin: 20px auto 0;
+    width: 94%;
+    max-width: 1200px;
+    padding: 22px 28px;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.encabezado-contenido {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.encabezado h1 {
+    color: #ffffff;
+    font-size: clamp(23px, 3vw, 30px);
+    font-weight: 600;
+}
+
+.boton-regresar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 16px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.boton-regresar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Contenedor principal */
+
+.contenedor {
+    width: 94%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0;
+}
+
+/* Introducción */
+
+.introduccion {
+    margin-bottom: 25px;
+    padding: 23px;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 21px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.introduccion h2 {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.introduccion p {
+    color: rgba(245, 247, 255, 0.75);
+    line-height: 1.8;
+}
+
+/* Cuadrícula de objetos */
+
+.lista-objetos {
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 22px;
+}
+
+/* Tarjeta de objeto */
+
+.tarjeta-objeto {
+    min-width: 0;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 21px;
+    overflow: hidden;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.tarjeta-objeto:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.11);
+}
+
+/* Imagen del objeto */
+
+.imagen-contenedor {
+    height: 220px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.imagen-contenedor img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sin-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    color: rgba(245, 247, 255, 0.58);
+    background: rgba(255, 255, 255, 0.04);
+    text-align: center;
+    padding: 15px;
+}
+
+/* Información del objeto */
+
+.informacion-objeto {
+    padding: 22px;
+}
+
+.informacion-objeto h3 {
+    margin-top: 0;
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.informacion-objeto p {
+    margin: 10px 0;
+    color: rgba(245, 247, 255, 0.77);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* Estado del objeto */
+
+.estado {
+    display: inline-block;
+    padding: 7px 12px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.11);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    font-size: 12px;
+}
+
+/* Botones de objeto */
+
+.botones-objeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.botones-objeto a {
+    text-decoration: none;
+}
+
+.boton-detalles,
+.boton-entrega {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    min-height: 42px;
+    padding: 11px 14px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: center;
+    overflow-wrap: anywhere;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.boton-detalles {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.boton-entrega {
+    background: rgba(46, 125, 50, 0.78);
+}
+
+.boton-detalles:hover,
+.boton-entrega:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+/* Mensajes y estados vacíos */
+
+.mensaje {
+    padding: 28px;
+    color: #f5f7ff;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.mensaje h3 {
+    color: #ffffff;
+}
+
+.mensaje p {
+    color: rgba(245, 247, 255, 0.75);
+    line-height: 1.7;
+}
+
+.error {
+    color: #ffaaaa;
+}
+
+/* Pie de página */
+
+footer {
+    margin-top: auto;
+    padding: 25px 16px;
+    color: rgba(245, 247, 255, 0.5);
+    text-align: center;
+    background: transparent;
+}
+
+footer p {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Accesibilidad */
+
+.boton-regresar:focus-visible,
+.boton-detalles:focus-visible,
+.boton-entrega:focus-visible {
+    outline: 2px solid #c6d3ff;
+    outline-offset: 3px;
+}
+
+/* Diseño adaptable */
+
+@media (max-width: 650px) {
+    .encabezado {
+        width: 92%;
+        padding: 19px;
+        border-radius: 19px;
+    }
+
+    .encabezado-contenido {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .contenedor {
+        width: 92%;
+        margin-top: 22px;
+    }
+
+    .introduccion {
+        padding: 19px;
+    }
+
+    .lista-objetos {
+        grid-template-columns: 1fr;
+        gap: 17px;
+    }
+
+    .informacion-objeto {
+        padding: 19px;
+    }
+
+    .botones-objeto {
+        flex-direction: column;
+    }
+
+    .boton-detalles,
+    .boton-entrega {
+        width: 100%;
+    }
+}

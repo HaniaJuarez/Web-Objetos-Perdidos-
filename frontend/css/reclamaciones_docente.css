@@ -429,3 +429,286 @@ footer {
 
     opacity: 0.85;
 }
+
+
+/* ==========================================================
+   FINDERS - RECLAMACIONES DOCENTE
+   LIQUID GLASS
+   ========================================================== */
+
+/* Fondo general */
+
+body {
+    min-height: 100vh;
+    font-family: "Century Gothic", CenturyGothic, sans-serif;
+    color: #f5f7ff;
+    background:
+        radial-gradient(
+            circle at 12% 8%,
+            rgba(83, 103, 177, 0.32),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(91, 71, 147, 0.22),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #10131d, #202638 55%, #10131d);
+}
+
+/* Encabezado */
+
+.encabezado {
+    margin: 20px auto 0;
+    width: 94%;
+    max-width: 1200px;
+    padding: 24px 28px;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.encabezado h1 {
+    color: #ffffff;
+    font-size: clamp(23px, 3vw, 31px);
+    font-weight: 600;
+}
+
+.encabezado p {
+    color: rgba(245, 247, 255, 0.72);
+    line-height: 1.7;
+}
+
+.encabezado a {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 11px 16px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.encabezado a:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Contenedor principal */
+
+.contenedor {
+    width: 94%;
+    max-width: 1200px;
+    margin: 30px auto 45px;
+}
+
+/* Tarjetas de reclamación */
+
+.reclamacion {
+    margin-bottom: 22px;
+    padding: 25px;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 22px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.reclamacion:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: translateY(-2px);
+}
+
+.reclamacion h2 {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.reclamacion p {
+    color: rgba(245, 247, 255, 0.82);
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Divisiones internas */
+
+.seccion {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.seccion h3 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Datos de alumno, objeto y reclamación */
+
+.datos {
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 14px;
+}
+
+.dato {
+    min-width: 0;
+    padding: 16px;
+    color: #f5f7ff;
+    background: rgba(255, 255, 255, 0.065);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+    overflow-wrap: anywhere;
+}
+
+.dato strong {
+    color: rgba(245, 247, 255, 0.68);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dato p,
+.dato span {
+    color: #ffffff;
+    line-height: 1.7;
+}
+
+/* Estado de la reclamación */
+
+.estado {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 7px 13px;
+    font-size: 12px;
+}
+
+/* Fotografías */
+
+.foto {
+    display: block;
+    max-width: min(100%, 320px);
+    max-height: 280px;
+    margin-top: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+/* Descripción privada: mantener una superficie legible */
+
+.descripcion-privada {
+    padding: 17px;
+    color: #ffffff;
+    background: rgba(143, 158, 210, 0.13);
+    border: 1px solid rgba(176, 190, 235, 0.28);
+    border-radius: 15px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Mensajes sin datos */
+
+.sin-datos {
+    padding: 20px;
+    color: rgba(245, 247, 255, 0.75);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+}
+
+/* Acciones de cada reclamación */
+
+.acciones-reclamacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.boton-aprobar,
+.boton-rechazar {
+    min-height: 43px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 13px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.boton-aprobar {
+    background: rgba(46, 125, 50, 0.78);
+}
+
+.boton-rechazar {
+    background: rgba(198, 40, 40, 0.78);
+}
+
+.boton-aprobar:hover,
+.boton-rechazar:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+}
+
+.boton-aprobar:focus-visible,
+.boton-rechazar:focus-visible,
+.encabezado a:focus-visible {
+    outline: 2px solid #c6d3ff;
+    outline-offset: 3px;
+}
+
+/* Pie de página */
+
+footer {
+    color: rgba(245, 247, 255, 0.5);
+    padding: 25px 16px;
+}
+
+/* Diseño adaptable */
+
+@media (max-width: 600px) {
+    .encabezado {
+        width: 92%;
+        padding: 20px;
+        border-radius: 19px;
+    }
+
+    .contenedor {
+        width: 92%;
+        margin-top: 22px;
+    }
+
+    .reclamacion {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .datos {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-reclamacion {
+        flex-direction: column;
+    }
+
+    .boton-aprobar,
+    .boton-rechazar {
+        width: 100%;
+    }
+}
