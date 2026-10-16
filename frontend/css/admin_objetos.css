@@ -500,3 +500,285 @@ footer {
     }
 
 }
+
+
+/* ============================================================
+   LIQUID GLASS - ADMINISTRACIÓN DE OBJETOS
+   Descripción:
+   Moderniza la apariencia de las tarjetas, imágenes, filtros
+   y botones sin modificar la lógica ni las funciones del sistema.
+   ============================================================ */
+
+/* Fondo general y tipografía */
+:root {
+    color-scheme: dark;
+}
+
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: #f4f7ff;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(90, 120, 255, 0.20), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(80, 220, 210, 0.14), transparent 32%),
+        linear-gradient(135deg, #080d1b, #111a30 55%, #080d18);
+    min-height: 100vh;
+}
+
+/* Tipografía para controles */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+/* Encabezado */
+.encabezado {
+    background: rgba(15, 22, 40, 0.72);
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.encabezado h1 {
+    color: #ffffff;
+}
+
+.encabezado p {
+    color: #bdc8dd;
+}
+
+/* Botón del encabezado */
+.boton {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Resumen general */
+.resumen {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.resumen h2,
+.resumen strong {
+    color: #ffffff;
+}
+
+/* Panel de filtros */
+.filtros {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.campo label {
+    color: #e1e8f5;
+}
+
+/* Campos de búsqueda y selectores */
+.campo input,
+.campo select {
+    background: rgba(7, 13, 28, 0.75);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input::placeholder {
+    color: #9aa8bf;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: rgba(120, 160, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(100, 140, 255, 0.15);
+}
+
+.campo select option {
+    background: #111a30;
+    color: #f4f7ff;
+}
+
+/* Botón secundario */
+.boton-secundario {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-secundario:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Cuadrícula de objetos */
+.grid-objetos {
+    gap: 20px;
+}
+
+/* Tarjetas de objetos */
+.tarjeta-objeto {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-objeto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+/* Área de las imágenes */
+.imagen {
+    background: rgba(7, 13, 28, 0.65);
+}
+
+/* Mantiene el tamaño y el ajuste de las fotografías */
+.imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mensaje cuando un objeto no tiene imagen */
+.sin-imagen {
+    background: rgba(255, 255, 255, 0.04);
+    color: #bdc8dd;
+}
+
+/* Información textual del objeto */
+.informacion {
+    color: #e8eefb;
+}
+
+.informacion h3 {
+    color: #ffffff;
+}
+
+.informacion p {
+    color: #c5d0e3;
+}
+
+/* Descripción del objeto */
+.descripcion {
+    color: #bdc8dd;
+    border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Etiqueta de estado */
+.estado {
+    background: rgba(140, 160, 210, 0.16);
+    color: #e4ecff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+}
+
+/* Contenedor de los botones de cada objeto */
+.botones-objeto {
+    gap: 10px;
+}
+
+/* Botones para ver el objeto y su historial */
+.boton-ver,
+.boton-historial {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-ver {
+    background: rgba(100, 140, 255, 0.22);
+    color: #e4ecff;
+}
+
+.boton-ver:hover {
+    background: rgba(100, 140, 255, 0.34);
+    transform: translateY(-2px);
+}
+
+.boton-historial {
+    background: rgba(255, 255, 255, 0.09);
+    color: #f4f7ff;
+}
+
+.boton-historial:hover {
+    background: rgba(255, 255, 255, 0.17);
+    transform: translateY(-2px);
+}
+
+/* Mensaje cuando no existen objetos */
+.sin-resultados {
+    background: rgba(255, 255, 255, 0.07);
+    color: #bdc8dd;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.sin-resultados h3 {
+    color: #ffffff;
+}
+
+/* Pie de página */
+footer {
+    background: rgba(15, 22, 40, 0.72);
+    color: #bdc8dd;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Ajustes visuales para móviles */
+@media (max-width: 700px) {
+    .resumen,
+    .filtros,
+    .tarjeta-objeto,
+    .sin-resultados {
+        border-radius: 16px;
+    }
+
+    .botones-objeto {
+        flex-direction: column;
+    }
+
+    .boton-ver,
+    .boton-historial {
+        text-align: center;
+    }
+}
