@@ -622,3 +622,328 @@ footer {
     }
 
 }
+
+
+/* ============================================================
+   LIQUID GLASS - HISTORIAL DE MOVIMIENTOS
+   Descripción:
+   Aplica un estilo de cristal translúcido al historial sin
+   cambiar las funciones, los datos ni la estructura HTML.
+   ============================================================ */
+
+/* Fondo general y tipografía */
+:root {
+    color-scheme: dark;
+}
+
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: #f4f7ff;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(90, 120, 255, 0.20), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(80, 220, 210, 0.14), transparent 32%),
+        linear-gradient(135deg, #080d1b, #111a30 55%, #080d18);
+    min-height: 100vh;
+}
+
+/* Tipografía de controles */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+/* Encabezado */
+.encabezado {
+    background: rgba(15, 22, 40, 0.72);
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.encabezado h1 {
+    color: #ffffff;
+}
+
+.encabezado p {
+    color: #bdc8dd;
+}
+
+/* Botón para regresar */
+.boton-regresar {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-regresar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Títulos y contador */
+.titulo-seccion h2,
+.contenedor h2 {
+    color: #f4f7ff;
+}
+
+#contador-resultados {
+    color: #bdc8dd;
+}
+
+/* Tarjetas de resumen */
+.tarjeta-resumen {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-resumen:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+.tarjeta-resumen .numero {
+    color: #ffffff;
+}
+
+.tarjeta-resumen .texto {
+    color: #bdc8dd;
+}
+
+/* Colores de las métricas */
+.tarjeta-resumen.resguardo {
+    border-top: 4px solid #f0ad4e;
+}
+
+.tarjeta-resumen.recuperado {
+    border-top: 4px solid #4caf50;
+}
+
+/* Panel de filtros */
+.filtros {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.campo label {
+    color: #e1e8f5;
+}
+
+/* Campos de búsqueda */
+.campo input,
+.campo select {
+    background: rgba(7, 13, 28, 0.75);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input::placeholder {
+    color: #9aa8bf;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: rgba(120, 160, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(100, 140, 255, 0.15);
+}
+
+.campo select option {
+    background: #111a30;
+    color: #f4f7ff;
+}
+
+/* Botón para limpiar filtros */
+#limpiar-filtros {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#limpiar-filtros:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Tarjetas de movimientos */
+.tarjeta-movimiento {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-movimiento:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+/* Cabecera de cada movimiento */
+.cabecera-movimiento {
+    border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.cabecera-movimiento h3 {
+    color: #ffffff;
+}
+
+/* Identificador del movimiento */
+.id-movimiento {
+    background: rgba(140, 160, 210, 0.16);
+    color: #e4ecff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+}
+
+/* Etiquetas de estado */
+.estado {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.estado-en-resguardo {
+    background: rgba(240, 173, 78, 0.16);
+    color: #ffdb91;
+    border-color: rgba(240, 173, 78, 0.35);
+}
+
+.estado-recuperado {
+    background: rgba(76, 175, 80, 0.16);
+    color: #a8efb0;
+    border-color: rgba(76, 175, 80, 0.35);
+}
+
+/* Transición entre estados */
+.cambio-estado span {
+    background: rgba(140, 160, 210, 0.16);
+    color: #e4ecff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+}
+
+.cambio-estado strong {
+    color: #bdc8dd;
+}
+
+/* Datos de cada movimiento */
+.datos-movimiento > div {
+    background: rgba(7, 13, 28, 0.48);
+    color: #c5d0e3;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+}
+
+.datos-movimiento strong {
+    color: #ffffff;
+}
+
+/* Descripción del movimiento */
+.descripcion {
+    background: rgba(7, 13, 28, 0.48);
+    color: #c5d0e3;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+}
+
+.descripcion p {
+    color: #c5d0e3;
+}
+
+/* Separador de las acciones */
+.acciones {
+    border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Botones de la tarjeta */
+.boton {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+.boton.secundario {
+    background: rgba(140, 160, 210, 0.16);
+    color: #e4ecff;
+}
+
+.boton.secundario:hover {
+    background: rgba(140, 160, 210, 0.25);
+}
+
+/* Mensaje cuando no existen movimientos */
+.mensaje-vacio {
+    background: rgba(255, 255, 255, 0.07);
+    color: #bdc8dd;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.mensaje-vacio h3 {
+    color: #ffffff;
+}
+
+/* Pie de página */
+footer {
+    background: rgba(15, 22, 40, 0.72);
+    color: #bdc8dd;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Ajustes para móviles */
+@media (max-width: 650px) {
+    .tarjeta-resumen,
+    .filtros,
+    .tarjeta-movimiento,
+    .mensaje-vacio {
+        border-radius: 16px;
+    }
+
+    .acciones {
+        flex-wrap: wrap;
+    }
+
+    .boton {
+        text-align: center;
+    }
+}
