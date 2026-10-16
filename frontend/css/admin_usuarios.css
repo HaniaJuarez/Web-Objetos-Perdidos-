@@ -463,3 +463,253 @@ footer {
     }
 
 }
+
+
+/* ============================================================
+   LIQUID GLASS - GESTIÓN DE USUARIOS
+   ============================================================ */
+
+/* Tipografía y fondo general */
+:root {
+    color-scheme: dark;
+}
+
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: #f4f7ff;
+
+    background:
+        radial-gradient(circle at 15% 15%, rgba(90, 120, 255, 0.20), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(80, 220, 210, 0.14), transparent 32%),
+        linear-gradient(135deg, #080d1b, #111a30 55%, #080d18);
+
+    min-height: 100vh;
+}
+
+/* Tipografía para controles */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+/* Encabezado de cristal */
+.encabezado {
+    background: rgba(15, 22, 40, 0.68);
+    color: #ffffff;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.encabezado h1 {
+    color: #ffffff;
+}
+
+.encabezado p {
+    color: #bdc8dd;
+}
+
+/* Botón de regreso */
+.boton {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Tarjetas de resumen y filtros */
+.resumen,
+.filtros,
+.tabla-contenedor {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Texto del resumen */
+.resumen h2,
+.resumen p,
+.resumen strong {
+    color: #f4f7ff;
+}
+
+/* Tarjetas individuales de roles */
+.resumen-roles div {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f4f7ff;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+}
+
+.resumen-roles span,
+.resumen-roles strong {
+    color: #f4f7ff;
+}
+
+/* Etiquetas de los filtros */
+.campo label {
+    color: #e1e8f5;
+}
+
+/* Campos de búsqueda y listas */
+.campo input,
+.campo select {
+    background: rgba(7, 13, 28, 0.65);
+    color: #f4f7ff;
+
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo input::placeholder {
+    color: #8e9bb3;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: rgba(120, 160, 255, 0.85);
+
+    box-shadow: 0 0 0 3px rgba(100, 140, 255, 0.15);
+}
+
+/* Botón para limpiar filtros */
+.boton-secundario {
+    background: rgba(255, 255, 255, 0.10);
+    color: #f4f7ff;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.boton-secundario:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Tabla de usuarios */
+table {
+    color: #e8eefb;
+    border-collapse: collapse;
+}
+
+/* Encabezados de la tabla */
+thead {
+    background: rgba(100, 125, 190, 0.22);
+    color: #ffffff;
+}
+
+th,
+td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+th {
+    color: #ffffff;
+}
+
+/* Efecto al pasar el cursor por una fila */
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Información de usuarios */
+.usuario {
+    color: #f4f7ff;
+}
+
+/* Avatar cuando no hay fotografía */
+.avatar {
+    background: rgba(105, 130, 210, 0.30);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+/* Etiquetas de roles */
+.rol {
+    background: rgba(130, 155, 210, 0.18);
+    color: #e4ecff;
+
+    border: 1px solid rgba(180, 200, 255, 0.18);
+    border-radius: 8px;
+}
+
+/* Mensaje cuando no hay resultados */
+.sin-resultados {
+    color: #bdc8dd;
+}
+
+.sin-resultados h3 {
+    color: #ffffff;
+}
+
+/* Pie de página */
+footer {
+    background: rgba(15, 22, 40, 0.68);
+    color: #bdc8dd;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Tabla adaptable en móviles */
+@media (max-width: 700px) {
+    .resumen,
+    .filtros,
+    .tabla-contenedor {
+        border-radius: 16px;
+    }
+
+    .tabla-contenedor {
+        padding: 12px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}
