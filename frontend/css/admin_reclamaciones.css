@@ -638,3 +638,348 @@ footer {
     }
 
 }
+
+
+/* ============================================================
+   LIQUID GLASS - ADMINISTRACIÓN DE RECLAMACIONES
+   Descripción:
+   Actualiza la apariencia visual sin modificar la lógica PHP,
+   los formularios, los filtros ni los estados de reclamación.
+   ============================================================ */
+
+/* Fondo general y tipografía */
+:root {
+    color-scheme: dark;
+}
+
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: #f4f7ff;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(90, 120, 255, 0.20), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(80, 220, 210, 0.14), transparent 32%),
+        linear-gradient(135deg, #080d1b, #111a30 55%, #080d18);
+    min-height: 100vh;
+}
+
+/* Unifica la tipografía de los controles */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+/* Encabezado translúcido */
+.encabezado {
+    background: rgba(15, 22, 40, 0.72);
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.encabezado h1 {
+    color: #ffffff;
+}
+
+.encabezado p {
+    color: #bdc8dd;
+}
+
+/* Botón para regresar al panel */
+.boton-regresar {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-regresar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Títulos y contador de resultados */
+.titulo-seccion h2,
+.contenedor h2 {
+    color: #f4f7ff;
+}
+
+#contador-resultados {
+    color: #bdc8dd;
+}
+
+/* Tarjetas de métricas */
+.tarjeta-resumen {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-resumen:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+.tarjeta-resumen .numero {
+    color: #ffffff;
+}
+
+.tarjeta-resumen .texto {
+    color: #bdc8dd;
+}
+
+/* Conserva los colores identificadores de cada estado */
+.tarjeta-resumen.pendiente {
+    border-top: 4px solid #f0ad4e;
+}
+
+.tarjeta-resumen.aprobada {
+    border-top: 4px solid #4caf50;
+}
+
+.tarjeta-resumen.rechazada {
+    border-top: 4px solid #ef6268;
+}
+
+.tarjeta-resumen.cerrada {
+    border-top: 4px solid #78909c;
+}
+
+/* Panel de filtros */
+.filtros {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.22),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.campo label {
+    color: #e1e8f5;
+}
+
+/* Campos de búsqueda y selectores */
+.campo input,
+.campo select {
+    background: rgba(7, 13, 28, 0.75);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input::placeholder {
+    color: #9aa8bf;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: rgba(120, 160, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(100, 140, 255, 0.15);
+}
+
+/* Opciones de los selectores */
+.campo select option {
+    background: #111a30;
+    color: #f4f7ff;
+}
+
+/* Botón para limpiar filtros */
+.boton-limpiar {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-limpiar:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Tarjetas individuales de reclamación */
+.tarjeta-reclamacion {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f4f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-reclamacion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+}
+
+/* Separador de la cabecera de cada reclamación */
+.cabecera-reclamacion {
+    border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.cabecera-reclamacion h3 {
+    color: #ffffff;
+}
+
+/* Folio o número de reclamación */
+.etiqueta-ticket {
+    background: rgba(140, 160, 210, 0.16);
+    color: #e4ecff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+}
+
+/* Etiquetas de estado */
+.estado {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.estado-pendiente {
+    background: rgba(240, 173, 78, 0.16);
+    color: #ffdb91;
+    border-color: rgba(240, 173, 78, 0.35);
+}
+
+.estado-aprobada {
+    background: rgba(76, 175, 80, 0.16);
+    color: #a8efb0;
+    border-color: rgba(76, 175, 80, 0.35);
+}
+
+.estado-rechazada {
+    background: rgba(229, 57, 53, 0.16);
+    color: #ffb3b3;
+    border-color: rgba(229, 57, 53, 0.35);
+}
+
+.estado-cerrada {
+    background: rgba(120, 144, 156, 0.18);
+    color: #d3e0e7;
+    border-color: rgba(160, 180, 195, 0.28);
+}
+
+/* Bloques de información */
+.bloque {
+    background: rgba(7, 13, 28, 0.48);
+    color: #e8eefb;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+}
+
+.bloque h4 {
+    color: #ffffff;
+}
+
+.bloque p {
+    color: #c5d0e3;
+}
+
+/* Enlaces de cada reclamación */
+.enlace {
+    color: #8ecbff;
+}
+
+.enlace:hover {
+    color: #c1e4ff;
+}
+
+/* Descripción enviada por el usuario */
+.descripcion {
+    background: rgba(7, 13, 28, 0.48);
+    color: #e8eefb;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+}
+
+.descripcion h4 {
+    color: #ffffff;
+}
+
+.descripcion p {
+    color: #c5d0e3;
+}
+
+/* Información del docente responsable */
+.docente-info {
+    color: #bdc8dd;
+    border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Botones de acción */
+.boton-secundario {
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-secundario:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Mensaje cuando no existen reclamaciones */
+.mensaje-vacio {
+    background: rgba(255, 255, 255, 0.07);
+    color: #bdc8dd;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.mensaje-vacio h3 {
+    color: #ffffff;
+}
+
+/* Pie de página */
+footer {
+    background: rgba(15, 22, 40, 0.72);
+    color: #bdc8dd;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Ajustes visuales para móviles */
+@media (max-width: 650px) {
+    .tarjeta-resumen,
+    .filtros,
+    .tarjeta-reclamacion,
+    .mensaje-vacio {
+        border-radius: 16px;
+    }
+
+    .acciones {
+        flex-wrap: wrap;
+    }
+
+    .boton-secundario {
+        text-align: center;
+    }
+}
