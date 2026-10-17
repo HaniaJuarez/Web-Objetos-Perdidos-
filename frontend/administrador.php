@@ -61,6 +61,28 @@ function consultarSupabase($url)
 
     // Retorna un arreglo vacío si la conexión o lectura fallaron.
     if ($response === false) {
+        error_log("Error de conexión al consultar Supabase: " . $url);
+        return [];
+    }
+
+    // Obtiene el código HTTP de la respuesta.
+    $codigoHTTP = 0;
+
+    if (isset($http_response_header)) {
+        foreach ($http_response_header as $header) {
+            if (preg_match('/^HTTP\/\S+\s+(\d+)/i', $header, $coincidencias)) {
+                $codigoHTTP = (int) $coincidencias[1];
+            }
+        }
+    }
+
+    // Registra errores HTTP para poder diagnosticarlos.
+    if ($codigoHTTP < 200 || $codigoHTTP >= 300) {
+        error_log(
+            "Supabase respondió HTTP " . $codigoHTTP .
+            ". URL consultada: " . $url .
+            ". Respuesta: " . $response
+        );
         return [];
     }
 
@@ -69,6 +91,7 @@ function consultarSupabase($url)
 
     // Si el resultado no es un arreglo válido, devuelve un arreglo vacío.
     if (!is_array($datos)) {
+        error_log("Supabase devolvió una respuesta JSON no válida.");
         return [];
     }
 
@@ -185,10 +208,7 @@ foreach ($reclamaciones as $reclamacion) {
         $total_aprobadas++;
     } elseif ($estado === 'rechazada') {
         $total_rechazadas++;
-    } elseif (
-        $estado === 'cerrada' ||
-        $estado === 'cerrada '
-    ) {
+    } elseif ($estado === 'cerrada') {
         $total_cerradas++;
     }
 }
