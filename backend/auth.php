@@ -114,19 +114,46 @@ if ($accion === 'login') {
         exit;
     }
 
+    // Guardar los datos del usuario autenticado en la sesión.
     $_SESSION['usuario_id'] = $usuario['id'];
     $_SESSION['nombre'] = $usuario['nombre'];   
     $_SESSION['correo'] = $usuario['correo'];
-    $_SESSION['rol'] = $usuario['rol'];
+    //$_SESSION['rol'] = $usuario['rol'];
+    $_SESSION['rol'] = strtolower(trim($usuario['rol'] ?? ''));
     $_SESSION['foto'] = $usuario['foto'] ?? '';
 
     //echo "Inicio de sesión correcto.<br>";
     //echo "Bienvenido, " . htmlspecialchars($usuario['nombre']) . "<br>";
     //echo "Rol: " . htmlspecialchars($usuario['rol']);
 
-    header("Location: ../frontend/index.php");
+    //header("Location: ../frontend/index.php");
+    //exit;
 
-    exit;
+    // Regenerar el identificador de sesión por seguridad.
+    session_regenerate_id(true);
+
+    // Redirigir al usuario según el rol registrado en Supabase.
+    switch ($_SESSION['rol']) {
+        case 'administrador':
+            header("Location: ../frontend/administrador.php");
+            exit;
+
+        case 'docente':
+            header("Location: ../frontend/docente.php");
+            exit;
+
+        case 'alumno':
+            header("Location: ../frontend/index.php");
+            exit;
+
+        default:
+            // Si el rol no es reconocido, cerrar la sesión y mostrar un error.
+            $_SESSION = [];
+            session_destroy();
+
+            header("Location: ../frontend/login.html");
+            exit;
+    }
 }
 
 echo "Acción no reconocida.";
