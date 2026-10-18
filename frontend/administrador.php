@@ -226,46 +226,6 @@ $historial = consultarSupabase(
 // Cuenta el total de movimientos/eventos registrados en el historial del sistema.
 $total_movimientos = count($historial);
 
-// ============================================================
-// DIAGNÓSTICO TEMPORAL DEL PANEL DE ADMINISTRACIÓN
-// ============================================================
-
-echo '<div style="
-    position: relative;
-    z-index: 99999;
-    margin: 20px;
-    padding: 20px;
-    background: #ffffff;
-    color: #111111;
-    border: 3px solid #e67e22;
-    border-radius: 10px;
-    font-family: monospace;
-">';
-
-echo '<h2>Diagnóstico de datos</h2>';
-
-echo '<pre>';
-echo 'Usuarios recibidos: ' . count($usuarios) . "\n";
-echo 'Alumnos: ' . $total_alumnos . "\n";
-echo 'Docentes: ' . $total_docentes . "\n";
-echo 'Administradores: ' . $total_administradores . "\n\n";
-
-echo 'Objetos recibidos: ' . count($objetos) . "\n";
-echo 'Perdidos: ' . $total_perdidos . "\n";
-echo 'Encontrados: ' . $total_encontrados . "\n";
-echo 'En resguardo: ' . $total_resguardo . "\n";
-echo 'Recuperados: ' . $total_recuperados . "\n\n";
-
-echo 'Reclamaciones recibidas: ' . count($reclamaciones) . "\n";
-echo 'Pendientes: ' . $total_pendientes . "\n";
-echo 'Aprobadas: ' . $total_aprobadas . "\n";
-echo 'Rechazadas: ' . $total_rechazadas . "\n";
-echo 'Cerradas: ' . $total_cerradas . "\n\n";
-
-echo 'Movimientos recibidos: ' . count($historial) . "\n";
-echo '</pre>';
-
-echo '</div>';
 
 ?>
 
