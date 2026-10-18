@@ -91,11 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Procesa cada elemento numérico para animar su conteo desde 0 hasta el valor final.
     numeros.forEach(numero => {
 
-        // Lee la meta-información 'data-valor' del elemento HTML y la convierte a número entero.
-        const valorFinal =
-            parseInt(
-                numero.dataset.valor
-            ) || 0;
+        // Si existe data-valor, utiliza ese valor.
+        // Si no existe, recupera el número que PHP ya imprimió.
+        const textoInicial = numero.textContent.trim();
+
+        const valorAtributo = numero.getAttribute("data-valor");
+
+        const valorFinal = valorAtributo !== null
+            ? parseInt(valorAtributo, 10)
+            : parseInt(textoInicial, 10);
+
+        // Si no se encuentra un número válido, no modifica el elemento.
+        if (Number.isNaN(valorFinal)) {
+            return;
+        }
 
         // Inicializa el contador del valor progresivo en 0.
         let valorActual = 0;
@@ -108,43 +117,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     valorFinal / 20
                 )
             );
+        
+        // Si el valor final es cero, lo muestra inmediatamente.
+        if (valorFinal === 0) {
+            numero.textContent = "0";
+            return;
+        }
 
         // Define el intervalo de tiempo repetitivo (30 ms) para simular el conteo animado.
-        const intervalo =
-            setInterval(() => {
+        const intervalo = setInterval(() => {
 
-                // Suma el valor del incremento al contador actual en cada paso.
-                valorActual += incremento;
+            valorActual += incremento;
 
-                // Si el contador actual alcanza o supera el valor meta deseado:
-                if (
-                    valorActual >=
-                    valorFinal
-                ) {
+            if (valorActual >= valorFinal) {
+                valorActual = valorFinal;
+                clearInterval(intervalo);
+            }
 
-                    // Ajusta el valor final exacto para no sobrepasarlo.
-                    valorActual =
-                        valorFinal;
+            numero.textContent = valorActual;
 
-                    // Cancela el temporizador del intervalo actual.
-                    clearInterval(
-                        intervalo
-                    );
-
-                }
-
-                // Actualiza el texto visible del elemento en el DOM con el número progresivo.
-                numero.textContent =
-                    valorActual;
-
-            }, 30);
-
-        // Caso especial: Si la métrica es igual a cero, asegura el valor inmediato sin esperar intervalo.
-        if (valorFinal === 0) {
-
-            numero.textContent = "0";
-
-        }
+        }, 30);
 
     });
 
