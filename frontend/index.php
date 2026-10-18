@@ -34,7 +34,9 @@ if (!isset($_SESSION['usuario_id'])) {
         <div class="header-superior">
 
             <div>
-                <h1>Finders</h1>
+                <a href="index.php" class="logo-inicio">
+                    <h1>Finders</h1>
+                </a>
             </div>
 
             
