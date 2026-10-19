@@ -89,9 +89,7 @@ if ($accion === 'registro') {
                 "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
                 "Content-Type: application/json\r\n" .
                 "Prefer: return=representation\r\n",
-            'content' => json_encode($datos)
-            'ignore_errors' => true,
-            'timeout' => 15
+            'content' => json_encode($datos)            
         ]
     ];
 
