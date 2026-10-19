@@ -114,6 +114,23 @@ if ($accion === 'login') {
         exit;
     }
 
+    // Validar el correo de los alumnos.
+// Los docentes y administradores no tienen esta restricción.
+$rolUsuario = strtolower(trim($usuario['rol'] ?? ''));
+$correoUsuario = strtolower(trim($usuario['correo'] ?? ''));
+
+if ($rolUsuario === 'alumno') {
+
+    // Formato permitido: zs + 8 dígitos + dominio institucional.
+    $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
+
+    if (!preg_match($patronAlumno, $correoUsuario)) {
+        echo "Acceso denegado: los alumnos deben utilizar su correo "
+           . "institucional con el formato zs12345678@estudiantes.uv.mx.";
+        exit;
+    }
+}
+
     // Guardar los datos del usuario autenticado en la sesión.
     $_SESSION['usuario_id'] = $usuario['id'];
     $_SESSION['nombre'] = $usuario['nombre'];   
