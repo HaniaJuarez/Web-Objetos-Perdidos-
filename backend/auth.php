@@ -17,8 +17,11 @@ $accion = $_POST['accion'] ?? '';
 
 if ($accion === 'registro') {
 
-    $nombre = $_POST['nombre'] ?? '';
-    $correo = $_POST['correo'] ?? '';
+    //$nombre = $_POST['nombre'] ?? '';
+    //$correo = $_POST['correo'] ?? '';
+    // Obtener y limpiar los datos del formulario.
+    $nombre = trim($_POST['nombre'] ?? '');
+    $correo = strtolower(trim($_POST['correo'] ?? ''));
     $password = $_POST['password'] ?? '';
 
     if (empty($nombre) || empty($correo) || empty($password)) {
@@ -26,6 +29,47 @@ if ($accion === 'registro') {
         exit;
     }
 
+    // Validar el nombre.
+    if (mb_strlen($nombre) > 50) {
+        echo "El nombre no debe superar los 50 caracteres.";
+        exit;
+    }
+
+    // Validar que el correo tenga un formato válido.
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        echo "Ingresa un correo electrónico válido.";
+        exit;
+    }
+
+    // Validar el nombre.
+    if (mb_strlen($nombre) > 100) {
+        echo "El nombre no debe superar los 100 caracteres.";
+        exit;
+    }
+
+    // Validar que el correo tenga un formato válido.
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        echo "Ingresa un correo electrónico válido.";
+        exit;
+    }
+
+    // Permitir únicamente correos institucionales de alumnos.
+    // Formato: zs + ocho dígitos + @estudiantes.uv.mx
+    $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
+
+    if (!preg_match($patronAlumno, $correo)) {
+        echo "No se pudo crear la cuenta. Debes utilizar tu correo "
+           . "institucional con el formato zs12345678@estudiantes.uv.mx.";
+        exit;
+    }
+
+    // Validar la longitud mínima de la contraseña.
+    if (strlen($password) < 8) {
+        echo "La contraseña debe tener al menos 8 caracteres.";
+        exit;
+    }
+
+    // Encriptar la contraseña antes de guardarla.
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     $url = SUPABASE_URL . '/rest/v1/usuarios';
@@ -46,6 +90,8 @@ if ($accion === 'registro') {
                 "Content-Type: application/json\r\n" .
                 "Prefer: return=representation\r\n",
             'content' => json_encode($datos)
+            'ignore_errors' => true,
+            'timeout' => 15
         ]
     ];
 
@@ -58,7 +104,38 @@ if ($accion === 'registro') {
         exit;
     }
 
-    echo "Usuario registrado correctamente.";
+    // Obtener el código HTTP devuelto por Supabase.
+    $codigoHTTP = 0;
+
+    if (isset($http_response_header)) {
+        foreach ($http_response_header as $encabezado) {
+            if (preg_match('/^HTTP\/\S+\s+(\d{3})/', $encabezado, $coincidencias)) {
+                $codigoHTTP = (int) $coincidencias[1];
+                break;
+            }
+        }
+    }
+
+    // Detectar errores, por ejemplo, si el correo ya existe
+    // y la base de datos tiene una restricción UNIQUE.
+    if ($codigoHTTP < 200 || $codigoHTTP >= 300) {
+
+        $errorSupabase = json_decode($response, true);
+        $codigoError = $errorSupabase['code'] ?? '';
+
+        if ($codigoError === '23505') {
+            echo "Ya existe una cuenta registrada con ese correo institucional.";
+            exit;
+        }
+
+        echo "No se pudo registrar la cuenta. Verifica los datos "
+           . "o inténtalo nuevamente.";
+        exit;
+    }
+
+
+    // Registro realizado correctamente.
+    header("Location: ../frontend/login.html");
     exit;
 }
 
