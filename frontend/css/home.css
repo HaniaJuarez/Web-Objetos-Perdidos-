@@ -1318,3 +1318,75 @@ footer {
     text-decoration: none;
     opacity: 0.85;
 }
+
+
+/* ==========================================
+   FINDERS - MENÚ DE USUARIO LIQUID GLASS
+   ========================================== */
+
+/* Contenedor del menú desplegable */
+.menu-usuario,
+.dropdown-menu,
+.menu-desplegable {
+    background: rgba(22, 34, 55, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Enlaces del menú */
+.menu-usuario a,
+.dropdown-menu a,
+.menu-desplegable a {
+    display: block;
+    padding: 12px 14px;
+    color: #e8eef9;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 9px;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Efecto al pasar el cursor */
+.menu-usuario a:hover,
+.dropdown-menu a:hover,
+.menu-desplegable a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* Separación visual antes de cerrar sesión */
+.menu-usuario a[href*="logout"],
+.dropdown-menu a[href*="logout"],
+.menu-desplegable a[href*="logout"] {
+    margin-top: 8px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 0 0 9px 9px;
+    color: #ffaaaa;
+}
+
+/* Efecto al pasar el cursor sobre cerrar sesión */
+.menu-usuario a[href*="logout"]:hover,
+.dropdown-menu a[href*="logout"]:hover,
+.menu-desplegable a[href*="logout"]:hover {
+    background: rgba(255, 100, 100, 0.13);
+    color: #ffd0d0;
+}
+
+/* Botón circular del usuario */
+.avatar-usuario,
+.boton-usuario,
+.usuario-avatar {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}

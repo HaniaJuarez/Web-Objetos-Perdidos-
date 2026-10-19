@@ -230,3 +230,155 @@ input[type="password"]:focus {
 .passkey-link:hover {
     text-decoration: underline;
 }
+
+
+/* ==========================================
+   FINDERS - LIQUID GLASS PARA LOGIN Y REGISTRO
+   ========================================== */
+
+body {
+    min-height: 100vh;
+    padding: 24px;
+    color: #f1f5ff;
+    background:
+        radial-gradient(ellipse at 15% 15%,
+            rgba(48, 91, 160, 0.45), transparent 45%),
+        radial-gradient(ellipse at 85% 80%,
+            rgba(35, 120, 145, 0.25), transparent 45%),
+        linear-gradient(135deg, #0b1224, #14243b 55%, #101a2d);
+}
+
+/* Contenedor de autenticación */
+.login-container {
+    width: 100%;
+    max-width: 390px;
+}
+
+/* Logo y título */
+.logo {
+    margin-bottom: 20px;
+}
+
+.title {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 650;
+    letter-spacing: -0.6px;
+}
+
+/* Panel de cristal */
+.login-box,
+.signup-box {
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+.login-box {
+    padding: 26px;
+}
+
+.signup-box {
+    padding: 18px;
+    color: #e2eaff;
+}
+
+/* Etiquetas */
+label {
+    color: #edf3ff;
+    font-weight: 500;
+}
+
+/* Campos */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    min-height: 44px;
+    padding: 11px 13px;
+    color: #ffffff;
+    background: rgba(7, 15, 30, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 11px;
+}
+
+input::placeholder {
+    color: #a9b8d0;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #83baff;
+    box-shadow: 0 0 0 3px rgba(91, 157, 255, 0.2);
+}
+
+/* Botón principal */
+.btn-primary {
+    min-height: 44px;
+    margin-top: 12px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #3478e5, #2455b5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 11px;
+    box-shadow: 0 6px 18px rgba(36, 85, 181, 0.25);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #4388f5, #3067cf);
+    transform: translateY(-1px);
+}
+
+/* Botón de Google */
+.btn-oauth {
+    min-height: 44px;
+    color: #f5f8ff;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 11px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-oauth:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Separador */
+.divider {
+    color: #bac9e0;
+}
+
+.divider::before,
+.divider::after {
+    border-color: rgba(255, 255, 255, 0.17);
+}
+
+/* Enlaces */
+.forgot-link,
+.signup-box a {
+    color: #9bc6ff;
+}
+
+.forgot-link:hover,
+.signup-box a:hover {
+    color: #ffffff;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+
+    .login-container {
+        max-width: 100%;
+    }
+
+    .login-box {
+        padding: 21px;
+    }
+}
