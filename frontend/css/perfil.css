@@ -251,3 +251,128 @@ body {
     }
 
 }
+
+
+/* =====================================================
+   FINDERS - AJUSTES VISUALES DEL PERFIL
+   Estilo oscuro Liquid Glass
+   ===================================================== */
+
+body {
+    background: linear-gradient(135deg, #10182d, #1d3552, #101827);
+    color: #f5f7ff;
+    min-height: 100vh;
+}
+
+/* Encabezado del perfil */
+.perfil-header {
+    background: rgba(22, 34, 55, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    color: #f5f7ff;
+}
+
+/* Enlace para regresar */
+.volver {
+    color: #ffffff;
+}
+
+.volver:hover {
+    color: #b8d8ff;
+}
+
+/* Tarjeta principal del usuario */
+.perfil-principal {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #f5f7ff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Nombre del usuario */
+.perfil-datos h1 {
+    color: #ffffff;
+}
+
+/* Correo y textos secundarios */
+.perfil-datos p {
+    color: #d0d8e8;
+}
+
+/* Etiqueta del rol */
+.rol {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Secciones de actividad y estadísticas */
+.actividad,
+.estadistica,
+.tarjeta,
+.reclamacion {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f7ff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Títulos y textos de las secciones */
+.actividad h2,
+.actividad h3,
+.estadistica h3,
+.tarjeta h3,
+.reclamacion h3 {
+    color: #ffffff;
+}
+
+/* Descripciones y datos secundarios */
+.actividad p,
+.estadistica p,
+.estadistica span,
+.tarjeta p,
+.reclamacion p,
+.sin-datos {
+    color: #d1d9e8;
+}
+
+/* Números estadísticos */
+.estadistica strong,
+.actividad strong {
+    color: #ffffff;
+}
+
+/* Enlaces dentro de las tarjetas */
+.tarjeta a,
+.reclamacion a {
+    color: #9ecbff;
+}
+
+.tarjeta a:hover,
+.reclamacion a:hover {
+    color: #ffffff;
+}
+
+/* Imágenes de perfil */
+.perfil-avatar img {
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 600px) {
+    .perfil-contenedor {
+        padding: 0 12px;
+    }
+
+    .perfil-principal,
+    .actividad {
+        padding: 20px;
+    }
+
+    .estadistica {
+        min-width: 0;
+        width: 100%;
+    }
+}
