@@ -17,7 +17,7 @@
         <h1 class="title">Crear cuenta</h1>
 
         <div class="login-box">
-            <form action="../backend/auth.php" method="POST">
+            <form id= "formRegistro" action="../backend/auth.php" method="POST">
                 <input type="hidden" name="accion" value="registro">
 
                 <div class="form-group">
@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                     <label for="correo">Correo institucional</label>
-                    <input type="email" id="correo" name="correo" placeholder="zs12345678@estudiantes.uv.mx" pattern="zs[0-9]{8}@estudiantes\.uv\.mx" required autocomplete="email">
+                    <input type="email" id="correo" name="correo" placeholder="zS12345678@estudiantes.uv.mx" pattern="zS[0-9]{8}@estudiantes\.uv\.mx" required autocomplete="email">
                 </div>
 
                 <div class="form-group">
@@ -35,14 +35,65 @@
                     <input type="password" id="password" name="password" required autocomplete="new-password">
                 </div>
 
-                <button type="submit" class="btn-primary">Registrarse</button>
+                <button type="submit" class="btn-primary" id="btnRegistro">Registrarse</button>
+
             </form>
+
+            <p id="mensaje" class="mensaje-formulario"
+                role="status" aria-live="polite" hidden></p>
+
         </div>
 
         <div class="signup-box">
             ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>.
         </div>
     </div>
+
+    
+<script>
+    const formulario = document.getElementById('formRegistro');
+    const mensaje = document.getElementById('mensaje');
+    const boton = document.getElementById('btnRegistro');
+
+    function mostrarMensaje(texto, tipo = 'error') {
+        mensaje.textContent = texto;
+        mensaje.className = 'mensaje-formulario ' + tipo;
+        mensaje.hidden = false;
+    }
+
+    formulario.addEventListener('submit', async function(evento) {
+        // Si hay campos required o pattern inválidos,
+        // el navegador muestra su aviso y no ejecuta este evento.
+        evento.preventDefault();
+
+        boton.disabled = true;
+        mostrarMensaje('Registrando cuenta...', 'info');
+
+        try {
+            const respuesta = await fetch(formulario.action, {
+                method: 'POST',
+                body: new FormData(formulario)
+            });
+
+            const texto = (await respuesta.text()).trim();
+
+            if (respuesta.ok) {
+                mostrarMensaje(texto, 'exito');
+                formulario.reset();
+            } else {
+                mostrarMensaje(texto, 'error');
+            }
+        } catch (error) {
+            mostrarMensaje(
+                'No fue posible conectar con el servidor. Inténtalo nuevamente.',
+                'error'
+            );
+        } finally {
+            boton.disabled = false;
+        }
+    });
+</script>
+
 
 </body>
 </html>

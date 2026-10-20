@@ -382,3 +382,45 @@ input[type="password"]:focus {
         padding: 21px;
     }
 }
+
+
+/* Mensajes dentro de la tarjeta Liquid Glass */
+.mensaje-formulario {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mensaje-formulario[hidden] {
+    display: none;
+}
+
+.mensaje-formulario.error {
+    color: #ffdada;
+    background: rgba(220, 38, 38, 0.16);
+    border-color: rgba(248, 113, 113, 0.4);
+}
+
+.mensaje-formulario.exito {
+    color: #d1fae5;
+    background: rgba(22, 163, 74, 0.16);
+    border-color: rgba(74, 222, 128, 0.4);
+}
+
+.mensaje-formulario.info {
+    color: #e0ecff;
+    background: rgba(59, 130, 246, 0.16);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
