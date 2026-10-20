@@ -4,9 +4,17 @@ session_start();
 
 require_once 'config.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "Solicitud no válida.";
+// Enviar mensajes que JavaScript pueda mostrar en el formulario.
+function responder($mensaje, $codigoHTTP = 200) {
+    http_response_code($codigoHTTP);
+    header('Content-Type: text/plain; charset=UTF-8');
+    echo $mensaje;
     exit;
+}
+
+// Solo aceptar solicitudes POST.
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    responder('Solicitud no válida.', 405);
 }
 
 $accion = $_POST['accion'] ?? '';
@@ -25,48 +33,31 @@ if ($accion === 'registro') {
     $password = $_POST['password'] ?? '';
 
     if (empty($nombre) || empty($correo) || empty($password)) {
-        echo "Todos los campos son obligatorios.";
-        exit;
+        responder('Todos los campos son obligatorios.', 400);
     }
 
     // Validar el nombre.
     if (mb_strlen($nombre) > 50) {
-        echo "El nombre no debe superar los 50 caracteres.";
-        exit;
+        responder('El nombre no debe superar los 50 caracteres.', 400);
     }
 
     // Validar que el correo tenga un formato válido.
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        echo "Ingresa un correo electrónico válido.";
-        exit;
-    }
-
-    // Validar el nombre.
-    if (mb_strlen($nombre) > 100) {
-        echo "El nombre no debe superar los 100 caracteres.";
-        exit;
-    }
-
-    // Validar que el correo tenga un formato válido.
-    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        echo "Ingresa un correo electrónico válido.";
-        exit;
+        responder('Ingresa un correo electrónico válido.', 400);
     }
 
     // Permitir únicamente correos institucionales de alumnos.
     // Formato: zs + ocho dígitos + @estudiantes.uv.mx
-    $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
+    $patronAlumno = '/^zS\d{8}@estudiantes\.uv\.mx$/i';
 
     if (!preg_match($patronAlumno, $correo)) {
-        echo "No se pudo crear la cuenta. Debes utilizar tu correo "
-           . "institucional con el formato zs12345678@estudiantes.uv.mx.";
-        exit;
+        responder('Debes utilizar tu correo institucional con el formato zS12345678@estudiantes.uv.mx.', 400);
+        
     }
 
     // Validar la longitud mínima de la contraseña.
     if (strlen($password) < 8) {
-        echo "La contraseña debe tener al menos 8 caracteres.";
-        exit;
+        responder('La contraseña debe tener al menos 8 caracteres.', 400);
     }
 
     // Encriptar la contraseña antes de guardarla.
@@ -100,8 +91,7 @@ if ($accion === 'registro') {
 
     // Si no se recibió respuesta, ocurrió un problema de conexión.
     if ($response === false) {
-        echo "Error al registrar el usuario.";
-        exit;
+        responder('No fue posible conectar con el servicio. Inténtalo más tarde.', 500);
     }
 
     // Obtener el código HTTP devuelto por Supabase.
@@ -124,13 +114,10 @@ if ($accion === 'registro') {
         $codigoError = $errorSupabase['code'] ?? '';
 
         if ($codigoError === 409 || $codigoError === '23505') {
-            echo "Ya existe una cuenta registrada con ese correo institucional.";
-            exit;
+            responder('Ya existe una cuenta registrada con ese correo institucional.', 409);
         }
 
-        echo "No se pudo registrar la cuenta. Verifica los datos "
-           . "o inténtalo nuevamente.";
-        exit;
+        responder('No se pudo registrar la cuenta. Verifica los datos e inténtalo nuevamente.', 400);
     }
 
 
@@ -150,8 +137,11 @@ if ($accion === 'login') {
     $password = $_POST['password'] ?? '';
 
     if (empty($correo) || empty($password)) {
-        echo "Correo y contraseña son obligatorios.";
-        exit;
+        responder('Correo y contraseña son obligatorios.', 400);
+    }
+
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+        responder('Ingresa un correo electrónico válido.', 400);
     }
 
     $url = SUPABASE_URL . '/rest/v1/usuarios?correo=eq.'
@@ -170,43 +160,59 @@ if ($accion === 'login') {
 
     $context = stream_context_create($options);
 
-    $response = file_get_contents($url, false, $context);
+    $response = @file_get_contents($url, false, $context);
 
     if ($response === false) {
-        echo "Error al consultar el usuario.";
-        exit;
+        responder('Error al consultar el usuario.', 500);
+    }
+
+    $codigoHTTP = 0;
+
+    if (isset($http_response_header)) {
+        foreach ($http_response_header as $encabezado) {
+            if (preg_match(
+                '/^HTTP\/\S+\s+(\d{3})/',
+                $encabezado,
+                $coincidencias
+            )) {
+                $codigoHTTP = (int) $coincidencias[1];
+                break;
+            }
+        }
+    }
+
+    if ($codigoHTTP < 200 || $codigoHTTP >= 300) {
+        responder('No fue posible consultar las cuentas. Inténtalo más tarde.', 500);
     }
 
     $usuarios = json_decode($response, true);
 
-    if (empty($usuarios)) {
-        echo "Correo o contraseña incorrectos.";
-        exit;
+    if (!is_array($usuarios) || empty($usuarios)) {
+        responder('Correo o contraseña incorrectos.', 401);
     }
 
     $usuario = $usuarios[0];
 
     if (!password_verify($password, $usuario['password'])) {
-        echo "Correo o contraseña incorrectos.";
-        exit;
+        responder('Correo o contraseña incorrectos.', 401);
     }
 
     // Validar el correo de los alumnos.
-// Los docentes y administradores no tienen esta restricción.
-$rolUsuario = strtolower(trim($usuario['rol'] ?? ''));
-$correoUsuario = strtolower(trim($usuario['correo'] ?? ''));
+    // Los docentes y administradores no tienen esta restricción.
+    $rolUsuario = strtolower(trim($usuario['rol'] ?? ''));
+    $correoUsuario = strtolower(trim($usuario['correo'] ?? ''));
 
-if ($rolUsuario === 'alumno') {
+    if ($rolUsuario === 'alumno') {
 
-    // Formato permitido: zs + 8 dígitos + dominio institucional.
-    $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
+        // Formato permitido: zs + 8 dígitos + dominio institucional.
+        $patronAlumno = '/^zS\d{8}@estudiantes\.uv\.mx$/i';
 
-    if (!preg_match($patronAlumno, $correoUsuario)) {
-        echo "Acceso denegado: los alumnos deben utilizar su correo "
-           . "institucional con el formato zs12345678@estudiantes.uv.mx.";
-        exit;
+        if (!preg_match($patronAlumno, $correoUsuario)) {
+            responder(
+                'Los alumnos deben utilizar su correo institucional de la UV.',
+                403);
+        }
     }
-}
 
     // Guardar los datos del usuario autenticado en la sesión.
     $_SESSION['usuario_id'] = $usuario['id'];
@@ -250,6 +256,6 @@ if ($rolUsuario === 'alumno') {
     }
 }
 
-echo "Acción no reconocida.";
+responder('Acción no reconocida.', 400);
 
 ?>
