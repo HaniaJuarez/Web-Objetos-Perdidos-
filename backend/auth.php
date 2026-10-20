@@ -12,6 +12,18 @@ function responder($mensaje, $codigoHTTP = 200) {
     exit;
 }
 
+function responderLogin($mensaje, $exito = false, $destino = '') {
+    header('Content-Type: application/json; charset=UTF-8');
+
+    echo json_encode([
+        'exito' => $exito,
+        'mensaje' => $mensaje,
+        'destino' => $destino
+    ]);
+
+    exit;
+}
+
 // Solo aceptar solicitudes POST.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     responder('Solicitud no válida.', 405);
@@ -48,7 +60,7 @@ if ($accion === 'registro') {
 
     // Permitir únicamente correos institucionales de alumnos.
     // Formato: zs + ocho dígitos + @estudiantes.uv.mx
-    $patronAlumno = '/^zS\d{8}@estudiantes\.uv\.mx$/i';
+    $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
 
     if (!preg_match($patronAlumno, $correo)) {
         responder('Debes utilizar tu correo institucional con el formato zS12345678@estudiantes.uv.mx.', 400);
@@ -137,11 +149,11 @@ if ($accion === 'login') {
     $password = $_POST['password'] ?? '';
 
     if (empty($correo) || empty($password)) {
-        responder('Correo y contraseña son obligatorios.', 400);
+        responderLogin('Correo y contraseña son obligatorios.', 400);
     }
 
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        responder('Ingresa un correo electrónico válido.', 400);
+        responderLogin('Ingresa un correo electrónico válido.', 400);
     }
 
     $url = SUPABASE_URL . '/rest/v1/usuarios?correo=eq.'
@@ -205,7 +217,7 @@ if ($accion === 'login') {
     if ($rolUsuario === 'alumno') {
 
         // Formato permitido: zs + 8 dígitos + dominio institucional.
-        $patronAlumno = '/^zS\d{8}@estudiantes\.uv\.mx$/i';
+        $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
 
         if (!preg_match($patronAlumno, $correoUsuario)) {
             responder(
