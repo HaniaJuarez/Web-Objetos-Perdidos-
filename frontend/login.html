@@ -19,12 +19,12 @@
 
         <!-- Formulario principal -->
         <div class="login-box">
-            <form action="../backend/auth.php" method="POST">
+            <form id="formLogin" action="../backend/auth.php" method="POST">
                 <input type="hidden" name="accion" value="login">
 
                 <div class="form-group">
                     <label for="correo">Correo electrónico institucional</label>
-                    <input type="email" id="correo" name="correo" placeholder="zs12345678@estudiantes.uv.mx" required autocomplete="username">
+                    <input type="email" id="correo" name="correo" placeholder="zS12345678@estudiantes.uv.mx" required autocomplete="username">
                 </div>
 
                 <div class="form-group">
@@ -35,9 +35,12 @@
                     <input type="password" id="password" name="password" required autocomplete="current-password">
                 </div>
 
-                <button type="submit" class="btn-primary">Ingresar</button>
+                <button type="submit" class="btn-primary" id="btnLogin">Ingresar</button>
+             
             </form>
 
+            <p id="mensaje" class="mensaje-formulario"
+                role="status" aria-live="polite" hidden></p>
                                    
         </div>
 
@@ -48,6 +51,54 @@
 
         
     </div>
+
+    <script>
+        const formulario = document.getElementById('formLogin');
+        const mensaje = document.getElementById('mensaje');
+        const boton = document.getElementById('btnLogin');
+
+        function mostrarMensaje(texto, tipo = 'error') {
+            mensaje.textContent = texto;
+            mensaje.className = 'mensaje-formulario ' + tipo;
+            mensaje.hidden = false;
+        }
+
+        formulario.addEventListener('submit', async function(evento) {
+            evento.preventDefault();
+
+            boton.disabled = true;
+            mostrarMensaje('Verificando datos...', 'info');
+
+            try {
+                const respuesta = await fetch(formulario.action, {
+                    method: 'POST',
+                    body: new FormData(formulario),
+                    redirect: 'follow'
+                });
+
+                // Si PHP redirige al panel, navegar a esa página.
+                if (respuesta.redirected) {
+                    window.location.href = respuesta.url;
+                    return;
+                }
+
+                const texto = (await respuesta.text()).trim();
+
+                mostrarMensaje(
+                    texto || 'No fue posible iniciar sesión.',
+                    respuesta.ok ? 'info' : 'error'
+                );
+
+            } catch (error) {
+                mostrarMensaje(
+                    'No fue posible conectar con el servidor. Inténtalo nuevamente.',
+                    'error'
+                );
+            } finally {
+                boton.disabled = false;
+            }
+        });
+    </script>
 
 </body>
 </html>
