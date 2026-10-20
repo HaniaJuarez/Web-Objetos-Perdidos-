@@ -73,21 +73,20 @@
                 const respuesta = await fetch(formulario.action, {
                     method: 'POST',
                     body: new FormData(formulario),
-                    redirect: 'follow'
+                    //redirect: 'manual'
                 });
 
+                const texto = await respuesta.json();
+
                 // Si PHP redirige al panel, navegar a esa página.
-                if (respuesta.redirected) {
-                    window.location.href = respuesta.url;
+                if (resultado.exito) {
+                    mostrarMensaje(resultado.mensaje, 'exito');
+
+                    window.location.href = resultado.destino;
                     return;
                 }
-
-                const texto = (await respuesta.text()).trim();
-
-                mostrarMensaje(
-                    texto || 'No fue posible iniciar sesión.',
-                    respuesta.ok ? 'info' : 'error'
-                );
+                
+                mostrarMensaje(resultado.mensaje, 'error');
 
             } catch (error) {
                 mostrarMensaje(
