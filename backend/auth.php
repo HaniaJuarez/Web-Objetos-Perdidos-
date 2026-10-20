@@ -95,8 +95,10 @@ if ($accion === 'registro') {
 
     $context = stream_context_create($options);
 
-    $response = file_get_contents($url, false, $context);
+    // Evitar que PHP muestre una advertencia técnica en pantalla.
+    $response = @file_get_contents($url, false, $context);
 
+    // Si no se recibió respuesta, ocurrió un problema de conexión.
     if ($response === false) {
         echo "Error al registrar el usuario.";
         exit;
@@ -121,7 +123,7 @@ if ($accion === 'registro') {
         $errorSupabase = json_decode($response, true);
         $codigoError = $errorSupabase['code'] ?? '';
 
-        if ($codigoError === '23505') {
+        if ($codigoError === 409 || $codigoError === '23505') {
             echo "Ya existe una cuenta registrada con ese correo institucional.";
             exit;
         }
