@@ -92,7 +92,9 @@ if ($accion === 'registro') {
                 "Authorization: Bearer " . SUPABASE_KEY . "\r\n" .
                 "Content-Type: application/json\r\n" .
                 "Prefer: return=representation\r\n",
-            'content' => json_encode($datos)            
+            'content' => json_encode($datos),
+            'ignore_errors' => true,
+            'timeout' => 20           
         ]
     ];
 
@@ -135,19 +137,32 @@ if ($accion === 'registro') {
     if ($codigoHTTP < 200 || $codigoHTTP >= 300) {
 
         $errorSupabase = json_decode($response, true);
+
+        // Registrar el detalle técnico para revisar el problema.
+        error_log(
+            'Error de Supabase al registrar. HTTP ' . $codigoHTTP .
+            ' - Respuesta: ' . $response
+        );
+
         $codigoError = $errorSupabase['code'] ?? '';
 
-        if ($codigoError === 409 || $codigoError === '23505') {
+        if ($codigoError === '23505') {
             responder('Ya existe una cuenta registrada con ese correo institucional.', 409);
         }
 
-        responder('No se pudo registrar la cuenta. Verifica los datos e inténtalo nuevamente.', 400);
+        if ($codigoError === '42501') {
+            responder(
+                'Supabase rechazó la operación por permisos de acceso a la tabla.',403);
+        }
+
+        responder(
+            'Supabase rechazó el registro (HTTP ' . $codigoHTTP .'). Revisa la terminal para conocer el detalle.',400);
     }
 
 
     // Registro realizado correctamente.
-    header("Location: ../frontend/login.html");
-    exit;
+    responder(
+    'Cuenta creada correctamente. Ya puedes iniciar sesión.',201);
 }
 
 
