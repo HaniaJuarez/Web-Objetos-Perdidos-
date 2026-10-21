@@ -259,24 +259,35 @@ if ($accion === 'login') {
     // Redirigir al usuario según el rol registrado en Supabase.
     switch ($_SESSION['rol']) {
         case 'administrador':
-            header("Location: ../frontend/administrador.php");
-            exit;
+            responderLogin(
+                'Inicio de sesión correcto.',
+                true,
+                '../frontend/administrador.php'
+            );
 
         case 'docente':
-            header("Location: ../frontend/docente.php");
-            exit;
+            responderLogin(
+                'Inicio de sesión correcto.',
+                true,
+                '../frontend/docente.php'
+            );
 
         case 'alumno':
-            header("Location: ../frontend/index.php");
-            exit;
+            responderLogin(
+                'Inicio de sesión correcto.',
+                true,
+                '../frontend/index.php'
+            );
 
         default:
             // Si el rol no es reconocido, cerrar la sesión y mostrar un error.
             $_SESSION = [];
             session_destroy();
 
-            header("Location: ../frontend/login.html");
-            exit;
+            responderLogin(
+                'El rol de la cuenta no es válido.',
+                false
+            );
     }
 }
 
