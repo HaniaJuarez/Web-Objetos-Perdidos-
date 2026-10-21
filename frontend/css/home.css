@@ -1390,3 +1390,167 @@ footer {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
+
+
+/* ==========================================
+   FINDERS - SETTINGS AND PRIVACY
+   ESTILO LIQUID GLASS
+   ========================================== */
+
+/* Submenú de configuración */
+#menu-configuracion {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    width: 270px;
+    box-sizing: border-box;
+
+    background: rgba(22, 34, 55, 0.88);
+    color: #f1f5f9;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    padding: 12px;
+    z-index: 1001;
+}
+
+/* Botón Settings and privacy del menú principal */
+#boton-configuracion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    padding: 12px 14px;
+
+    color: #e8eef9;
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Flecha del botón */
+#boton-configuracion span {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 22px;
+    transition: transform 0.25s ease;
+}
+
+/* Efecto al pasar el cursor */
+#boton-configuracion:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateX(2px);
+}
+
+#boton-configuracion:hover span {
+    transform: translateX(3px);
+}
+
+/* Botón para regresar al menú principal */
+#menu-configuracion .volver-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 12px;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+#menu-configuracion .volver-menu:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Separador dentro del submenú */
+#menu-configuracion .separador {
+    height: 1px;
+    margin: 12px 2px;
+
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Opción Perfil / Editar perfil */
+#menu-configuracion a {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+
+    text-decoration: none;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Nombre de la opción */
+#menu-configuracion a strong {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Descripción de la opción */
+#menu-configuracion a span {
+    color: rgba(226, 232, 240, 0.70);
+    font-size: 12px;
+}
+
+/* Efecto al pasar el cursor por Perfil */
+#menu-configuracion a:hover {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+}
+
+/* Ajuste para teléfonos */
+@media (max-width: 600px) {
+    #menu-configuracion {
+        width: min(270px, calc(100vw - 24px));
+        right: 0;
+    }
+}
+
