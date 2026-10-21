@@ -103,7 +103,19 @@ if ($accion === 'registro') {
 
     // Si no se recibió respuesta, ocurrió un problema de conexión.
     if ($response === false) {
-        responder('No fue posible conectar con el servicio. Inténtalo más tarde.', 500);
+        //responder('No fue posible conectar con el servicio. Inténtalo más tarde.', 500);
+        $errorPHP = error_get_last();
+
+        error_log(
+            'Error al registrar en Supabase: ' .
+            ($errorPHP['message'] ?? 'Error de conexión desconocido')
+        
+        );
+
+        responder(
+            'No fue posible conectar con el servicio. Revisa el registro de errores del servidor.',
+            500
+        );
     }
 
     // Obtener el código HTTP devuelto por Supabase.
