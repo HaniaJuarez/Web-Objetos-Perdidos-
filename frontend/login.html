@@ -52,52 +52,63 @@
         
     </div>
 
-    <script>
-        const formulario = document.getElementById('formLogin');
-        const mensaje = document.getElementById('mensaje');
-        const boton = document.getElementById('btnLogin');
+    
+<script>
+    const formulario = document.getElementById('formLogin');
+    const mensaje = document.getElementById('mensaje');
+    const boton = document.getElementById('btnLogin');
 
-        function mostrarMensaje(texto, tipo = 'error') {
-            mensaje.textContent = texto;
-            mensaje.className = 'mensaje-formulario ' + tipo;
-            mensaje.hidden = false;
+    function mostrarMensaje(texto, tipo = 'error') {
+        mensaje.textContent = texto;
+        mensaje.className = 'mensaje-formulario ' + tipo;
+        mensaje.hidden = false;
+    }
+
+    formulario.addEventListener('submit', async function(evento) {
+        evento.preventDefault();
+
+        // Validar los campos antes de enviar.
+        if (!formulario.checkValidity()) {
+            formulario.reportValidity();
+            return;
         }
 
-        formulario.addEventListener('submit', async function(evento) {
-            evento.preventDefault();
+        boton.disabled = true;
+        mostrarMensaje('Verificando datos...', 'info');
 
-            boton.disabled = true;
-            mostrarMensaje('Verificando datos...', 'info');
+        try {
+            const respuesta = await fetch(formulario.action, {
+                method: 'POST',
+                body: new FormData(formulario)
+            });
 
-            try {
-                const respuesta = await fetch(formulario.action, {
-                    method: 'POST',
-                    body: new FormData(formulario),
-                    //redirect: 'manual'
-                });
+            // auth.php debe responder JSON en los errores.
+            const resultado = await respuesta.json();
 
-                const texto = await respuesta.json();
-
-                // Si PHP redirige al panel, navegar a esa página.
-                if (resultado.exito) {
-                    mostrarMensaje(resultado.mensaje, 'exito');
-
-                    window.location.href = resultado.destino;
-                    return;
-                }
-                
-                mostrarMensaje(resultado.mensaje, 'error');
-
-            } catch (error) {
-                mostrarMensaje(
-                    'No fue posible conectar con el servidor. Inténtalo nuevamente.',
-                    'error'
-                );
-            } finally {
-                boton.disabled = false;
+            if (resultado.exito && resultado.destino) {
+                mostrarMensaje(resultado.mensaje, 'exito');
+                window.location.href = resultado.destino;
+                return;
             }
-        });
-    </script>
+
+            mostrarMensaje(
+                resultado.mensaje || 'No fue posible iniciar sesión.',
+                'error'
+            );
+
+        } catch (error) {
+            mostrarMensaje(
+                'No se pudo procesar la respuesta del servidor. Revisa auth.php.',
+                'error'
+            );
+            console.error('Error en el inicio de sesión:', error);
+
+        } finally {
+            boton.disabled = false;
+        }
+    });
+</script>
+
 
 </body>
 </html>
