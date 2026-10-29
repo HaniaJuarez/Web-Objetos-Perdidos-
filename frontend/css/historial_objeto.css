@@ -1,354 +1,446 @@
-/* ============================================================
-   REGLAS GENERALES Y RESETEO DE ESTILOS
-   ============================================================ */
+/* =========================================
+   FINDERS — HISTORIAL LIQUID GLASS
+   Diseño oscuro translúcido
+   ========================================= */
 
-/* Aplica el modelo de caja border-box a todos los elementos del documento.
-   Incluye el padding y el border dentro del ancho y alto total del elemento. */
+:root {
+    --texto: #f8fafc;
+    --texto-secundario: #cbd5e1;
+    --borde-vidrio: rgba(255, 255, 255, 0.22);
+    --fondo-vidrio: rgba(255, 255, 255, 0.07);
+    --fondo-vidrio-hover: rgba(255, 255, 255, 0.13);
+    --acento: #a5f3fc;
+    --sombra: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* Reset general */
+
 * {
     box-sizing: border-box;
 }
 
-/* Configuración global del cuerpo de la página */
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
 body {
-    /* Elimina el margen predeterminado del navegador */
     margin: 0;
+    min-height: 100vh;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: var(--texto);
 
-    /* Tipografía principal y alternativa sans-serif */
-    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 10% 10%, #263d66 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, #243b55 0%, transparent 40%),
+        linear-gradient(135deg, #0b1220, #172337 55%, #101827);
 
-    /* Color de fondo suave para el sitio */
-    background-color: #f5f6f8;
-
-    /* Color principal de texto */
-    color: #333;
+    background-attachment: fixed;
 }
 
+/* Encabezado */
 
-/* ==============================
-   ENCABEZADO
-   ============================== */
-
-/* Bloque del encabezado superior */
 .encabezado {
-    background-color: #2B2F3A;
+    position: relative;
+    padding: 20px 18px;
 
-    color: white;
+    background: rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid var(--borde-vidrio);
 
-    padding: 20px 30px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
 }
 
-/* Contenedor interno del encabezado para centrar y alinear el contenido */
 .encabezado-contenido {
+    width: 100%;
     max-width: 1000px;
+    margin: 0 auto;
 
-    margin: auto;
-
-    /* Distribución flexible en fila con espacio entre elementos y alineación vertical centrada */
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-/* Título dentro del encabezado */
 .encabezado h1 {
     margin: 0;
-
-    font-size: 27px;
+    font-size: clamp(21px, 3vw, 27px);
+    font-weight: 700;
+    color: #ffffff;
 }
 
+/* Botón regresar */
 
-/* ==============================
-   BOTÓN REGRESAR
-   ============================== */
-
-/* Estilos para el botón o enlace de regreso */
 .boton-regresar {
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
+    padding: 10px 17px;
+
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 600;
     text-decoration: none;
 
-    background-color: #444a59;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    padding: 10px 16px;
-
-    border-radius: 6px;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
 }
 
-/* Estado hover al pasar el cursor sobre el botón de regresar */
 .boton-regresar:hover {
-    background-color: #555c6d;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(165, 243, 252, 0.65);
+    transform: translateY(-2px);
 }
 
+/* Contenedor principal */
 
-/* ==============================
-   CONTENEDOR
-   ============================== */
-
-/* Contenedor principal para delimitar el ancho del contenido de la página */
 .contenedor {
+    width: 100%;
     max-width: 1000px;
-
-    margin: 35px auto;
-
+    margin: 28px auto;
     padding: 0 20px;
 }
 
+/* Tarjetas de cristal */
 
-/* ==============================
-   INFORMACIÓN DEL OBJETO
-   ============================== */
+.objeto,
+.seccion-historial {
+    position: relative;
 
-/* Tarjeta resumen de la información general del objeto */
+    background: var(--fondo-vidrio);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 22px;
+
+    box-shadow: var(--sombra);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
 .objeto {
-    background-color: white;
-
-    padding: 25px;
-
-    border-radius: 10px;
-
-    /* Sombra ligera para dar elevación a la tarjeta */
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.08);
-
-    /* Disposición flexible en fila con alineación central y espacio entre elementos */
     display: flex;
-
     align-items: center;
-
     gap: 25px;
 
-    margin-bottom: 30px;
+    min-height: 110px;
+    padding: 25px;
+    margin-bottom: 24px;
 }
 
-/* Ajustes de la imagen miniatura del objeto */
+.informacion-objeto {
+    min-width: 0;
+}
+
+.informacion-objeto h2 {
+    margin: 0 0 14px;
+    font-size: 21px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Imagen del objeto */
+
 .imagen-objeto {
     width: 150px;
-
     height: 120px;
+    flex-shrink: 0;
 
-    /* Mantiene la proporción de la imagen cubriendo el área sin distorsionarse */
     object-fit: cover;
+    border-radius: 16px;
 
-    border-radius: 8px;
+    border: 1px solid var(--borde-vidrio);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
 }
 
-/* Quita el margen superior del título de la información del objeto */
-.informacion-objeto h2 {
-    margin-top: 0;
-}
+/* Estado del objeto */
 
-
-/* ==============================
-   ESTADO
-   ============================== */
-
-/* Etiqueta o badge indicadora del estado del objeto */
 .estado {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
-    padding: 5px 9px;
+    padding: 6px 11px;
+    margin-left: 4px;
 
-    border-radius: 5px;
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    border-radius: 999px;
 
-    background-color: #e8f5e9;
+    background: rgba(52, 211, 153, 0.13);
+    color: #a7f3d0;
 
-    color: #2e7d32;
+    font-size: 12px;
+    font-weight: 700;
 }
 
+/* Sección del historial */
 
-/* ==============================
-   HISTORIAL
-   ============================== */
-
-/* Sección contenedora del historial de movimientos */
 .seccion-historial {
-    background-color: white;
-
-    padding: 30px;
-
-    border-radius: 10px;
-
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 28px;
 }
 
-/* Quita el margen superior del título de la sección del historial */
 .seccion-historial h2 {
-    margin-top: 0;
+    margin: 0 0 22px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
 }
 
+/* Línea de tiempo */
 
-/* ==============================
-   TIMELINE
-   ============================== */
-
-/* Contenedor relativo de la línea de tiempo */
 .timeline {
     position: relative;
-
-    margin-top: 30px;
-
-    padding-left: 35px;
+    margin-top: 10px;
+    padding-left: 30px;
 }
 
-/* Pseudoelemento para crear la línea vertical contínua del timeline */
 .timeline::before {
     content: "";
-
     position: absolute;
 
-    left: 9px;
-
-    top: 0;
-
-    bottom: 0;
+    top: 8px;
+    bottom: 8px;
+    left: 7px;
 
     width: 2px;
+    border-radius: 10px;
 
-    background-color: #d0d0d0;
+    background: linear-gradient(
+        to bottom,
+        rgba(165, 243, 252, 0.75),
+        rgba(255, 255, 255, 0.12)
+    );
 }
 
+/* Movimientos */
 
-/* ==============================
-   MOVIMIENTO
-   ============================== */
-
-/* Elemento individual dentro del historial */
 .movimiento {
     position: relative;
-
-    margin-bottom: 30px;
+    margin-bottom: 22px;
 }
 
-/* Círculo o viñeta indicadora sobre la línea de tiempo */
+.movimiento:last-child {
+    margin-bottom: 0;
+}
+
 .punto {
     position: absolute;
+    top: 13px;
+    left: -29px;
 
-    left: -32px;
-
-    top: 5px;
-
-    width: 18px;
-
-    height: 18px;
+    width: 16px;
+    height: 16px;
 
     border-radius: 50%;
+    border: 3px solid #1b293e;
 
-    background-color: #2B2F3A;
+    background: var(--acento);
 
-    border: 3px solid white;
+    box-shadow: 0 0 0 2px rgba(165, 243, 252, 0.35);
 
-    /* Sombra exterior para simular un segundo borde */
-    box-shadow:
-        0 0 0 2px #2B2F3A;
+    z-index: 1;
 }
 
-/* Tarjeta contenedora de los detalles del movimiento */
+/* Tarjeta de cada movimiento */
+
 .contenido-movimiento {
-    background-color: #f8f9fa;
+    padding: 19px 20px;
 
-    padding: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-left: 3px solid rgba(165, 243, 252, 0.70);
+    border-radius: 15px;
 
-    border-radius: 8px;
-
-    /* Borde lateral izquierdo para resaltar la tarjeta */
-    border-left: 4px solid #2B2F3A;
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease;
 }
 
-/* Estilo para la fecha/hora del movimiento */
+.contenido-movimiento:hover {
+    background: var(--fondo-vidrio-hover);
+    border-left-color: var(--acento);
+    transform: translateX(3px);
+}
+
 .fecha {
-    color: #777;
-
-    font-size: 14px;
-
     margin-bottom: 8px;
+
+    color: #aab8ce;
+    font-size: 12px;
+    font-weight: 500;
 }
 
-/* Título de la transición de estado */
 .contenido-movimiento h3 {
     margin: 5px 0 10px;
+
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
-/* Texto descriptivo del evento registrado */
 .contenido-movimiento p {
-    margin: 5px 0 10px;
+    margin: 6px 0 10px;
 
-    line-height: 1.5;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
 }
 
-/* Texto secundario para el usuario responsable */
 .contenido-movimiento small {
-    color: #777;
+    color: #aab8ce;
+    font-size: 11px;
 }
 
+/* Historial vacío */
 
-/* ==============================
-   MENSAJE VACÍO
-   ============================== */
-
-/* Contenedor para mostrar cuando no hay movimientos en el historial */
 .mensaje-vacio {
-    padding: 30px;
+    padding: 30px 22px;
 
     text-align: center;
 
-    background-color: #f8f9fa;
-
-    border-radius: 8px;
+    background: var(--fondo-vidrio);
+    border: 1px solid var(--borde-vidrio);
+    border-radius: 18px;
 }
 
-/* Quita el margen superior del título dentro del mensaje vacío */
 .mensaje-vacio h3 {
-    margin-top: 0;
+    margin: 0 0 10px;
+    color: #ffffff;
+    font-size: 18px;
 }
 
-
-/* ==============================
-   FOOTER
-   ============================== */
+.mensaje-vacio p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.6;
+}
 
 /* Pie de página */
-footer {
-    margin-top: 40px;
 
-    padding: 20px;
+footer {
+    margin-top: 35px;
+    padding: 24px 20px;
 
     text-align: center;
 
-    background-color: #2B2F3A;
+    background: rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--borde-vidrio);
 
-    color: white;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    font-weight: 600;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
+footer p {
+    margin: 0;
+}
 
-/* ==============================
-   RESPONSIVE
-   ============================== */
+/* Accesibilidad */
 
-/* Adaptaciones responsivas para pantallas móviles (ancho máximo de 600px) */
-@media (max-width: 600px) {
+.boton-regresar:focus-visible {
+    outline: 3px solid rgba(165, 243, 252, 0.75);
+    outline-offset: 3px;
+}
 
-    /* Alineación vertical del encabezado en pantallas pequeñas */
+/* Adaptación para tabletas y teléfonos */
+
+@media (max-width: 700px) {
+    .encabezado {
+        padding: 18px 16px;
+    }
+
     .encabezado-contenido {
         flex-direction: column;
-
-        gap: 15px;
-
         text-align: center;
+        gap: 15px;
     }
 
-    /* Alineación vertical y centrado de la información del objeto */
+    .contenedor {
+        margin: 22px auto;
+        padding: 0 13px;
+    }
+
     .objeto {
         flex-direction: column;
-
-        text-align: center;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
     }
 
-    /* Ajuste del sangrado lateral de la línea de tiempo */
+    .imagen-objeto {
+        width: 100%;
+        max-width: 260px;
+        height: 180px;
+    }
+
+    .seccion-historial {
+        padding: 20px 15px;
+    }
+
+    .seccion-historial h2 {
+        font-size: 19px;
+    }
+
     .timeline {
-        padding-left: 30px;
+        padding-left: 25px;
     }
 
+    .timeline::before {
+        left: 5px;
+    }
+
+    .punto {
+        left: -25px;
+        width: 14px;
+        height: 14px;
+    }
+
+    .contenido-movimiento {
+        padding: 15px;
+    }
+
+    .contenido-movimiento h3 {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+/* Navegadores sin efecto de desenfoque */
+
+@supports not (backdrop-filter: blur(10px)) {
+    .encabezado,
+    .objeto,
+    .seccion-historial,
+    .contenido-movimiento,
+    .mensaje-vacio {
+        background: #202d40;
+    }
+}
+
+/* Respeta la preferencia de movimiento reducido */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
 }
