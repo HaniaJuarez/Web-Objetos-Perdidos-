@@ -221,19 +221,19 @@ if ($accion === 'login') {
     }
 
     if ($codigoHTTP < 200 || $codigoHTTP >= 300) {
-        responder('No fue posible consultar las cuentas. Inténtalo más tarde.', 500);
+        responderLogin('No fue posible consultar las cuentas. Inténtalo más tarde.', false);
     }
 
     $usuarios = json_decode($response, true);
 
     if (!is_array($usuarios) || empty($usuarios)) {
-        responder('Correo o contraseña incorrectos.', 401);
+        responderLogin('Correo o contraseña incorrectos.', false);
     }
 
     $usuario = $usuarios[0];
 
     if (!password_verify($password, $usuario['password'])) {
-        responder('Correo o contraseña incorrectos.', 401);
+        responderLogin('Correo o contraseña incorrectos.', false);
     }
 
     // Validar el correo de los alumnos.
@@ -247,9 +247,9 @@ if ($accion === 'login') {
         $patronAlumno = '/^zs\d{8}@estudiantes\.uv\.mx$/i';
 
         if (!preg_match($patronAlumno, $correoUsuario)) {
-            responder(
+            responderLogin(
                 'Los alumnos deben utilizar su correo institucional de la UV.',
-                403);
+                false);
         }
     }
 
